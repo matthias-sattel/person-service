@@ -39,18 +39,27 @@
             <artifactId>mapstruct</artifactId>
         </dependency>
 
-        <!-- *** Test *** -->
+        <!-- Monitoring -->
+
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+
+        <!-- Test -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <!-- Persistence via Profiles, this is just for showcases not for production -->
@@ -71,12 +80,10 @@
                     <artifactId>h2</artifactId>
                 </dependency>
 
-                <!--
                 <dependency>
                     <groupId>org.postgresql</groupId>
                     <artifactId>postgresql</artifactId>
                 </dependency>
-                -->
             </dependencies>
         </profile>
         <profile>
