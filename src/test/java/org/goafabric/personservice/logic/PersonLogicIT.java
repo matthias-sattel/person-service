@@ -1,6 +1,6 @@
 package org.goafabric.personservice.logic;
 
-import org.goafabric.personservice.service.dto.Person;
+import org.goafabric.personservice.service.Person;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
