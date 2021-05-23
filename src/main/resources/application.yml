@@ -15,9 +15,7 @@ security:
   authentication:
     enabled: true
 
-spring:
-  datasource:
-    url: jdbc:h2:mem:persondb
+spring.datasource.url: jdbc:h2:mem:persondb
 
 #log levels
 logging.level.root: "WARN"
