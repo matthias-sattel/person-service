@@ -27,19 +27,6 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <!-- persistence common -->
-
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-commons</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
-        </dependency>
-
-        
         <!-- 3rd party -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -66,6 +53,7 @@
         </dependency>
     </dependencies>
 
+    <!-- Persistence via Profiles, this is just for showcases not for production -->
     <profiles>
         <profile>
             <id>data-jpa</id>
@@ -91,21 +79,28 @@
                 -->
             </dependencies>
         </profile>
-            <profile>
-                <id>data-mongo</id>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter-data-mongodb</artifactId>
-                    </dependency>
+        <profile>
+            <id>data-mongo</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-data-mongodb</artifactId>
+                </dependency>
 
-                    <dependency>
-                        <groupId>de.flapdoodle.embed</groupId>
-                        <artifactId>de.flapdoodle.embed.mongo</artifactId>
-                    </dependency>
-                </dependencies>
-            </profile>
-        </profiles>
+                <dependency>
+                    <groupId>de.flapdoodle.embed</groupId>
+                    <artifactId>de.flapdoodle.embed.mongo</artifactId>
+                </dependency>
+
+                <!-- stupid workaround for stupid hibernate -->
+                <dependency>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-annotations</artifactId>
+                    <version>3.5.6-Final</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
 
-        </project>
+</project>
