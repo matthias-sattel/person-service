@@ -38,6 +38,7 @@
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
         </dependency>
+
         
         <!-- 3rd party -->
         <dependency>
