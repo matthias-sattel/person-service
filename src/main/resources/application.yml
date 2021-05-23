@@ -17,7 +17,7 @@ security:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:person
+    url: jdbc:h2:mem:persondb
 
 #log levels
 logging.level.root: "WARN"
