@@ -26,5 +26,4 @@ public class PersonBo {
     private String firstName;
 
     private String lastName;
-
 }
