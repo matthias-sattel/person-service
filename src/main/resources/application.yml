@@ -1,5 +1,5 @@
 server:
-  port: 50900
+  port: 50800
   tomcat.max-threads: 20
 
 management:
