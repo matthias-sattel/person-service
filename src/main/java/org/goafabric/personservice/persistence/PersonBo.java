@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.UUID;
 
 @Data
 @Builder
@@ -19,7 +18,8 @@ import java.util.UUID;
 @Entity @Table(name = "person")
 public class PersonBo {
     @Id @GeneratedValue(generator = "uuid")
-    private UUID id;
+    @org.springframework.data.annotation.Id
+    private String id;
 
     private String firstName;
 
