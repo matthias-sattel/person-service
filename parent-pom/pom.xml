@@ -375,10 +375,6 @@
                                     <groupId>org.projectlombok</groupId>
                                     <artifactId>lombok</artifactId>
                                 </exclude>
-                                <exclude>
-                                    <groupId>com.h2database</groupId>
-                                    <artifactId>h2</artifactId>
-                                </exclude>
                             </excludes>
                             <image>
                                 <name>${docker.registry}/${project.artifactId}-native:${project.version}</name>
