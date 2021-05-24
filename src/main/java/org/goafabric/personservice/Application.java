@@ -23,7 +23,7 @@ public class Application {
     public CommandLineRunner init(ApplicationContext context, DemoDataInitializer demoDataInitializer) {
         return args -> {
             if ((args.length > 0) && ("-check-integrity".equals(args[0]))) { SpringApplication.exit(context, () -> 0);}
-            else {demoDataInitializer.run();}
+            else {demoDataInitializer.run();} //don't to stuff like this at home kidz
         };
 
     }
