@@ -16,8 +16,8 @@ services:
     volumes:
       - tmp:/tmp
       - applogs:/usr/share/logs
-#    entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}",
-#                 "-Djava.security.egd=file:/dev/./urandom","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.personservice.Application"]
+    entrypoint: ["/workspace/org.goafabric.personservice.Application", "-Xmx64m"]
+#    entrypoint: ["java","-Xms${SERVICE_MEM}","-Xmx${SERVICE_MEM}","-cp","/app/resources:/app/classes:/app/libs/*","org.goafabric.personservice.Application"]
     networks:
       - person-service-net
 

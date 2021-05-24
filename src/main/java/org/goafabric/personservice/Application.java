@@ -1,7 +1,6 @@
 package org.goafabric.personservice;
 
-import org.goafabric.personservice.logic.PersonLogic;
-import org.goafabric.personservice.service.Person;
+import org.goafabric.personservice.persistence.DemoDataInitializer;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,24 +20,10 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner init(ApplicationContext context, PersonLogic personLogic) {
+    public CommandLineRunner init(ApplicationContext context, DemoDataInitializer demoDataInitializer) {
         return args -> {
-            if ((args.length > 0) && ("-check-integrity".equals(args[0]))) {
-                SpringApplication.exit(context, () -> 0);
-                return;
-            }
-
-            personLogic.save(Person.builder()
-                    .firstName("Homer").lastName("Simpson")
-                    .build());
-
-            personLogic.save(Person.builder()
-                    .firstName("Bart").lastName("Simpson")
-                    .build());
-
-            personLogic.save(Person.builder()
-                    .firstName("Monty").lastName("Burns")
-                    .build());
+            if ((args.length > 0) && ("-check-integrity".equals(args[0]))) { SpringApplication.exit(context, () -> 0);}
+            else {demoDataInitializer.run();}
         };
 
     }
