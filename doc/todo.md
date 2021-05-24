@@ -1,1 +1,3 @@
 - maven modules for different databases
+- multiple compose files
+- elasticsearch and reactive
