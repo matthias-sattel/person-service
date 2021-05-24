@@ -28,7 +28,7 @@ public class Application {
                 return;
             }
 
-            Person person = personLogic.save(Person.builder()
+            personLogic.save(Person.builder()
                     .firstName("Homer").lastName("Simpson")
                     .build());
 
