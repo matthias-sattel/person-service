@@ -1,5 +1,6 @@
 #1.0.2
 - version increased, and documentation updated
+- prometheus metrics fix added
 
 #1.0.1
 - native build enhanced
