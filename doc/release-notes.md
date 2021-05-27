@@ -1,5 +1,5 @@
 #1.0.2
-
+- version increased, and documentation updated
 
 #1.0.1
 - native build enhanced
