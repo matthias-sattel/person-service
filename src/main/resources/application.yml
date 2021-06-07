@@ -22,6 +22,9 @@ spring.datasource.url: jdbc:h2:mem:persondb
 spring.datasource.hikari.maximum-pool-size: "10"
 spring.datasource.hikari.connection-timeout: "10000"
 
+spring.datasource.schema: classpath*:db/migration/V1__init.sql
+spring.jpa.hibernate.ddl-auto: none
+
 #Logging
 logging.level.root: "WARN"
 logging.level.org.springframework: "INFO"
