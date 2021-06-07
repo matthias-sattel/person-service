@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DemoDataInitializer {
     @Autowired
-    private PersonRepository personRepository;
+    PersonRepository personRepository;
 
     public void run() {
         if (personRepository.findAll().isEmpty()) {

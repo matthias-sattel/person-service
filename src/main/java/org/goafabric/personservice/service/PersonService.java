@@ -13,14 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping(value = "/persons",
-        produces = "application/json")
-
+@RequestMapping(value = "/persons", produces = "application/json")
 @RestController
 @Slf4j
 public class PersonService {
     @Autowired
-    private PersonLogic personLogic;
+    PersonLogic personLogic;
 
     @GetMapping("getById/{id}")
     public Person getById(@PathVariable("id") String id) {

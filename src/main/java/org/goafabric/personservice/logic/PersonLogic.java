@@ -10,10 +10,10 @@ import java.util.List;
 @Component
 public class PersonLogic {
     @Autowired
-    private PersonMapper personMapper;
+    PersonMapper personMapper;
 
     @Autowired
-    private PersonRepository personRepository;
+    PersonRepository personRepository;
 
     public Person getById(String id) {
         return personMapper.map(

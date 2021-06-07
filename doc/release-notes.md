@@ -1,3 +1,6 @@
+#1.0.3
+- sync with quarkus variant
+
 #1.0.2
 - version increased, and documentation updated
 - prometheus metrics fix added
