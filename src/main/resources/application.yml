@@ -1,7 +1,9 @@
+#Spring
 server:
   port: 50800
   tomcat.max-threads: 20
 
+#Monitoring
 management:
   endpoint:
     health:
@@ -15,13 +17,16 @@ security:
   authentication:
     enabled: true
 
+#Persistence
 spring.datasource.url: jdbc:h2:mem:persondb
+spring.datasource.hikari.maximum-pool-size: "10"
+spring.datasource.hikari.connection-timeout: "10000"
 
-#log levels
+#Logging
 logging.level.root: "WARN"
-logging.level.org.goafabric: "INFO"
-
 logging.level.org.springframework: "INFO"
+
+logging.level.org.goafabric: "INFO"
 logging.level.org.flywaydb.core: "INFO"
 logging.level.org.hibernate.SQL: "INFO"
 
