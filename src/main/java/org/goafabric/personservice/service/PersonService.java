@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping(value = "/persons", produces = "application/json")
@@ -42,7 +43,7 @@ public class PersonService {
 
 
     @PostMapping(value = "save", consumes = "application/json")
-    public Person save(@RequestBody Person person) {
+    public Person save(@RequestBody @Valid Person person) {
         return personLogic.save(person);
     }
 

@@ -1,5 +1,6 @@
 #1.0.3
 - sync with quarkus variant
+- mongodb profile removed
 
 #1.0.2
 - version increased, and documentation updated
