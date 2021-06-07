@@ -9,7 +9,7 @@ public class DemoDataInitializer {
     private PersonRepository personRepository;
 
     public void run() {
-        if (!personRepository.findAll().iterator().hasNext()) {
+        if (personRepository.findAll().isEmpty()) {
             personRepository.save(PersonBo.builder()
                     .firstName("Homer").lastName("Simpson")
                     .build());
