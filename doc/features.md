@@ -1,9 +1,9 @@
 #Working 
 - Tomcat, Actuator, Prometheus, Lombok, Mapstruct, ExceptionHandler
 - JPA
+- Bean Validation
 
 #Not Activated / Tested
-- Bean Validation
 - Security
 - Jasypt, Multi Tenancy
 
