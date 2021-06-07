@@ -19,4 +19,4 @@
 #build times github:
 - console: 4m
 - web: 8m
-- jpa: 12m
+- jpa: 15m
