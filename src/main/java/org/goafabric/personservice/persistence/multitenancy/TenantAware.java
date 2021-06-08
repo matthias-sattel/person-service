@@ -11,10 +11,7 @@ public class TenantAware {
     public static final String TENANT_FILTER = "TENANT_FILTER";
 
     @Access(AccessType.PROPERTY)
-    public String getTenantId() {
-        return TenantIdInterceptor.getTenantId(); //this is for save operations only and this should also ensure that setting the wrong tenant is nearly impossible
-    }
-
-    public void setTenantId(String tenantId) {
-    }
+    public String getTenantId() {return TenantIdInterceptor.getTenantId();}
+    
+    public void setTenantId(String tenantId) {}
 }
