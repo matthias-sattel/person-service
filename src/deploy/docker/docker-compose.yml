@@ -3,7 +3,7 @@ version: "3.7"
 services:
   person-service:
     container_name: person-service-${STACK_NAME}
-    image: goafabric/person-service-native:1.0.4-SNAPSHOT
+    image: goafabric/person-service-native:1.0.4-MT-SNAPSHOT
 #    image: goafabric/person-service${ARCH_SUFFIX}:1.0.4-SNAPSHOT
     restart: 'no'
     ports:
@@ -31,6 +31,8 @@ services:
       - spring.datasource.password=person-service
       # Adapter
       - adapter.calleeservice.url=http://host.docker.internal:50900
+      #Logging
+      - logging.level.org.hibernate.SQL: "DEBUG"
 
   postgres:
     container_name: postgres_${STACK_NAME}
