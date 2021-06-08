@@ -2,4 +2,4 @@
 - Jasypt
 - HTTP Restcall + Timeout
 
-- multi database for jpa, mongo, elastic, reactive
+- Multi database for jpa, mongo, elastic, reactive
