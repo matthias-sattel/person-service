@@ -11,14 +11,17 @@ public class DemoDataInitializer {
     public void run() {
         if (personRepository.findAll().isEmpty()) {
             personRepository.save(PersonBo.builder()
+                    .tenantId("0")
                     .firstName("Homer").lastName("Simpson")
                     .build());
 
             personRepository.save(PersonBo.builder()
+                    .tenantId("0")
                     .firstName("Bart").lastName("Simpson")
                     .build());
 
             personRepository.save(PersonBo.builder()
+                    .tenantId("0")
                     .firstName("Monty").lastName("Burns")
                     .build());
         }
