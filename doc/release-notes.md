@@ -1,4 +1,6 @@
 #1.0.4
+- Multi Tenancy added
+- RestTemplate call added (not working for native image)
 
 #1.0.3
 - sync with quarkus variant
