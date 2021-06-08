@@ -394,7 +394,6 @@
                                 <env>
                                     <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
                                     <BP_JVM_VERSION>11</BP_JVM_VERSION>
-                                    <JAVA_TOOL_OPTIONS>-Xmx4096m</JAVA_TOOL_OPTIONS>
                                     <!--
                                     <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>MINUS-enable-http</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
                                     <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>MINUS-enable-https</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
