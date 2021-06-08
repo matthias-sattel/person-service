@@ -1,8 +1,5 @@
-- reenable integrity check for h2
-- Jasypt, Multi Tenancy, 
-- CalleeService Call
+- Reenable integrity check for h2
+- Jasypt
+- HTTP Restcall + Timeout
 
-#db
-- maven modules for different databases
-- multiple compose files
-- elasticsearch and reactive
+- multi database for jpa, mongo, elastic, reactive

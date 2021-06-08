@@ -395,8 +395,8 @@
                                     <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
                                     <BP_JVM_VERSION>11</BP_JVM_VERSION>
                                     <!--
-                                    <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>--enable-http</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
-                                    <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>--enable-https</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
+                                    <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>MINUS-enable-http</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
+                                    <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>MINUS-enable-https</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
                                     -->
                                 </env>
                             </image>

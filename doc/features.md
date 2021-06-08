@@ -1,17 +1,19 @@
 #Working 
 - Tomcat, Actuator, Prometheus, Lombok, Mapstruct, ExceptionHandler
 - JPA
-- Bean Validation
+- Bean Validation 
+- Multi Tenancy
 
 #Not Activated / Tested
 - Security
-- Jasypt, Multi Tenancy
+- Jasypt 
 
 #Not Working
 - Swagger
 - Flyway, Annotations (e.g. @Transactional)
 - Cache
 - Resilience4j, Tracing
+- HTTP Rest Call
 
 #build times apple silicon:
 - not working
