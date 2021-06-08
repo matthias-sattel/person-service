@@ -25,12 +25,20 @@ spring.datasource.hikari.connection-timeout: "10000"
 spring.datasource.schema: classpath*:db/migration/V1__init.sql
 spring.jpa.hibernate.ddl-auto: none
 
+## adapter section
+adapter:
+  timeout: 10000
+  calleeservice:
+    url: http://localhost:50900
+    user: exampleuser
+    password: cdKBo95xcTVVH3dh
+
 #Logging
 logging.level.root: "WARN"
 logging.level.org.springframework: "INFO"
 
 logging.level.org.goafabric: "INFO"
 logging.level.org.flywaydb.core: "INFO"
-logging.level.org.hibernate.SQL: "DEBUG"
+logging.level.org.hibernate.SQL: "INFO"
 
 #logging.pattern.console: "%white(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable"

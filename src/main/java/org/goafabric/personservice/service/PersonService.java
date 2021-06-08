@@ -47,4 +47,8 @@ public class PersonService {
         return personLogic.save(person);
     }
 
+    @GetMapping("isAlive")
+    public Boolean isAlive() {
+        return personLogic.isAlive();
+    }
 }

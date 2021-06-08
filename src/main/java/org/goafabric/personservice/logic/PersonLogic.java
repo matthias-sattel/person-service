@@ -1,5 +1,6 @@
 package org.goafabric.personservice.logic;
 
+import org.goafabric.personservice.adapter.CalleeServiceAdapter;
 import org.goafabric.personservice.persistence.PersonRepository;
 import org.goafabric.personservice.service.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class PersonLogic {
 
     @Autowired
     PersonRepository personRepository;
+
+    @Autowired
+    CalleeServiceAdapter calleeServiceAdapter;
 
     public Person getById(String id) {
         return personMapper.map(
@@ -40,4 +44,7 @@ public class PersonLogic {
                 personMapper.map(person)));
     }
 
+    public Boolean isAlive() {
+        return calleeServiceAdapter.isAlive();
+    }
 }
