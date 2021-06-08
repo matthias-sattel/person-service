@@ -1,9 +1,9 @@
 #1.0.4
-- Exceptionhandler added
 
 #1.0.3
 - sync with quarkus variant
 - mongodb profile removed
+- ExceptionHandler added
 
 #1.0.2
 - version increased, and documentation updated
