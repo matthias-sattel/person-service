@@ -32,7 +32,7 @@ services:
       # Adapter
       - adapter.calleeservice.url=http://host.docker.internal:50900
       #Logging
-      - logging.level.org.hibernate.SQL: "DEBUG"
+      - logging.level.org.hibernate.SQL="DEBUG"
 
   postgres:
     container_name: postgres_${STACK_NAME}
