@@ -25,8 +25,6 @@ public class PersonBo extends TenantAware {
     @GeneratedValue(generator = "uuid") @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    private String tenantId;
-
     private String firstName;
 
     private String lastName;

@@ -16,9 +16,7 @@ import javax.validation.constraints.Size;
 public class Person {
     @Null
     private String id;
-
-    private String tenantId;
-
+    
     @NotNull
     @Size(min = 3, max = 255)
     private String firstName;
