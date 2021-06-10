@@ -1,9 +1,9 @@
-#Spring
+#application
 server:
   port: 50800
   tomcat.max-threads: 20
 
-#Monitoring
+#monitoring
 management:
   endpoint:
     health:
@@ -17,7 +17,7 @@ security:
   authentication:
     enabled: true
 
-#Persistence
+#persistence
 spring.datasource.url: jdbc:h2:mem:persondb
 spring.datasource.hikari.maximum-pool-size: "10"
 spring.datasource.hikari.connection-timeout: "10000"
@@ -26,7 +26,7 @@ spring.datasource.initialization-mode: always
 spring.datasource.schema: classpath*:db/migration/V1__init.sql
 spring.jpa.hibernate.ddl-auto: none
 
-## adapter section
+#adapter
 adapter:
   timeout: 10000
   calleeservice:
@@ -34,7 +34,7 @@ adapter:
     user: exampleuser
     password: cdKBo95xcTVVH3dh
 
-#Logging
+#logging
 logging.level.root: "WARN"
 logging.level.org.springframework: "INFO"
 
