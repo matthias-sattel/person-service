@@ -1,3 +1,5 @@
+drop table if exists person;
+
 create table person
 (
 	id varchar(36) not null
