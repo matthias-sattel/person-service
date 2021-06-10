@@ -23,7 +23,6 @@ services:
 
     environment:
       - TZ=Europe/Berlin
-      - management.database.monitoring.enabled=true
       - security.authentication.enabled=false
       # Datasource
       - spring.datasource.url=jdbc:postgresql://postgres_${STACK_NAME}:5432/persondb
