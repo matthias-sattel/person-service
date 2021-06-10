@@ -36,7 +36,7 @@ services:
       - spring.datasource.username=person-service
       - spring.datasource.password=person-service
       #adapter
-      - adapter.personservice.url=http://host.docker.internal:50900
+      - adapter.calleeservice.url=http://host.docker.internal:50900
       #logging
       - logging.level.root=WARN
       - logging.level.org.springframework=INFO
