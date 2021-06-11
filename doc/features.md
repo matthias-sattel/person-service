@@ -3,6 +3,7 @@
 - JPA
 - Bean Validation 
 - Multi Tenancy
+- HTTP Rest Call
 
 #Not Activated / Tested
 - Security
@@ -14,7 +15,6 @@
 - Aspects / Interceptor
 - Cache
 - Resilience4j, Tracing
-- HTTP Rest Call
 
 #build times apple silicon:
 - not working
