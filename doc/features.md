@@ -11,7 +11,6 @@
 - Flyway, Annotations (e.g. @Transactional)
 - Aspects / Interceptor
 - Cache
-  
 - Resilience4j, Tracing
 
 #Not Activated / Tested
