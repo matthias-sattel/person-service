@@ -37,6 +37,7 @@ services:
       - spring.datasource.password=person-service
       #adapter
       - adapter.calleeservice.url=http://host.docker.internal:50900
+      - adapter.timeout=10000
       #log levels
       - logging.level.root=WARN
       - logging.level.org.springframework=INFO
