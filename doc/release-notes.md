@@ -1,6 +1,7 @@
 #1.0.4
 - Multi Tenancy added
 - RestTemplate call added (not working for native image)
+- Upgrade to Spring Boot 2.5.1 and Spring Native 0.10.0                                                             
 
 #1.0.3
 - sync with quarkus variant
