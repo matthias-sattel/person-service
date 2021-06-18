@@ -3,7 +3,6 @@ package org.goafabric.personservice;
 import org.goafabric.personservice.persistence.DemoDataInitializer;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.actuate.autoconfigure.metrics.data.RepositoryMetricsAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +11,7 @@ import org.springframework.context.annotation.Bean;
  * Created by amautsch on 26.06.2015.
  */
 
-@SpringBootApplication(exclude = {RepositoryMetricsAutoConfiguration.class}) //https://github.com/spring-projects/spring-boot/issues/26630
+@SpringBootApplication
         //exclude = { SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class, UserDetailsServiceAutoConfiguration.class})
 public class Application {
 
