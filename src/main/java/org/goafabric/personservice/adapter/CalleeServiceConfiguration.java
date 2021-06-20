@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Base64;
 import java.util.Collections;
 
 @Configuration
@@ -27,7 +28,8 @@ public class CalleeServiceConfiguration {
         restTemplate.setMessageConverters(Collections.singletonList(new MappingJackson2HttpMessageConverter()));
         restTemplate.getInterceptors().add((request, body, execution) -> {
             request.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-            request.getHeaders().setBasicAuth(user, password);
+            request.getHeaders().setBasicAuth(
+                    new String(Base64.getDecoder().decode(user)), new String(Base64.getDecoder().decode(password)));
             return execution.execute(request, body);
         });
         return restTemplate;

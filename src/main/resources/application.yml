@@ -31,8 +31,8 @@ adapter:
   timeout: 10000
   calleeservice:
     url: http://localhost:50900
-    user: admin
-    password: admin
+    user: YWRtaW4=
+    password: YWRtaW4=
 
 #logging
 logging.level.root: "WARN"
