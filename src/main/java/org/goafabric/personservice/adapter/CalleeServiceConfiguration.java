@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 
 @Configuration
-public class CalleServiceConfiguration {
+public class CalleeServiceConfiguration {
 
     @Bean
     public RestTemplate restTemplate(
