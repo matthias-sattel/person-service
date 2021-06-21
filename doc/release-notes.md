@@ -2,6 +2,7 @@
 - Multi Tenancy added
 - RestTemplate call added
 - Upgrade to Spring Boot 2.5.1 and Spring Native 0.10.0                                                             
+- Database Provisioning Toggle added
 
 #1.0.3
 - sync with quarkus variant
