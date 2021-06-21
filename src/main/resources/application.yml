@@ -26,6 +26,8 @@ spring.datasource.initialization-mode: always
 spring.datasource.schema: classpath*:db/migration/V1__init.sql
 spring.jpa.hibernate.ddl-auto: none
 
+database.provisioning.goals: -import-demo-data
+
 #adapter
 adapter:
   timeout: 10000

@@ -35,6 +35,7 @@ services:
       - spring.datasource.url=jdbc:postgresql://${_Values_root_name}-postgres:5432/persondb
       - spring.datasource.username=person-service
       - spring.datasource.password=person-service
+      - database.provisioning.goals=-import-demo-data
       #adapter
       - adapter.calleeservice.url=http://host.docker.internal:50900
       - adapter.calleeservice.user=YWRtaW4=
