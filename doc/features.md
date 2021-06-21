@@ -5,9 +5,10 @@
 
 - JPA, Bean Validation
 
+- Multi Tenancy for JPA
+
 #Not Working
 - Swagger
-
 - DurationLogger
   
 - Flyway
@@ -16,7 +17,7 @@
 
 #Not Tested /Activated
 - Jaspyt Encryption
-- Tracing
+- Auditing
 
 #build times apple silicon:
 - not working
