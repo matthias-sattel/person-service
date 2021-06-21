@@ -1,12 +1,12 @@
 #Working
 - Web, Health, Prometheus, ExceptionHandler
 - Lombok, Mapstruct
+- Security
 
 - JPA, Bean Validation
 
 #Not Working
 - Swagger
-- Security
 
 - DurationLogger
   
@@ -15,7 +15,6 @@
 - Resilience
 
 #Not Tested /Activated
-- Security
 - Jaspyt Encryption
 - Tracing
 
