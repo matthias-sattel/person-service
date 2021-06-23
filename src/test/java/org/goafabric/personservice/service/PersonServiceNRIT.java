@@ -1,6 +1,6 @@
 package org.goafabric.personservice.service;
 
-import org.goafabric.personservice.client.PersonServiceClient;
+import org.goafabric.personservice.client.PersonServiceAdapter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,12 +19,12 @@ class PersonServiceNRIT {
     @LocalServerPort
     private int port;
 
-    private PersonServiceClient personServiceClient;
+    private PersonServiceAdapter personServiceAdapter;
 
     @PostConstruct
     private void init() {
-        this.personServiceClient
-                = new PersonServiceClient(restTemplateTest, "http://localhost"+ ":" + port);
+        this.personServiceAdapter
+                = new PersonServiceAdapter(restTemplateTest, "http://localhost"+ ":" + port);
     }
 
     @Test
@@ -34,19 +34,19 @@ class PersonServiceNRIT {
 
     @Test
     void findAll() {
-        assertThat(personServiceClient.findAll())
+        assertThat(personServiceAdapter.findAll())
                 .isNotNull().isNotEmpty();
     }
 
     @Test
     void findByFirstName() {
-        assertThat(personServiceClient.findByFirstName("Bart"))
+        assertThat(personServiceAdapter.findByFirstName("Bart"))
                 .isNotNull().hasSize(1);
     }
 
     @Test
     void findByLastName() {
-        assertThat(personServiceClient.findByLastName("Simpson"))
+        assertThat(personServiceAdapter.findByLastName("Simpson"))
                 .isNotNull().hasSize(2);
     }
     

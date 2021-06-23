@@ -5,12 +5,12 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-public class PersonServiceClient {
+public class PersonServiceAdapter {
     private final RestTemplate restTemplate;
 
     private final String serviceUrl;
 
-    public PersonServiceClient(RestTemplate restTemplate, String baseUrl) {
+    public PersonServiceAdapter(RestTemplate restTemplate, String baseUrl) {
         this.restTemplate = restTemplate;
         this.serviceUrl = baseUrl + "/persons";
     }
