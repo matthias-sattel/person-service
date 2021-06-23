@@ -21,7 +21,7 @@ class PersonLogicIT {
     @Test
     void findAll() {
         assertThat(personLogic.findAll())
-                .isNotNull();
+                .isNotNull().isNotEmpty();
     }
 
     @Test
