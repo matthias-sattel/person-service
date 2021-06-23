@@ -1,6 +1,8 @@
 package org.goafabric.personservice.client;
 
 import org.goafabric.personservice.service.Person;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -26,13 +28,15 @@ public class PersonServiceAdapter {
     }
 
     public List<Person> findByFirstName(String firstName) {
-        return restTemplate.getForObject(serviceUrl + "/findByFirstName?firstName={firstName}",
-                List.class, firstName);
+        return restTemplate.exchange(serviceUrl + "/findByFirstName?firstName={firstName}",
+                HttpMethod.GET, null, new ParameterizedTypeReference<List<Person>>(){}, firstName)
+                .getBody();
     }
 
     public List<Person>findByLastName(String lastName) {
-        return restTemplate.getForObject(serviceUrl + "/findByLastName?lastName={lastName}",
-                List.class, lastName);
+        return restTemplate.exchange(serviceUrl + "/findByLastName?lastName={lastName}",
+                HttpMethod.GET, null, new ParameterizedTypeReference<List<Person>>(){}, lastName)
+                .getBody();
     }
 
     public Boolean isAlive() {
