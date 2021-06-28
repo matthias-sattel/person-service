@@ -10,6 +10,8 @@ create table person
 	last_name varchar(255)
 );
 
+drop table if exists person_audit;
+
 create table person_audit
 (
 	id varchar(36) not null
