@@ -35,6 +35,7 @@ public class AuditJpaListener implements ApplicationContextAware {
 
     @PostPersist
     public void afterCreate(Object object)  {
+        System.out.println("hello from entitylistener create");
         context.getBean(AuditBean.class).afterCreate(object, getId(object));
     }
 
