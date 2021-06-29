@@ -1,4 +1,6 @@
 #1.0.5
+- upgrade to Spring Boot 2.52 and Spring NAtive 0.10.1
+- @Transactional readded
 
 #1.0.4
 - Multi Tenancy added

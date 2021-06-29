@@ -5,11 +5,12 @@ import org.goafabric.personservice.persistence.PersonRepository;
 import org.goafabric.personservice.service.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
-//@Transactional
+@Transactional
 public class PersonLogic {
     @Autowired
     PersonMapper personMapper;
