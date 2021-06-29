@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Bean;
  */
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class, UserDetailsServiceAutoConfiguration.class})
-//@AotProxyHint(targetClass=org.goafabric.personservice.persistence.audit.AuditJpaListener$AuditJpaUpdater.class, proxyFeatures = ProxyBits.IS_STATIC)
 public class Application {
 
     public static void main(String[] args){

@@ -66,7 +66,8 @@ public class AuditJpaListener implements ApplicationContextAware {
 
     @Component
     static class AuditJpaInserter implements AuditBean.AuditInserter {
-        @Autowired private DataSource dataSource;
+        @Autowired
+        private DataSource dataSource;
 
         public void insertAudit(AuditBean.AuditEvent auditEvent, Object object) { //we cannot use jpa because of the dynamic table name
             final SimpleJdbcInsert insert = new SimpleJdbcInsert(dataSource).withTableName(getTableName(object) + "_audit");
