@@ -9,6 +9,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
+@EntityListeners(AuditJpaListener.class)
 public abstract class TenantAware {
     public static final String TENANT_FILTER = "TENANT_FILTER";
 
