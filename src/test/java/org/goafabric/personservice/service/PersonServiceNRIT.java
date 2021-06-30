@@ -19,11 +19,11 @@ class PersonServiceNRIT {
     @LocalServerPort
     private int port;
 
-    private PersonServiceAdapter personServiceAdapter;
+    private PersonServiceAdapter personService;
 
     @PostConstruct
     private void init() {
-        this.personServiceAdapter
+        this.personService
                 = new PersonServiceAdapter(restTemplateTest, "http://localhost"+ ":" + port);
     }
 
@@ -34,19 +34,19 @@ class PersonServiceNRIT {
 
     @Test
     void findAll() {
-        assertThat(personServiceAdapter.findAll())
+        assertThat(personService.findAll())
                 .isNotNull().isNotEmpty();
     }
 
     @Test
     void findByFirstName() {
-        assertThat(personServiceAdapter.findByFirstName("Bart"))
+        assertThat(personService.findByFirstName("Bart"))
                 .isNotNull().hasSize(1);
     }
 
     @Test
     void findByLastName() {
-        assertThat(personServiceAdapter.findByLastName("Simpson"))
+        assertThat(personService.findByLastName("Simpson"))
                 .isNotNull().hasSize(2);
     }
     

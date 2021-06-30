@@ -15,10 +15,10 @@ public class CalleeServiceAdapter {
     @Value("${adapter.calleeservice.url}")
     private String url;
 
-    public Boolean isAlive() {
+    public Callee sayMyName(String name) {
         log.info("Calling CalleService ...");
-        final Boolean isAlive = restTemplate.getForObject(url + "/callees/isAlive", Boolean.class);
-        log.info("got: " + isAlive);
-        return isAlive;
+        final Callee callee = restTemplate.getForObject(url + "/callees/sayMyName?name={name}", Callee.class, name);
+        log.info("got: " + callee);
+        return callee;
     }
 }
