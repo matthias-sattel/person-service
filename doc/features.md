@@ -12,12 +12,9 @@
 - DurationLogger
   
 - Flyway
-- Cache
 - Resilience
 
-#Not Tested /Activated
 - Jaspyt Encryption
-- Auditing
 
 #build times apple silicon:
 - not working
