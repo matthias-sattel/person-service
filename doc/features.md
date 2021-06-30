@@ -6,6 +6,7 @@
 - JPA, Bean Validation
 
 - Multi Tenancy for JPA
+- Auditing               
 
 #Not Working
 - Swagger
