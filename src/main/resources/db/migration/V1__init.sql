@@ -17,7 +17,7 @@ create table person_audit
 	id varchar(36) not null
 		constraint pk_person_audit
 			primary key,
-    tenant_id varchar(3),
+    tenant_id varchar(36),
 
     reference_id varchar(255),
     operation varchar(255),
