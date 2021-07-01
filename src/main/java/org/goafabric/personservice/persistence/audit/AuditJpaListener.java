@@ -30,29 +30,25 @@ public class AuditJpaListener implements ApplicationContextAware {
 
     @PostLoad
     public void afterRead(Object object) {
-        context.getBean(AuditBean.class).afterRead(object, getId(object));
+        context.getBean(AuditBean.class).afterRead(object, ((TenantAware) object).getId());
     }
 
     @PostPersist
     public void afterCreate(Object object)  {
-        context.getBean(AuditBean.class).afterCreate(object, getId(object));
+        context.getBean(AuditBean.class).afterCreate(object, ((TenantAware) object).getId());
     }
 
     @PostUpdate
     public void afterUpdate(Object object) {
-        context.getBean(AuditBean.class).afterUpdate(object, getId(object),
-                context.getBean(AuditJpaUpdater.class).findOldObject(object.getClass(), getId(object)));
+        context.getBean(AuditBean.class).afterUpdate(object, ((TenantAware) object).getId(),
+                context.getBean(AuditJpaUpdater.class).findOldObject(object.getClass(), ((TenantAware) object).getId()));
     }
 
     @PostRemove
     public void afterDelete(Object object) {
-        context.getBean(AuditBean.class).afterDelete(object, getId(object));
+        context.getBean(AuditBean.class).afterDelete(object, ((TenantAware) object).getId());
     }
-
-    private String getId(@NonNull Object object) {
-        return ((TenantAware) object).getId();
-    }
-
+    
     @Component
     static class AuditJpaUpdater {
         @Autowired private EntityManager entityManager;
