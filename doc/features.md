@@ -9,8 +9,6 @@
 - Auditing               
 
 #Not Working
-- REST Call
-  
 - Swagger
 - DurationLogger
   
