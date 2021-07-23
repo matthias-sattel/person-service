@@ -5,6 +5,8 @@
 
 - JPA, Bean Validation
 
+- Tracing
+
 - Multi Tenancy for JPA
 - Auditing (not in native mode, https://github.com/spring-projects-experimental/spring-native/issues/869)               
 

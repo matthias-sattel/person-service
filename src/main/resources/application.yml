@@ -13,6 +13,11 @@ management:
       exposure:
         include: "health,prometheus,heapdump"
 
+#jaeger / zipkin
+spring.sleuth.enabled: false
+spring.zipkin.enabled: false
+
+#security
 security:
   authentication:
     enabled: true
