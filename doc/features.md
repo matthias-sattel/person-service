@@ -15,7 +15,7 @@
 - DurationLogger (https://github.com/spring-projects-experimental/spring-native/issues/649)
   
 - Flyway (https://github.com/spring-projects-experimental/spring-native/issues/778)
-- Resilience
+- Resilience (not tested)
 
 - Jaspyt Encryption
   
