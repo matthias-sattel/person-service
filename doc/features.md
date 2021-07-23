@@ -16,6 +16,7 @@
 - Resilience
 
 - Jaspyt Encryption
+- Arm Builds (https://github.com/buildpacks/lifecycle/issues/435)
 
 #build times apple silicon:
 - not working
