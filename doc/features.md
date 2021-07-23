@@ -13,9 +13,9 @@
 #Not Working
 - Flyway (https://github.com/spring-projects-experimental/spring-native/issues/778)
 - Swagger (https://github.com/springfox/springfox/issues/3816, https://github.com/springdoc/springdoc-openapi/issues/1164)
-- DurationLogger (https://github.com/spring-projects-experimental/spring-native/issues/649)
-  
 - Resilience (not tested)
+
+- DurationLogger (https://github.com/spring-projects-experimental/spring-native/issues/649)
 
 - Jaspyt Encryption
   
