@@ -9,10 +9,10 @@
 - Auditing               
 
 #Not Working
-- Swagger
+- Swagger (https://github.com/springfox/springfox/issues/3816)
 - DurationLogger
   
-- Flyway
+- Flyway (https://github.com/spring-projects-experimental/spring-native/issues/778)
 - Resilience
 
 - Jaspyt Encryption
