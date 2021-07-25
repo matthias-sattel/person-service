@@ -10,6 +10,8 @@ create table person
 	last_name varchar(255)
 );
 
+create index idx_person_tenant_id on person(tenant_id);
+
 drop table if exists person_audit;
 
 create table person_audit
@@ -28,3 +30,5 @@ create table person_audit
     oldvalue TEXT,
     newvalue TEXT
 );
+
+create index idx_person_audit_tenant_id on person_audit(tenant_id);
