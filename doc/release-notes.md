@@ -2,7 +2,7 @@
 - spring sleuth for jaeger added
 
 #1.0.5
-- upgrade to Spring Boot 2.52 and Spring NAtive 0.10.1
+- upgrade to Spring Boot 2.5.2 and Spring Native 0.10.1
 - @Transactional readded
 - Auditing added (currently not working in native mode)
 
