@@ -13,7 +13,7 @@
 
     <groupId>org.goafabric</groupId>
     <artifactId>person-service</artifactId>
-    <version>1.0.7-SNAPSHOT</version>
+    <version>1.0.7-jasypt-SNAPSHOT</version>
 
     <dependencies>
         <!-- web -->
@@ -91,6 +91,17 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <!-- Jasypt -->
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt-hibernate5</artifactId>
         </dependency>
 
         <!-- test -->
