@@ -24,7 +24,7 @@ import java.util.UUID;
 @Slf4j
 @Configuration
 public class EncryptionConfiguration {
-    @Value("security.encryption.key")
+    @Value("${security.encryption.key:}")
     String encryptionKey;
 
     @Bean
@@ -48,10 +48,10 @@ public class EncryptionConfiguration {
     }
 
     private String getEncryptionKey() {
-        if (" ".equals(encryptionKey)) {
+        if ("".equals(encryptionKey)) {
             log.warn("security.encryption.key is empty, generating one for temporary usage");
         }
-        return " ".equals(encryptionKey) ? UUID.randomUUID().toString() : encryptionKey;
+        return "".equals(encryptionKey) ? UUID.randomUUID().toString() : encryptionKey;
     }
 
 }
