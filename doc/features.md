@@ -1,18 +1,22 @@
 #Working
-- Web, Health, Prometheus, ExceptionHandler
+- Web, ExceptionHandler
 - Lombok, Mapstruct
+
+- Health, Prometheus
+- Swagger
+
 - Security
 
-- JPA, Bean Validation
+- JPA
+- Bean Validation
 
 - Tracing
 
-- Multi Tenancy for JPA
-- Auditing (not in native mode, https://github.com/spring-projects-experimental/spring-native/issues/869)               
+- Auditing (not in native mode, https://github.com/spring-projects-experimental/spring-native/issues/869)
+- Multi Tenancy 
 
 #Not Working
 - Flyway (https://github.com/spring-projects-experimental/spring-native/issues/778)
-- Swagger (https://github.com/springfox/springfox/issues/3816, https://github.com/springdoc/springdoc-openapi/issues/1164)
 - Resilience (not tested)
 
 - DurationLogger (https://github.com/spring-projects-experimental/spring-native/issues/649)

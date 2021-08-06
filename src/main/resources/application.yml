@@ -13,6 +13,8 @@ management:
       exposure:
         include: "health,prometheus,heapdump"
 
+springdoc.swagger-ui.path: /swagger-ui/index.html
+
 #jaeger / zipkin
 spring.sleuth.enabled: false
 spring.zipkin.enabled: false
