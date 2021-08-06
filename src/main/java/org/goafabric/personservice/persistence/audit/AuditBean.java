@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.crossfunctional.TenantIdInterceptor;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -51,6 +52,9 @@ public class AuditBean {
 
     @Autowired
     private AuditInserter auditInserter;
+
+    @Autowired
+    StandardPBEStringEncryptor hibernateEncryptor;
 
 
     public void afterRead(Object object, String id) {
@@ -100,8 +104,8 @@ public class AuditBean {
                 .createdAt(dbOperation == DbOperation.CREATE ? date : null)
                 .modifiedBy((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? getUserName() : null)
                 .modifiedAt((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? date : null)
-                .oldValue(oldObject == null ? null : getJsonValue(oldObject))
-                .newValue(newObject == null ? null : getJsonValue(newObject))
+                .oldValue(oldObject == null ? null : hibernateEncryptor.encrypt(getJsonValue(oldObject)))
+                .newValue(newObject == null ? null : hibernateEncryptor.encrypt(getJsonValue(newObject)))
                 .build();
     }
 

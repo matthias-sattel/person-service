@@ -13,14 +13,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.UUID;
 
-/*
-@RegisterForReflection(targets= {
-        java.text.Normalizer.class,
-        java.text.Normalizer.Form.class
-        //com.ibm.icu.text.Normalizer.class
-})
-
- */
 @Slf4j
 @Configuration
 public class EncryptionConfiguration {
