@@ -7,6 +7,8 @@
 
 - Security
 
+- DurationLogger Aspect
+
 - JPA
 - Bean Validation
 
@@ -19,7 +21,6 @@
 #Not Working
 - Flyway (https://github.com/spring-projects-experimental/spring-native/issues/778)
 - Resilience (not tested)
-- DurationLogger (https://github.com/spring-projects-experimental/spring-native/issues/649)
 
 - Arm Builds (https://github.com/buildpacks/lifecycle/issues/435)
 
