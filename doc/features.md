@@ -14,15 +14,13 @@
 
 - Auditing (not in native mode, https://github.com/spring-projects-experimental/spring-native/issues/869)
 - Multi Tenancy 
+- Jaspyt Database Encryption
 
 #Not Working
 - Flyway (https://github.com/spring-projects-experimental/spring-native/issues/778)
 - Resilience (not tested)
-
 - DurationLogger (https://github.com/spring-projects-experimental/spring-native/issues/649)
 
-- Jaspyt Encryption
-  
 - Arm Builds (https://github.com/buildpacks/lifecycle/issues/435)
 
 #build times apple silicon:
