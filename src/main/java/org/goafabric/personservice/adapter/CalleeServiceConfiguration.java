@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.nativex.hint.TypeHint;
 import org.springframework.web.client.RestTemplate;
@@ -16,7 +15,7 @@ import java.util.Base64;
 import java.util.Collections;
 
 @Configuration
-@TypeHint(types = ClientHttpRequestFactory.class)
+@TypeHint(types = org.springframework.http.client.SimpleClientHttpRequestFactory.class)
 @TypeHint(types = org.goafabric.personservice.adapter.Callee.class)
 public class CalleeServiceConfiguration {
 
