@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.nativex.hint.TypeHint;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ import javax.sql.DataSource;
  *
  */
 
+@TypeHint(types = AuditJpaListener.class)
 public class AuditJpaListener implements ApplicationContextAware {
     private static ApplicationContext context;
 
