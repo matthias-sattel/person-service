@@ -22,7 +22,6 @@ import org.springframework.nativex.hint.TypeHint;
 
 @TypeHint(types = {java.text.Normalizer.class, java.text.Normalizer.Form.class})
 @TypeHint(types = org.jasypt.hibernate5.type.EncryptedStringType.class, typeNames = "encryptedString", access = AccessBits.ALL)
-@TypeHint(typeNames = "org.goafabric.personservice.persistence.PersonBo.secret", access = AccessBits.ALL)
 
 //@TypeHint(types = AuditJpaListener.class)
 public class Application {
