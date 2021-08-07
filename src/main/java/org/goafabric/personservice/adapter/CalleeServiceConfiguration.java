@@ -17,6 +17,7 @@ import java.util.Collections;
 
 @Configuration
 @TypeHint(types = ClientHttpRequestFactory.class)
+@TypeHint(types = org.goafabric.personservice.adapter.Callee.class)
 public class CalleeServiceConfiguration {
 
     @Bean
