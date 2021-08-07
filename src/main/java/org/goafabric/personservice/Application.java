@@ -18,10 +18,6 @@ import org.springframework.nativex.hint.TypeHint;
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class, UserDetailsServiceAutoConfiguration.class})
 
 @TypeHint(types = org.goafabric.personservice.adapter.Callee.class)
-
-//@TypeHint(types = {java.text.Normalizer.class, java.text.Normalizer.Form.class})
-//@TypeHint(types = org.jasypt.hibernate5.type.EncryptedStringType.class, access = AccessBits.ALL)
-
 //@TypeHint(types = AuditJpaListener.class)
 public class Application {
 
