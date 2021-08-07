@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.nativex.hint.AccessBits;
 import org.springframework.nativex.hint.TypeHint;
 
 /**
@@ -20,8 +19,8 @@ import org.springframework.nativex.hint.TypeHint;
 
 @TypeHint(types = org.goafabric.personservice.adapter.Callee.class)
 
-@TypeHint(types = {java.text.Normalizer.class, java.text.Normalizer.Form.class})
-@TypeHint(types = org.jasypt.hibernate5.type.EncryptedStringType.class, access = AccessBits.ALL)
+//@TypeHint(types = {java.text.Normalizer.class, java.text.Normalizer.Form.class})
+//@TypeHint(types = org.jasypt.hibernate5.type.EncryptedStringType.class, access = AccessBits.ALL)
 
 //@TypeHint(types = AuditJpaListener.class)
 public class Application {
