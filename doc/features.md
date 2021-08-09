@@ -20,7 +20,7 @@
 
 #Not Working
 - Flyway (https://github.com/spring-projects-experimental/spring-native/issues/778)
-- Resilience (not tested)
+- Resilience (https://github.com/spring-projects-experimental/spring-native/issues/960)
 
 - Arm Builds (https://github.com/buildpacks/lifecycle/issues/435)
 
