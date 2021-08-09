@@ -1,3 +1,5 @@
+#1.1.1
+
 #1.1.0
 - Upgrade to Spring Boot 2.5.3 / Spring Native 10.0.2
 - Swagger added
