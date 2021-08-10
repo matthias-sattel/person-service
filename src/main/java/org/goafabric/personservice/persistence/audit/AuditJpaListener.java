@@ -20,8 +20,10 @@ import javax.sql.DataSource;
  *
  */
 
+@Component
 public class AuditJpaListener implements ApplicationContextAware {
-    private static ApplicationContext context;
+    @Autowired
+    private ApplicationContext context;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
