@@ -33,4 +33,8 @@ public class TenantIdInterceptor implements WebMvcConfigurer {
         return tenantId == null ? "0" : tenantId;  //Todo: should throw exception
     }
 
+    public static void setTenantId(String tenantId) {
+        tenantIdThreadLocal.set(tenantId);
+    }
+
 }
