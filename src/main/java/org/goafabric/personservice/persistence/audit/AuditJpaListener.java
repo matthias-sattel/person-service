@@ -2,10 +2,8 @@ package org.goafabric.personservice.persistence.audit;
 
 import lombok.NonNull;
 import org.goafabric.personservice.persistence.multitenancy.TenantAware;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
@@ -21,15 +19,10 @@ import javax.sql.DataSource;
  */
 
 @Component
-public class AuditJpaListener implements ApplicationContextAware {
+public class AuditJpaListener {
     @Autowired
     private ApplicationContext context;
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        context = applicationContext;
-    }
-
+    
     @PostLoad
     public void afterRead(Object object) {
         context.getBean(AuditBean.class).afterRead(object, ((TenantAware) object).getId());
