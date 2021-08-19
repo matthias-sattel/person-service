@@ -22,7 +22,7 @@
 - Flyway (https://github.com/spring-projects-experimental/spring-native/issues/778)
 - Resilience (https://github.com/spring-projects-experimental/spring-native/issues/960)
 
-- Arm Builds (https://github.com/buildpacks/lifecycle/issues/435)
+- Arm Builds (https://github.com/paketo-buildpacks/stacks/issues/51)
 
 #build times apple silicon:
 - not working
