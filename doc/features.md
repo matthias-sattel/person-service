@@ -14,7 +14,7 @@
 
 - Tracing
 
-- Auditing (not in native mode, https://github.com/spring-projects-experimental/spring-native/issues/869)
+- Auditing (not in native mode, https://github.com/spring-projects-experimental/spring-native/issues/949)
 - Multi Tenancy 
 - Jaspyt Database Encryption
 
