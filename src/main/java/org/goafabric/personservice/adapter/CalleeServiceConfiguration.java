@@ -15,7 +15,6 @@ import java.util.Base64;
 import java.util.Collections;
 
 @Configuration
-@TypeHint(types = org.springframework.http.client.SimpleClientHttpRequestFactory.class)
 @TypeHint(types = org.goafabric.personservice.adapter.Callee.class)
 public class CalleeServiceConfiguration {
 

@@ -1,7 +1,9 @@
 #1.1.1
+- plugin management
+- upgrade to Spring Native 0.10.3
 
 #1.1.0
-- Upgrade to Spring Boot 2.5.3 / Spring Native 10.0.2
+- Upgrade to Spring Boot 2.5.3 / Spring Native 0.10.2
 - Swagger added
 - Jasypt Database Encryption added
 - DurationLogger Aspect added
