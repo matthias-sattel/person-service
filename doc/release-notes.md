@@ -1,6 +1,6 @@
 #1.1.1
 - plugin management
-- upgrade to Spring Native 0.10.3
+- Upgrade to Spring Boot 2.5.5 / Spring Native 0.10.4
 - build updated to jdk 17
 
 #1.1.0
