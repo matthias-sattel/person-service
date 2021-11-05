@@ -1,7 +1,6 @@
 package org.goafabric.personservice;
 
 import org.goafabric.personservice.persistence.DatabaseProvisioning;
-import org.goafabric.personservice.persistence.audit.AuditJpaListener;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
@@ -10,7 +9,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.nativex.hint.TypeHint;
 
 /**
  * Created by amautsch on 26.06.2015.
@@ -18,7 +16,7 @@ import org.springframework.nativex.hint.TypeHint;
 
 @SpringBootApplication
         (exclude = { SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class, UserDetailsServiceAutoConfiguration.class})
-@TypeHint(types = AuditJpaListener.class)
+//@TypeHint(types = AuditJpaListener.class)
 public class Application {
 
     public static void main(String[] args){
