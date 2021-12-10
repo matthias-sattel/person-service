@@ -17,7 +17,7 @@ import java.util.UUID;
 
 @Slf4j
 @Configuration
-@TypeHint(types = {java.text.Normalizer.class, java.text.Normalizer.Form.class})
+@TypeHint(types = {java.text.Normalizer.class, java.text.Normalizer.Form.class}, access = {TypeAccess.RESOURCE, TypeAccess.DECLARED_CLASSES, TypeAccess.DECLARED_FIELDS, TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS, TypeAccess.PUBLIC_CLASSES, TypeAccess.PUBLIC_CONSTRUCTORS, TypeAccess.PUBLIC_FIELDS, TypeAccess.PUBLIC_METHODS})
 @TypeHint(types = org.jasypt.hibernate5.type.EncryptedStringType.class, access = {TypeAccess.RESOURCE, TypeAccess.DECLARED_CLASSES, TypeAccess.DECLARED_FIELDS, TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS, TypeAccess.PUBLIC_CLASSES, TypeAccess.PUBLIC_CONSTRUCTORS, TypeAccess.PUBLIC_FIELDS, TypeAccess.PUBLIC_METHODS})
 public class EncryptionConfiguration {
     @Value("${security.encryption.key:}")
