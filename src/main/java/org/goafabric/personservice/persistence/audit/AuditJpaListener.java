@@ -1,3 +1,4 @@
+/*
 package org.goafabric.personservice.persistence.audit;
 
 import lombok.NonNull;
@@ -14,11 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import javax.sql.DataSource;
-
-/**
- * Specific Listener for JPA for Auditing
- *
- */
 
 public class AuditJpaListener implements ApplicationContextAware {
     private static ApplicationContext context;
@@ -74,3 +70,5 @@ public class AuditJpaListener implements ApplicationContextAware {
         }
     }
 }
+
+ */
