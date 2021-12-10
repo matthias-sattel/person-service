@@ -10,7 +10,7 @@ import org.jasypt.salt.SaltGenerator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.nativex.hint.AccessBits;
+import org.springframework.nativex.hint.TypeAccess;
 import org.springframework.nativex.hint.TypeHint;
 
 import java.util.UUID;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @Slf4j
 @Configuration
 @TypeHint(types = {java.text.Normalizer.class, java.text.Normalizer.Form.class})
-@TypeHint(types = org.jasypt.hibernate5.type.EncryptedStringType.class, access = AccessBits.ALL)
+@TypeHint(types = org.jasypt.hibernate5.type.EncryptedStringType.class, access = TypeAccess.AUTO_DETECT)
 public class EncryptionConfiguration {
     @Value("${security.encryption.key:}")
     String encryptionKey;
