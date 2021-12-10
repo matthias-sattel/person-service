@@ -432,7 +432,7 @@
                                                 <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
                                                 <BP_JVM_VERSION>11</BP_JVM_VERSION>
                                                 <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>--enable-http</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
-                                                <!-- <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>-J-Xmx6000m</BP_NATIVE_IMAGE_BUILD_ARGUMENTS> -->
+                                                <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>-J-Xmx6000m</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
                                             </env>
                                             <pullPolicy>IF_NOT_PRESENT</pullPolicy>
                                         </image>
