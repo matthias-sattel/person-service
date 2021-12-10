@@ -1,4 +1,3 @@
-/*
 package org.goafabric.personservice.persistence.audit;
 
 import lombok.NonNull;
@@ -47,11 +46,12 @@ public class AuditJpaListener implements ApplicationContextAware {
     
     @Component
     static class AuditJpaUpdater {
-        @Autowired private EntityManager entityManager;
+        //@Autowired private EntityManager entityManager;
 
         @Transactional(propagation = Propagation.REQUIRES_NEW) //new transaction helps us to retrieve the old value still inside the db
         public <T> T findOldObject(Class<T> clazz, String id) {
-            return entityManager.find(clazz, id);
+            return null;
+            //return entityManager.find(clazz, id);
         }
     }
 
@@ -71,4 +71,4 @@ public class AuditJpaListener implements ApplicationContextAware {
     }
 }
 
- */
+
