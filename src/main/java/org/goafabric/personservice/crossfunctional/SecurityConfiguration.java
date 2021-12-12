@@ -1,6 +1,7 @@
+
 package org.goafabric.personservice.crossfunctional;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,8 +16,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration//(proxyBeanMethods = false)
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@ConditionalOnProperty(value = "security.authentication.enabled", matchIfMissing = false)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+    @Value("${security.authentication.enabled:true}")
+    private Boolean isAuthenticationEnabled;
+
     @Override //in memory authentication
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
@@ -29,17 +32,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests()
-                .antMatchers(
-                        "/actuator/**",
-                        "/", "/welcome/**"
-                ).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic()
-                .and()
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        if (isAuthenticationEnabled) {
+            httpSecurity.authorizeRequests()
+                    .antMatchers(
+                            "/actuator/**",
+                            "/", "/welcome/**"
+                    ).permitAll()
+                    .anyRequest().authenticated()
+                    .and()
+                    .httpBasic()
+                    .and()
+                    .csrf().disable()
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        } else {
+            httpSecurity.authorizeRequests().anyRequest().permitAll();
+        }
     }
 
     @Bean
