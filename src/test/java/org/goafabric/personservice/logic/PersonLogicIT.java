@@ -51,6 +51,7 @@ class PersonLogicIT {
         assertThat(persons).isNotNull().hasSize(1);
         assertThat(persons.get(0).getFirstName()).isEqualTo("Monty");
         assertThat(persons.get(0).getLastName()).isEqualTo("Burns");
+        assertThat(persons.get(0).getSecret()).isEqualTo("SuperSecret");
 
         TenantIdInterceptor.setTenantId("5a2f");
         assertThat(personLogic.findByFirstName("Monty")).isNotNull().hasSize(0);
@@ -68,7 +69,14 @@ class PersonLogicIT {
     }
     @Test
     void save() {
-        assertThat(personLogic.save(Person.builder()
-                .build())).isNotNull();
+        final Person person = personLogic.save(
+            Person.builder().firstName("Homer").lastName("Simpson").build()
+        );
+        assertThat(person).isNotNull();
+
+        person.setFirstName("Bart");
+        assertThat(personLogic.save(person)).isNotNull();
+
+        assertThat(personLogic.getById(person.getId()).getFirstName()).isEqualTo("Bart");
     }
 }
