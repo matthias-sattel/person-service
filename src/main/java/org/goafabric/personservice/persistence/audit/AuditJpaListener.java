@@ -50,7 +50,8 @@ public class AuditJpaListener implements ApplicationContextAware {
 
         @Transactional(propagation = Propagation.REQUIRES_NEW) //new transaction helps us to retrieve the old value still inside the db
         public <T> T findOldObject(Class<T> clazz, String id) {
-            return context.getBean(EntityManager.class).find(clazz, id);
+            return null;
+            //return entityManager.find(clazz, id);
         }
     }
 
