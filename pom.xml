@@ -43,12 +43,15 @@
             <artifactId>spring-cloud-sleuth-zipkin</artifactId>
         </dependency>
 
-        <!--
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
         </dependency>
-        -->
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-native</artifactId>
+        </dependency>
 
         <!-- code generation -->
         <dependency>
