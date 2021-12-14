@@ -422,6 +422,10 @@
                                                 <groupId>org.projectlombok</groupId>
                                                 <artifactId>lombok</artifactId>
                                             </exclude>
+                                            <exclude>
+                                                <groupId>com.h2database</groupId>
+                                                <artifactId>h2</artifactId>
+                                            </exclude>
                                         </excludes>
                                         <image>
                                             <name>${docker.registry}/${project.artifactId}-native:${project.version}
@@ -432,7 +436,7 @@
                                                 <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
                                                 <BP_JVM_VERSION>11</BP_JVM_VERSION>
                                                 <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>--enable-http</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
-                                                <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>-J-Xmx9000m</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
+                                                <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>-J-Xmx6000m</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
                                             </env>
                                             <pullPolicy>IF_NOT_PRESENT</pullPolicy>
                                         </image>
@@ -467,6 +471,7 @@
                             <artifactId>exec-maven-plugin</artifactId>
                             <version>${exec-maven-plugin.version}</version>
                             <executions>
+                                <!--
                                 <execution>
                                     <id>integrity</id>
                                     <phase>deploy</phase>
@@ -483,6 +488,7 @@
                                         </arguments>
                                     </configuration>
                                 </execution>
+                                -->
                                 <execution>
                                     <id>docker push</id>
                                     <phase>deploy</phase>
