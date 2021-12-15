@@ -3,7 +3,8 @@
 - Lombok, Mapstruct
 
 - Health, Prometheus
-- Swagger
+- Tracing
+- OpenAPI
 
 - Security
 
@@ -11,8 +12,6 @@
 
 - JPA
 - Bean Validation
-
-- Tracing
 
 - Auditing (not in native mode, https://github.com/spring-projects-experimental/spring-native/issues/949)
 - Multi Tenancy 
