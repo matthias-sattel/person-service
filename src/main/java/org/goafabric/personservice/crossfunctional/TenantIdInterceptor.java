@@ -17,7 +17,7 @@ public class TenantIdInterceptor implements WebMvcConfigurer {
         registry.addInterceptor(new HandlerInterceptor() {
             @Override
             public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-                tenantIdThreadLocal.set(request.getHeader("X-TenantId"));
+                setTenantId(request.getHeader("X-TenantId"));
                 return true;
             }
 
