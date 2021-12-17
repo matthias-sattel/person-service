@@ -29,4 +29,7 @@ public class PersonBo extends TenantAware {
 
     @Type(type="org.jasypt.hibernate5.type.EncryptedStringType", parameters = @org.hibernate.annotations.Parameter(name="encryptorRegisteredName", value="hibernateStringEncryptor"))
     private String secret;
+
+    @Version //optimistic locking
+    private Long version;
 }

@@ -8,7 +8,8 @@ create table person
     tenant_id varchar(36),
 	first_name varchar(255),
 	last_name varchar(255),
-    secret varchar(2048) -- The field has to be much bigger because it has to hold encrypted info
+    secret varchar(2048), -- The field has to be much bigger because it has to hold encrypted info
+    version bigint default 0
 );
 
 create index idx_person_tenant_id on person(tenant_id);
