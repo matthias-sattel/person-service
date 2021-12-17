@@ -1,4 +1,5 @@
 #Working
+Core
 - Web, ExceptionHandler
 - Lombok, Mapstruct
 
@@ -9,13 +10,16 @@
 - Security
 
 - DurationLogger Aspect
-
+         
+Persistence
 - JPA
 - Bean Validation
-
 - Auditing (not in native mode, https://github.com/spring-projects-experimental/spring-native/issues/949)
 - Multi Tenancy 
 - Jaspyt Database Encryption
+
+Adapter
+- REST Call
 
 #Not Working
 - Flyway (https://github.com/spring-projects-experimental/spring-native/issues/778)
