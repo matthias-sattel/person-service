@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Aspect
 @Slf4j
 @AotProxyHint(targetClass = org.goafabric.personservice.logic.PersonLogic.class, proxyFeatures = ProxyBits.IS_STATIC)
-public class DurationLogAspect {
+public class DurationLogger {
 
     @Around("execution(public * org.goafabric.personservice.logic.PersonLogic.*(..))")
     //@Around("execution(public * *(..)) && within(@org.goafabric.calleeservice.crossfunctional.DurationLog *)")
