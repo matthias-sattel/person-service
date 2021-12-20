@@ -1,3 +1,5 @@
+#1.2.1
+
 #1.2.0
 - plugin management
 - upgrade to Spring Native 0.11
