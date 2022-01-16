@@ -1,4 +1,4 @@
-package org.goafabric.personservice.persistence.transformer;
+package org.goafabric.personservice.persistence.encryption;
 
 import lombok.extern.slf4j.Slf4j;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;

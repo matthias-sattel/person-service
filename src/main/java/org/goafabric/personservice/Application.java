@@ -1,6 +1,6 @@
 package org.goafabric.personservice;
 
-import org.goafabric.personservice.persistence.transformer.DatabaseProvisioning;
+import org.goafabric.personservice.persistence.DatabaseProvisioning;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
