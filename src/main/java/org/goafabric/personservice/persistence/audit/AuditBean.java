@@ -20,10 +20,7 @@ import java.util.UUID;
 /** A class that audits all registered entities with @EntityListeners and writes the Audit Entries to the database **/
 public class AuditBean {
     private enum DbOperation {
-        CREATE,
-        READ,
-        UPDATE,
-        DELETE
+        CREATE, READ, UPDATE, DELETE
     }
 
     @Data
