@@ -56,7 +56,6 @@ public class AuditBean {
     @Autowired
     StandardPBEStringEncryptor hibernateEncryptor;
 
-
     public void afterRead(Object object, String id) {
         insertAudit(DbOperation.READ, id, object, object);
     }
