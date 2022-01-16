@@ -3,10 +3,8 @@ package org.goafabric.personservice.persistence.encryption;
 import lombok.extern.slf4j.Slf4j;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.hibernate5.encryptor.HibernatePBEEncryptorRegistry;
-import org.jasypt.iv.IvGenerator;
 import org.jasypt.iv.RandomIvGenerator;
 import org.jasypt.salt.RandomSaltGenerator;
-import org.jasypt.salt.SaltGenerator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,21 +23,19 @@ public class EncryptionConfiguration {
 
     @Bean
     public StandardPBEStringEncryptor hibernateEncryptor() {
-        final StandardPBEStringEncryptor encryptor =
-                getAES256Encryptor(getEncryptionKey(), new RandomIvGenerator(), new RandomSaltGenerator());
-
+        final StandardPBEStringEncryptor encryptor = getAES256Encryptor();
         HibernatePBEEncryptorRegistry.getInstance()
                 .registerPBEStringEncryptor("hibernateStringEncryptor", encryptor);
 
         return encryptor;
     }
 
-    private StandardPBEStringEncryptor getAES256Encryptor(String configKey, IvGenerator ivGenerator, SaltGenerator saltGenerator) {
+    private StandardPBEStringEncryptor getAES256Encryptor() {
         final StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setAlgorithm("PBEWithHMACSHA512AndAES_256");
-        encryptor.setIvGenerator(ivGenerator);
-        encryptor.setSaltGenerator(saltGenerator);
-        encryptor.setPassword(configKey);
+        encryptor.setIvGenerator(new RandomIvGenerator());
+        encryptor.setSaltGenerator(new RandomSaltGenerator());
+        encryptor.setPassword(getEncryptionKey());
         return encryptor;
     }
 
