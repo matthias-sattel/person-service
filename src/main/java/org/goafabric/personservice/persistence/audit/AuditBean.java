@@ -17,11 +17,7 @@ import java.util.UUID;
 
 @Component
 @Slf4j
-//also see https://www.baeldung.com/database-auditing-jpa
-/**
- * A class that audits all registered entities with @EntityListeners
- * And writes the Audit Entries to the database
- */
+/** A class that audits all registered entities with @EntityListeners and writes the Audit Entries to the database **/
 public class AuditBean {
     private enum DbOperation {
         CREATE,
