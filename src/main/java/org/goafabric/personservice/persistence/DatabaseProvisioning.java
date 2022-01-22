@@ -45,7 +45,7 @@ public class DatabaseProvisioning {
                     .firstName("Monty").lastName("Burns").secret("SuperSecret")
                     .build());
 
-            person.setSecret("Secret");
+            person.setSecret("SuperSecret");
             personRepository.save(person);
         }
     }
