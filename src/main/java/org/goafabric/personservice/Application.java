@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
         (exclude = { SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class, UserDetailsServiceAutoConfiguration.class})
 //@TypeHint(types = AuditJpaListener.class, access = {TypeAccess.DECLARED_CLASSES, TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS})
+//@EnableJpaRepositories
 public class Application {
 
     public static void main(String[] args){
