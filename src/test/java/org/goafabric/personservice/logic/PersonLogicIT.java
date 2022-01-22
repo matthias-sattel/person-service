@@ -75,7 +75,7 @@ class PersonLogicIT {
         assertThat(person).isNotNull();
 
         person.setFirstName("Bart");
-        //assertThat(personLogic.save(person)).isNotNull();
+        assertThat(personLogic.save(person)).isNotNull();
         //assertThat(personLogic.getById(person.getId()).getFirstName()).isEqualTo("Bart");
     }
 }
