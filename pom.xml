@@ -15,6 +15,11 @@
     <artifactId>person-service</artifactId>
     <version>1.2.1-SNAPSHOT</version>
 
+    <properties>
+        <maven.compiler.release>17</maven.compiler.release>
+        <spring.boot.version>3.0.0-M1</spring.boot.version>
+    </properties>
+
     <dependencies>
         <!-- web -->
         <dependency>
@@ -33,6 +38,7 @@
             <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-sleuth</artifactId>
@@ -52,6 +58,7 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-native</artifactId>
         </dependency>
+        -->
 
         <!-- code generation -->
         <dependency>
@@ -127,15 +134,7 @@
             <artifactId>spring-native</artifactId>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>spring-releases</id>
-            <name>Spring Releases</name>
-            <url>https://repo.spring.io/release</url>
-        </repository>
-    </repositories>
-
+    
     <!-- application build -->
     <build>
         <plugins>
@@ -151,6 +150,7 @@
     </build>
 
     <!-- native application build -->
+    <!--
     <profiles>
         <profile>
             <id>docker-image-native</id>
@@ -168,5 +168,28 @@
             </build>
         </profile>
     </profiles>
+    -->
+
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
