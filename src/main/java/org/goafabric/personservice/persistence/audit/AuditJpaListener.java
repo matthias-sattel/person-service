@@ -1,5 +1,6 @@
 package org.goafabric.personservice.persistence.audit;
 
+import jakarta.persistence.*;
 import lombok.NonNull;
 import org.goafabric.personservice.persistence.multitenancy.TenantAware;
 import org.springframework.beans.BeansException;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
 import javax.sql.DataSource;
 
 public class AuditJpaListener implements ApplicationContextAware {

@@ -3,10 +3,10 @@ package org.goafabric.personservice.persistence.multitenancy;
 import org.goafabric.personservice.crossfunctional.TenantIdInterceptor;
 import org.goafabric.personservice.persistence.audit.AuditJpaListener;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 @EntityListeners(AuditJpaListener.class)

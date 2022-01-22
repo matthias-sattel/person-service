@@ -5,7 +5,7 @@ import org.goafabric.personservice.logic.PersonLogic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RequestMapping(value = "/persons", produces = "application/json")
