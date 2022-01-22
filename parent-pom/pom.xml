@@ -14,10 +14,12 @@
         <url>https://github.com/goafabric/goa-parent.git</url>
         <tag>HEAD</tag>
     </scm>
-
+    
     <properties>
         <!--                   Project                                 -->
-        <maven.compiler.release>11</maven.compiler.release>
+        <java.version>11</java.version>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
