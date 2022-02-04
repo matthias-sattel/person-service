@@ -25,22 +25,26 @@ public class AuditJpaListener implements ApplicationContextAware {
 
     @PostLoad
     public void afterRead(Object object) {
+        if (context == null) {return;} //workaround for current spring native problem
         context.getBean(AuditBean.class).afterRead(object, ((TenantAware) object).getId());
     }
 
     @PostPersist
     public void afterCreate(Object object)  {
+        if (context == null) {return;}
         context.getBean(AuditBean.class).afterCreate(object, ((TenantAware) object).getId());
     }
 
     @PostUpdate
     public void afterUpdate(Object object) {
+        if (context == null) {return;}
         context.getBean(AuditBean.class).afterUpdate(object, ((TenantAware) object).getId(),
                 context.getBean(AuditJpaUpdater.class).findOldObject(object.getClass(), ((TenantAware) object).getId()));
     }
 
     @PostRemove
     public void afterDelete(Object object) {
+        if (context == null) {return;}
         context.getBean(AuditBean.class).afterDelete(object, ((TenantAware) object).getId());
     }
     
