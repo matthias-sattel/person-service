@@ -1,11 +1,11 @@
 #docker compose
 go to /src/deploy/docker and do "./stack up"
 
+#run jvm multi image
+docker pull goafabric/person-service:1.2.1-SNAPSHOT && docker run --name person-service --rm -p50900:50900 goafabric/person-service:1.2.1-SNAPSHOT
+
 #run native image
-docker pull goafabric/person-service-native:1.2.1-SNAPSHOT && docker run --name person-service-native --rm -p50800:50800 goafabric/person-service-native:1.2.1-SNAPSHOT -Xmx64m
+docker pull goafabric/person-service-native:1.2.1-SNAPSHOT && docker run --name person-service-native --rm -p50900:50900 goafabric/person-service-native:1.2.1-SNAPSHOT -Xmx64m
 
-#run amd image
-docker pull goafabric/person-service:1.2.1-SNAPSHOT && docker run --name person-service-native --rm -p50800:50800 goafabric/person-service:1.2.1-SNAPSHOT -Xmx64m
-
-#run arm image
-docker pull goafabric/person-service-arm64v8:1.2.1-SNAPSHOT && docker run --name person-service-native --rm -p50800:50800 goafabric/person-service-arm64v8:1.2.1-SNAPSHOT -Xmx64m
+#force amd64
+docker pull goafabric/person-service:1.2.1-SNAPSHOT && docker run --platform linux/amd64 --name person-service --rm -p50900:50900 goafabric/person-service:1.2.1-SNAPSHOT
