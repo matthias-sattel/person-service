@@ -24,8 +24,6 @@ Adapter
 #Not Working
 - Flyway (https://github.com/spring-projects-experimental/spring-native/issues/778)
 - Resilience (https://github.com/spring-projects-experimental/spring-native/issues/960)
-- Spring Sleuth ConditionalProperty (https://github.com/spring-projects-experimental/spring-native/issues/764)
-
 - Arm Builds (https://github.com/paketo-buildpacks/stacks/issues/51)
 
 #build times apple silicon:
