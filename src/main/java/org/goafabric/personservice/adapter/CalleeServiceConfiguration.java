@@ -17,7 +17,7 @@ import java.util.Collections;
 
 @Configuration
 @TypeHint(types = org.goafabric.personservice.adapter.Callee.class, access = {TypeAccess.DECLARED_CLASSES, TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS})
-@TypeHint(types = org.springframework.http.client.SimpleClientHttpRequestFactory.class, access = {TypeAccess.DECLARED_CLASSES, TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS})
+//@TypeHint(types = org.springframework.http.client.SimpleClientHttpRequestFactory.class, access = {TypeAccess.DECLARED_CLASSES, TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS})
 public class CalleeServiceConfiguration {
 
     @Bean
