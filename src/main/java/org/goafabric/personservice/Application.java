@@ -9,8 +9,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.nativex.hint.AotProxyHint;
-import org.springframework.nativex.hint.ProxyBits;
 
 /**
  * Created by amautsch on 26.06.2015.
@@ -19,7 +17,6 @@ import org.springframework.nativex.hint.ProxyBits;
 @SpringBootApplication
         (exclude = { SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class, UserDetailsServiceAutoConfiguration.class})
 //@EnableJpaRepositories
-@AotProxyHint(targetClass=org.springframework.orm.jpa.JpaTransactionManager.class, proxyFeatures = ProxyBits.IS_STATIC)
 public class Application {
 
     public static void main(String[] args){
