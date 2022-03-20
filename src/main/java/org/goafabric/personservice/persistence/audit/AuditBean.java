@@ -5,11 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.goafabric.personservice.crossfunctional.SecurityConfiguration;
 import org.goafabric.personservice.crossfunctional.TenantIdInterceptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -84,18 +83,13 @@ public class AuditBean {
                 .referenceId(referenceId)
                 .tenantId(TenantIdInterceptor.getTenantId())
                 .operation(dbOperation)
-                .createdBy(dbOperation == DbOperation.CREATE ? getUserName() : null)
+                .createdBy(dbOperation == DbOperation.CREATE ? SecurityConfiguration.getUserName() : null)
                 .createdAt(dbOperation == DbOperation.CREATE ? date : null)
-                .modifiedBy((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? getUserName() : null)
+                .modifiedBy((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? SecurityConfiguration.getUserName() : null)
                 .modifiedAt((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? date : null)
                 .oldValue(oldObject == null ? null : hibernateEncryptor.encrypt(getJsonValue(oldObject)))
                 .newValue(newObject == null ? null : hibernateEncryptor.encrypt(getJsonValue(newObject)))
                 .build();
-    }
-
-    private String getUserName() {
-        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return (authentication == null) ? "" : authentication.getName();
     }
 
     private String getJsonValue(final Object object) throws JsonProcessingException {
