@@ -28,7 +28,12 @@ security:
     enabled: true
 
 #persistence
-spring.datasource.url: jdbc:h2:mem:persondb
+spring.datasource.url: jdbc:postgresql://localhost:50810/persondb
+#spring.datasource.url: jdbc:h2:mem:persondb
+
+spring.datasource.username: person-service
+spring.datasource.password: person-service
+
 
 spring.datasource.hikari.maximum-pool-size: "10"
 spring.datasource.hikari.connection-timeout: "10000"
@@ -49,7 +54,7 @@ adapter:
 
 #logging
 logging.level.root: "WARN"
-logging.level.org.springframework: "INFO"
+logging.level.org.springframework: "DEBUG"
 
 logging.level.org.goafabric: "INFO"
 logging.level.org.flywaydb.core: "INFO"
