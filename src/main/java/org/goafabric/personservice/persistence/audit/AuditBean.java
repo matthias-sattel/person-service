@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.crossfunctional.TenantIdInterceptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -94,8 +93,8 @@ public class AuditBean {
     }
 
     private String getUserName() {
-        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return (authentication == null) ? "" : authentication.getName();
+        return (SecurityContextHolder.getContext().getAuthentication() == null) ? ""
+                : SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     private String getJsonValue(final Object object) throws JsonProcessingException {
