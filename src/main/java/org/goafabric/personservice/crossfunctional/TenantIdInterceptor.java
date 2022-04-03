@@ -29,8 +29,7 @@ public class TenantIdInterceptor implements WebMvcConfigurer {
     }
 
     public static String getTenantId() {
-        final String tenantId = tenantIdThreadLocal.get();
-        return tenantId == null ? "0" : tenantId;  //Todo: should throw exception
+        return tenantIdThreadLocal.get() == null ? "0" : tenantIdThreadLocal.get();  //Todo: should throw exception
     }
 
     public static void setTenantId(String tenantId) {
