@@ -23,9 +23,10 @@ logging.level.zipkin2: "FATAL"
 
 
 #security
-security:
-  authentication:
-    enabled: true
+security.authentication.enabled: true
+
+spring.security.user.name: "admin"
+spring.security.user.password: "admin"
 
 #persistence
 spring.datasource.url: jdbc:h2:mem:persondb
