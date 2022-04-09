@@ -1,5 +1,6 @@
 package org.goafabric.personservice;
 
+import org.goafabric.personservice.persistence.DatabaseProvisioning;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,8 +24,12 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner init(ApplicationContext context) {
-        return args -> {if ((args.length > 0) && ("-check-integrity".equals(args[0]))) {SpringApplication.exit(context, () -> 0);}};
+    public CommandLineRunner init(ApplicationContext context, DatabaseProvisioning databaseProvisioning) {
+        return args -> {
+            databaseProvisioning.run();
+            if ((args.length > 0) && ("-check-integrity".equals(args[0]))) { SpringApplication.exit(context, () -> 0);}
+        };
+
     }
 
     @Configuration
