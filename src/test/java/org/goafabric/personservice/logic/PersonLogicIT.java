@@ -67,6 +67,7 @@ class PersonLogicIT {
     }
     @Test
     void save() {
+        HttpInterceptor.setTenantId("4711");
         final Person person = personLogic.save(
             Person.builder().firstName("Homer").lastName("Simpson").build()
         );
