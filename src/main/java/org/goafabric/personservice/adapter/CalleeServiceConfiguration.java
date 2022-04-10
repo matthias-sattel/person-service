@@ -1,5 +1,6 @@
 package org.goafabric.personservice.adapter;
 
+import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -34,8 +35,8 @@ public class CalleeServiceConfiguration {
         restTemplate.getInterceptors().add((request, body, execution) -> {
             request.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
             request.getHeaders().setBasicAuth(new String(Base64.getDecoder().decode(user)), new String(Base64.getDecoder().decode(password)));
-            //request.getHeaders().set("X-TenantId", HttpInterceptor.getTenantId());
-            //request.getHeaders().set("X-Auth-Request-Preferred-Username", HttpInterceptor.getUserName());
+            request.getHeaders().set("X-TenantId", HttpInterceptor.getTenantId());
+            request.getHeaders().set("X-Auth-Request-Preferred-Username", HttpInterceptor.getUserName());
             return execution.execute(request, body);
         });
         return restTemplate;

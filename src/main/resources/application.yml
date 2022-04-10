@@ -21,8 +21,8 @@ spring.zipkin.enabled: true
 spring.sleuth.enabled: ${spring.zipkin.enabled}
 logging.level.zipkin2: "FATAL"
 
-spring.sleuth.baggage.remote-fields: X-TenantId, X-Auth-Request-Preferred-Username
-spring.sleuth.baggage.correlation-fields: X-TenantId, X-Auth-Request-Preferred-Username
+#spring.sleuth.baggage.remote-fields: X-TenantId, X-Auth-Request-Preferred-Username
+#spring.sleuth.baggage.correlation-fields: X-TenantId, X-Auth-Request-Preferred-Username
 
 #security
 security.authentication.enabled: true
