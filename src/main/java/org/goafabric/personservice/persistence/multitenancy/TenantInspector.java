@@ -1,6 +1,6 @@
 package org.goafabric.personservice.persistence.multitenancy;
 
-import org.goafabric.personservice.crossfunctional.TenantIdInterceptor;
+import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.hibernate.resource.jdbc.spi.StatementInspector;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,7 @@ public class TenantInspector implements StatementInspector {
     @Override
     public String inspect(String sql) {
         return sql.contains(TenantAware.TENANT_FILTER)
-                ? sql.replace(TenantAware.TENANT_FILTER, "tenant_id = '" + TenantIdInterceptor.getTenantId() + "'")
+                ? sql.replace(TenantAware.TENANT_FILTER, "tenant_id = '" + HttpInterceptor.getTenantId() + "'")
                 : sql;
     }
 
