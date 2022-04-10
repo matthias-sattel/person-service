@@ -7,7 +7,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.nativex.hint.AotProxyHint;
 import org.springframework.nativex.hint.ProxyBits;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
@@ -44,8 +43,4 @@ public class DurationLogger {
                 method.getName(), parameterTypes);
     }
 
-    private String getUserName() {
-        return (SecurityContextHolder.getContext().getAuthentication() == null) ? ""
-                : SecurityContextHolder.getContext().getAuthentication().getName();
-    }
 }
