@@ -34,8 +34,7 @@ public class Application {
 
     @Configuration
     static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-        @Value("${security.authentication.enabled:true}")
-        private Boolean isAuthenticationEnabled;
+        @Value("${security.authentication.enabled:true}") private Boolean isAuthenticationEnabled;
 
         @Override
         protected void configure(final HttpSecurity httpSecurity) throws Exception {
