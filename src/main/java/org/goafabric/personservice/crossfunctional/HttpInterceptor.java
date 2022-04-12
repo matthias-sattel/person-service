@@ -9,13 +9,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Enumeration;
 
 @Configuration
 @Slf4j
 public class HttpInterceptor implements WebMvcConfigurer {
     private static final ThreadLocal<String> tenantId = new ThreadLocal<>();
     private static final ThreadLocal<String> userName = new ThreadLocal<>();
+
+    public static String getTenantId() { return tenantId.get(); }
+    public static String getUserName() { return userName.get(); }
+    public static void   setTenantId(String tenantId) { HttpInterceptor.tenantId.set(tenantId); }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -25,7 +28,6 @@ public class HttpInterceptor implements WebMvcConfigurer {
                 tenantId.set(request.getHeader("X-TenantId") != null ? request.getHeader("X-TenantId") : "0"); //TODO
                 userName.set(request.getHeader("X-Auth-Request-Preferred-Username") != null ? request.getHeader("X-Auth-Request-Preferred-Username")
                                                 :  SecurityContextHolder.getContext().getAuthentication().getName());
-                logHeaders(request, request.getHeaderNames());
                 return true;
             }
 
@@ -36,18 +38,4 @@ public class HttpInterceptor implements WebMvcConfigurer {
             }
         });
     }
-
-    public void logHeaders(HttpServletRequest request, Enumeration<String> headerNames) {
-        while (log.isDebugEnabled() && headerNames.hasMoreElements()) {
-            final String header = headerNames.nextElement();
-            log.info(header + " : " + request.getHeader(header));
-        }
-    }
-
-    public static String getTenantId() { return tenantId.get(); }
-    
-    public static String getUserName() { return userName.get(); }
-
-    public static void setTenantId(String tenantId) { HttpInterceptor.tenantId.set(tenantId); }
-
 }
