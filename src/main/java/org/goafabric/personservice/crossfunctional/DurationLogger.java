@@ -31,7 +31,7 @@ public class DurationLogger {
             return joinPoint.proceed();
         } finally {
             final Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
-            log.info("{} took {}ms for user {}", toString(method), System.currentTimeMillis() - startTime, HttpInterceptor.getUserName());
+            log.info("{} took {}ms for user: {} , tenant: {}", toString(method), System.currentTimeMillis() - startTime, HttpInterceptor.getUserName(), HttpInterceptor.getTenantId());
         }
     }
 
