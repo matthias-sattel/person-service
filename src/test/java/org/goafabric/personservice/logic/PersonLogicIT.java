@@ -72,9 +72,5 @@ class PersonLogicIT {
             Person.builder().firstName("Homer").lastName("Simpson").build()
         );
         assertThat(person).isNotNull();
-
-        person.setFirstName("Bart");
-        assertThat(personLogic.save(person)).isNotNull();
-        //assertThat(personLogic.getById(person.getId()).getFirstName()).isEqualTo("Bart");
     }
 }
