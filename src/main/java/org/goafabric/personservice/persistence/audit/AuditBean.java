@@ -5,10 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.goafabric.personservice.crossfunctional.TenantIdInterceptor;
+import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -81,21 +80,18 @@ public class AuditBean {
         return AuditEvent.builder()
                 .id(UUID.randomUUID().toString())
                 .referenceId(referenceId)
-                .tenantId(TenantIdInterceptor.getTenantId())
+                .tenantId(HttpInterceptor.getTenantId())
                 .operation(dbOperation)
-                .createdBy(dbOperation == DbOperation.CREATE ? getUserName() : null)
+                .type(newObject.getClass().getSimpleName())
+                .createdBy(dbOperation == DbOperation.CREATE ? HttpInterceptor.getUserName() : null)
                 .createdAt(dbOperation == DbOperation.CREATE ? date : null)
-                .modifiedBy((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? getUserName() : null)
+                .modifiedBy((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? HttpInterceptor.getUserName() : null)
                 .modifiedAt((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? date : null)
                 .oldValue(oldObject == null ? null : hibernateEncryptor.encrypt(getJsonValue(oldObject)))
                 .newValue(newObject == null ? null : hibernateEncryptor.encrypt(getJsonValue(newObject)))
                 .build();
     }
 
-    private String getUserName() {
-        return (SecurityContextHolder.getContext().getAuthentication() == null) ? ""
-                : SecurityContextHolder.getContext().getAuthentication().getName();
-    }
 
     private String getJsonValue(final Object object) throws JsonProcessingException {
         return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(object);

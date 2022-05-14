@@ -1,6 +1,7 @@
 package org.goafabric.personservice.persistence;
 
 import lombok.extern.slf4j.Slf4j;
+import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -33,20 +34,27 @@ public class DatabaseProvisioning {
 
     private void importDemoData() {
         if (personRepository.findAll().isEmpty()) {
-            personRepository.save(PersonBo.builder()
-                    .firstName("Homer").lastName("Simpson").secret("SuperSecret")
-                    .build());
-
-            personRepository.save(PersonBo.builder()
-                    .firstName("Bart").lastName("Simpson").secret("SuperSecret")
-                    .build());
-
-            PersonBo person = personRepository.save(PersonBo.builder()
-                    .firstName("Monty").lastName("Burns").secret("SuperSecret")
-                    .build());
-
-            person.setSecret("SuperSecret");
-            personRepository.save(person);
+            HttpInterceptor.setTenantId("0");
+            insertData();
+            HttpInterceptor.setTenantId("5a2f");
+            insertData();
         }
+    }
+
+    private void insertData() {
+        personRepository.save(PersonBo.builder()
+                .firstName("Homer").lastName("Simpson").secret("SuperSecret")
+                .build());
+
+        personRepository.save(PersonBo.builder()
+                .firstName("Bart").lastName("Simpson").secret("SuperSecret")
+                .build());
+
+        PersonBo person = personRepository.save(PersonBo.builder()
+                .firstName("Monty").lastName("Burns").secret("SuperSecret")
+                .build());
+
+        person.setSecret("SuperSecret");
+        personRepository.save(person);
     }
 }
