@@ -49,7 +49,6 @@ class PersonLogicIT {
         assertThat(persons).isNotNull().hasSize(1);
         assertThat(persons.get(0).getFirstName()).isEqualTo("Monty");
         assertThat(persons.get(0).getLastName()).isEqualTo("Burns");
-        assertThat(persons.get(0).getSecret()).isEqualTo("SuperSecret");
 
         HttpInterceptor.setTenantId("5a2f");
         assertThat(personLogic.findByFirstName("Monty")).isNotNull().hasSize(1);
