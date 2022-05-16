@@ -19,7 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 
 @SpringBootApplication
-@TypeHint(types = org.springframework.beans.AbstractNestablePropertyAccessor.class, access = {TypeAccess.DECLARED_CLASSES, TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS})
+@TypeHint(types = org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class, access = {TypeAccess.DECLARED_CLASSES, TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS})
 public class Application {
 
     public static void main(String[] args){
