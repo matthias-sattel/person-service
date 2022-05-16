@@ -63,8 +63,8 @@ public class AuditBean {
         try {
             final AuditEvent auditEvent =
                 createAuditEvent(operation, referenceId, oldObject, newObject);
-            auditInserter.insertAudit(auditEvent, oldObject != null ? oldObject : newObject);
             log.debug("New audit event :\n{}", auditEvent);
+            //auditInserter.insertAudit(auditEvent, oldObject != null ? oldObject : newObject);
         } catch (Exception e) {
             log.error("Error during audit:\n{}", e.getMessage(), e);
         }
