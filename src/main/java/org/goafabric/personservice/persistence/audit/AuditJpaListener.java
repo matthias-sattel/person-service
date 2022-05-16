@@ -1,7 +1,7 @@
 package org.goafabric.personservice.persistence.audit;
 
 import lombok.NonNull;
-import org.goafabric.personservice.persistence.multitenancy.TenantAware;
+import org.goafabric.personservice.persistence.multitenancy.AuditAware;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -26,26 +26,26 @@ public class AuditJpaListener implements ApplicationContextAware {
     @PostLoad
     public void afterRead(Object object) {
         if (context == null) {return;} //workaround for current spring native problem
-        context.getBean(AuditBean.class).afterRead(object, ((TenantAware) object).getId());
+        context.getBean(AuditBean.class).afterRead(object, ((AuditAware) object).getId());
     }
 
     @PostPersist
     public void afterCreate(Object object)  {
         if (context == null) {return;}
-        context.getBean(AuditBean.class).afterCreate(object, ((TenantAware) object).getId());
+        context.getBean(AuditBean.class).afterCreate(object, ((AuditAware) object).getId());
     }
 
     @PostUpdate
     public void afterUpdate(Object object) {
         if (context == null) {return;}
-        context.getBean(AuditBean.class).afterUpdate(object, ((TenantAware) object).getId(),
-                context.getBean(AuditJpaUpdater.class).findOldObject(object.getClass(), ((TenantAware) object).getId()));
+        context.getBean(AuditBean.class).afterUpdate(object, ((AuditAware) object).getId(),
+                context.getBean(AuditJpaUpdater.class).findOldObject(object.getClass(), ((AuditAware) object).getId()));
     }
 
     @PostRemove
     public void afterDelete(Object object) {
         if (context == null) {return;}
-        context.getBean(AuditBean.class).afterDelete(object, ((TenantAware) object).getId());
+        context.getBean(AuditBean.class).afterDelete(object, ((AuditAware) object).getId());
     }
     
     @Component
