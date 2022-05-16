@@ -23,7 +23,7 @@ public class PersonBo extends TenantAware {
 
     private String lastName;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     @NonNull
     private AddressBo address;
