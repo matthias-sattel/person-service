@@ -46,24 +46,24 @@ public class DatabaseProvisioning {
 
     private void insertData() {
         personRepository.save(Person.builder()
-                .firstName("Homer").lastName("Simpson " + HttpInterceptor.getTenantId())
+                .firstName("Homer").lastName("Simpson")
                 .address(createAddress("Evergreen Terrace 1"))
                 .build());
 
         personRepository.save(Person.builder()
-                .firstName("Bart").lastName("Simpson " + HttpInterceptor.getTenantId())
-                .address(createAddress("Everglue Terrace 1"))
+                .firstName("Bart").lastName("Simpson")
+                .address(createAddress("Everblue Terrace 1"))
                 .build());
 
         personRepository.save(Person.builder()
-                .firstName("Monty").lastName("Burns" + HttpInterceptor.getTenantId())
+                .firstName("Monty").lastName("Burns")
                 .address(createAddress("Monty Mansion"))
                 .build());
     }
 
     private Address createAddress(String street) {
         return Address.builder()
-                .street(street).city("Springfield")
+                .street(street).city("Springfield " + HttpInterceptor.getTenantId())
                 .build();
     }
 
