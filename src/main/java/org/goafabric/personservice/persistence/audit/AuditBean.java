@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.nativex.hint.TypeAccess;
+import org.springframework.nativex.hint.TypeHint;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -15,6 +17,7 @@ import java.util.UUID;
 @Component
 @Slf4j
 /** A class that audits all registered entities with @EntityListeners and writes the Audit Entries to the database **/
+@TypeHint(types = org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class, access = {TypeAccess.DECLARED_CLASSES, TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS})
 public class AuditBean {
     private enum DbOperation {
         CREATE, READ, UPDATE, DELETE
@@ -22,7 +25,7 @@ public class AuditBean {
 
     @Data
     @Builder
-    public static class AuditEvent {
+    static class AuditEvent {
         private String id;
         private String tenantId;
         private String referenceId;
@@ -64,9 +67,7 @@ public class AuditBean {
             final AuditEvent auditEvent =
                 createAuditEvent(operation, referenceId, oldObject, newObject);
             log.debug("New audit event :\n{}", auditEvent);
-            try {
-                auditInserter.insertAudit(auditEvent, oldObject != null ? oldObject : newObject);
-            } catch (Exception e) { log.warn("could not insert audit, {}" + e.getMessage());}
+            auditInserter.insertAudit(auditEvent, oldObject != null ? oldObject : newObject);
         } catch (Exception e) {
             log.error("Error during audit:\n{}", e.getMessage(), e);
         }
