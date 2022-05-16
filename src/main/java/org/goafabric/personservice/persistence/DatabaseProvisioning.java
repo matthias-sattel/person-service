@@ -2,6 +2,7 @@ package org.goafabric.personservice.persistence;
 
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
+import org.goafabric.personservice.persistence.domain.PersonBo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -43,18 +44,17 @@ public class DatabaseProvisioning {
 
     private void insertData() {
         personRepository.save(PersonBo.builder()
-                .firstName("Homer").lastName("Simpson").secret("SuperSecret")
+                .firstName("Homer").lastName("Simpson")
                 .build());
 
         personRepository.save(PersonBo.builder()
-                .firstName("Bart").lastName("Simpson").secret("SuperSecret")
+                .firstName("Bart").lastName("Simpson")
                 .build());
 
         PersonBo person = personRepository.save(PersonBo.builder()
-                .firstName("Monty").lastName("Burns").secret("SuperSecret")
+                .firstName("Monty").lastName("Burns")
                 .build());
-
-        person.setSecret("SuperSecret");
+        
         personRepository.save(person);
     }
 }

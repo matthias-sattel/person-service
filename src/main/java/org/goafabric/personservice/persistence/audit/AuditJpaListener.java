@@ -1,7 +1,6 @@
 package org.goafabric.personservice.persistence.audit;
 
 import lombok.NonNull;
-import org.goafabric.personservice.persistence.multitenancy.AuditAware;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

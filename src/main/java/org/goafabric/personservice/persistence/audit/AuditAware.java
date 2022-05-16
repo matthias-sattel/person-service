@@ -1,4 +1,4 @@
-package org.goafabric.personservice.persistence.multitenancy;
+package org.goafabric.personservice.persistence.audit;
 
 import org.goafabric.personservice.persistence.audit.AuditJpaListener;
 

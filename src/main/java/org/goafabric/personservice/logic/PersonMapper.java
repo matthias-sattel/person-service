@@ -1,6 +1,6 @@
 package org.goafabric.personservice.logic;
 
-import org.goafabric.personservice.persistence.PersonBo;
+import org.goafabric.personservice.persistence.domain.PersonBo;
 import org.goafabric.personservice.service.Person;
 import org.mapstruct.Mapper;
 
