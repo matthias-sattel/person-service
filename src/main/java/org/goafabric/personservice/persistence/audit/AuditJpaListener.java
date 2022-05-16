@@ -41,7 +41,6 @@ public class AuditJpaListener implements ApplicationContextAware {
 
     @PostRemove
     public void afterDelete(Object object) {
-        if (context == null) {return;}
         context.getBean(AuditBean.class).afterDelete(object, ((TenantAware) object).getId());
     }
     
