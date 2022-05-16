@@ -13,7 +13,7 @@
 
     <groupId>org.goafabric</groupId>
     <artifactId>person-service</artifactId>
-    <version>1.2.3-SNAPSHOT</version>
+    <version>1.2.3-flyway-SNAPSHOT</version>
 
     <dependencies>
         <!-- web -->
@@ -97,6 +97,10 @@
             <artifactId>postgresql</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
         <!-- Jasypt -->
         <dependency>
             <groupId>org.jasypt</groupId>
