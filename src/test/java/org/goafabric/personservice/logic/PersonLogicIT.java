@@ -1,6 +1,7 @@
 package org.goafabric.personservice.logic;
 
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
+import org.goafabric.personservice.service.dto.Address;
 import org.goafabric.personservice.service.dto.Person;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +69,7 @@ class PersonLogicIT {
     void save() {
         HttpInterceptor.setTenantId("4711");
         final Person person = personLogic.save(
-            Person.builder().firstName("Homer").lastName("Simpson").build()
+            Person.builder().firstName("Homer").lastName("Simpson").address(Address.builder().build()).build()
         );
         assertThat(person).isNotNull();
     }

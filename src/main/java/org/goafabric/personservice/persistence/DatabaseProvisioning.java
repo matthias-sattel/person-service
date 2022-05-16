@@ -46,17 +46,17 @@ public class DatabaseProvisioning {
 
     private void insertData() {
         personRepository.save(Person.builder()
-                .firstName("Homer").lastName("Simpson")
+                .firstName("Homer").lastName("Simpson " + HttpInterceptor.getTenantId())
                 .address(createAddress("Evergreen Terrace 1"))
                 .build());
 
         personRepository.save(Person.builder()
-                .firstName("Bart").lastName("Simpson")
-                .address(createAddress("Evergblue Terrace 1"))
+                .firstName("Bart").lastName("Simpson " + HttpInterceptor.getTenantId())
+                .address(createAddress("Everglue Terrace 1"))
                 .build());
 
         personRepository.save(Person.builder()
-                .firstName("Monty").lastName("Burns")
+                .firstName("Monty").lastName("Burns" + HttpInterceptor.getTenantId())
                 .address(createAddress("Monty Mansion"))
                 .build());
     }
