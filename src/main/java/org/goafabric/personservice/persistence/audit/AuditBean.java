@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -64,7 +65,9 @@ public class AuditBean {
             final AuditEvent auditEvent =
                 createAuditEvent(operation, referenceId, oldObject, newObject);
             log.debug("New audit event :\n{}", auditEvent);
-            //auditInserter.insertAudit(auditEvent, oldObject != null ? oldObject : newObject);
+            if (new BeanPropertySqlParameterSource(auditEvent).getValue("id") != null) {
+                auditInserter.insertAudit(auditEvent, oldObject != null ? oldObject : newObject);
+            } else { log.warn("could not get audit id !"); }
         } catch (Exception e) {
             log.error("Error during audit:\n{}", e.getMessage(), e);
         }
