@@ -47,3 +47,22 @@ create table address
 	city varchar(255) NULL,
 	version bigint default 0
 );
+
+drop table if exists address_audit;
+
+create table address_audit
+(
+	id varchar(36) not null
+		constraint pk_address_audit
+			primary key,
+    tenant_id varchar(36),
+
+    reference_id varchar(255),
+    operation varchar(255),
+    created_by varchar(255),
+    created_at date,
+    modified_by varchar(255),
+    modified_at date,
+    oldvalue TEXT,
+    newvalue TEXT
+);
