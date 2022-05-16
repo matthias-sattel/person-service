@@ -1,9 +1,6 @@
 package org.goafabric.personservice.persistence.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.goafabric.personservice.persistence.multitenancy.TenantAware;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
@@ -25,7 +22,12 @@ public class PersonBo extends TenantAware {
     private String firstName;
 
     private String lastName;
-    
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @NonNull
+    private AddressBo address;
+
     @Version //optimistic locking
     private Long version;
 }

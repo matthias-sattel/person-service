@@ -2,7 +2,9 @@ package org.goafabric.personservice.persistence;
 
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
-import org.goafabric.personservice.persistence.domain.PersonBo;
+import org.goafabric.personservice.logic.PersonLogic;
+import org.goafabric.personservice.service.dto.Address;
+import org.goafabric.personservice.service.dto.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +18,7 @@ public class DatabaseProvisioning {
     String goals;
 
     @Autowired
-    PersonRepository personRepository;
+    PersonLogic personRepository;
 
     @Autowired
     ApplicationContext applicationContext;
@@ -43,18 +45,26 @@ public class DatabaseProvisioning {
     }
 
     private void insertData() {
-        personRepository.save(PersonBo.builder()
+        personRepository.save(Person.builder()
                 .firstName("Homer").lastName("Simpson")
+                .address(createAddress("Evergreen Terrace 1"))
                 .build());
 
-        personRepository.save(PersonBo.builder()
+        personRepository.save(Person.builder()
                 .firstName("Bart").lastName("Simpson")
+                .address(createAddress("Evergblue Terrace 1"))
                 .build());
 
-        PersonBo person = personRepository.save(PersonBo.builder()
+        personRepository.save(Person.builder()
                 .firstName("Monty").lastName("Burns")
+                .address(createAddress("Monty Mansion"))
                 .build());
-        
-        personRepository.save(person);
     }
+
+    private Address createAddress(String street) {
+        return Address.builder()
+                .street(street).city("Springfield")
+                .build();
+    }
+
 }

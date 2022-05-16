@@ -2,6 +2,7 @@ package org.goafabric.personservice.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.logic.PersonLogic;
+import org.goafabric.personservice.service.dto.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
