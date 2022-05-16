@@ -6,8 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
-import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.nativex.hint.TypeAccess;
+import org.springframework.nativex.hint.TypeHint;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @Component
 @Slf4j
 /** A class that audits all registered entities with @EntityListeners and writes the Audit Entries to the database **/
+@TypeHint(types = org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class, access = {TypeAccess.DECLARED_CLASSES, TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS})
 public class AuditBean {
     private enum DbOperation {
         CREATE, READ, UPDATE, DELETE
@@ -44,9 +46,6 @@ public class AuditBean {
     @Autowired
     private AuditInserter auditInserter;
 
-    @Autowired
-    StandardPBEStringEncryptor hibernateEncryptor;
-
     public void afterRead(Object object, String id) {
         insertAudit(DbOperation.READ, id, object, object);
     }
@@ -67,8 +66,8 @@ public class AuditBean {
         try {
             final AuditEvent auditEvent =
                 createAuditEvent(operation, referenceId, oldObject, newObject);
-            //auditInserter.insertAudit(auditEvent, oldObject != null ? oldObject : newObject);
             log.debug("New audit event :\n{}", auditEvent);
+            auditInserter.insertAudit(auditEvent, oldObject != null ? oldObject : newObject);
         } catch (Exception e) {
             log.error("Error during audit:\n{}", e.getMessage(), e);
         }
@@ -87,8 +86,8 @@ public class AuditBean {
                 .createdAt(dbOperation == DbOperation.CREATE ? date : null)
                 .modifiedBy((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? HttpInterceptor.getUserName() : null)
                 .modifiedAt((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? date : null)
-                .oldValue(oldObject == null ? null : hibernateEncryptor.encrypt(getJsonValue(oldObject)))
-                .newValue(newObject == null ? null : hibernateEncryptor.encrypt(getJsonValue(newObject)))
+                .oldValue(oldObject == null ? null : getJsonValue(oldObject))
+                .newValue(newObject == null ? null : getJsonValue(newObject))
                 .build();
     }
 

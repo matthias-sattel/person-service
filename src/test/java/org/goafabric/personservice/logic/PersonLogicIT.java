@@ -1,7 +1,8 @@
 package org.goafabric.personservice.logic;
 
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
-import org.goafabric.personservice.service.Person;
+import org.goafabric.personservice.service.dto.Address;
+import org.goafabric.personservice.service.dto.Person;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -49,7 +50,6 @@ class PersonLogicIT {
         assertThat(persons).isNotNull().hasSize(1);
         assertThat(persons.get(0).getFirstName()).isEqualTo("Monty");
         assertThat(persons.get(0).getLastName()).isEqualTo("Burns");
-        assertThat(persons.get(0).getSecret()).isEqualTo("SuperSecret");
 
         HttpInterceptor.setTenantId("5a2f");
         assertThat(personLogic.findByFirstName("Monty")).isNotNull().hasSize(1);
@@ -69,7 +69,7 @@ class PersonLogicIT {
     void save() {
         HttpInterceptor.setTenantId("4711");
         final Person person = personLogic.save(
-            Person.builder().firstName("Homer").lastName("Simpson").build()
+            Person.builder().firstName("Homer").lastName("Simpson").address(Address.builder().build()).build()
         );
         assertThat(person).isNotNull();
     }

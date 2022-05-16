@@ -3,7 +3,7 @@ package org.goafabric.personservice.logic;
 import lombok.NonNull;
 import org.goafabric.personservice.adapter.CalleeServiceAdapter;
 import org.goafabric.personservice.persistence.PersonRepository;
-import org.goafabric.personservice.service.Person;
+import org.goafabric.personservice.service.dto.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

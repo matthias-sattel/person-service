@@ -1,12 +1,8 @@
-package org.goafabric.personservice.persistence;
+package org.goafabric.personservice.persistence.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.goafabric.personservice.persistence.multitenancy.TenantAware;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -27,8 +23,10 @@ public class PersonBo extends TenantAware {
 
     private String lastName;
 
-    @Type(type="org.jasypt.hibernate5.type.EncryptedStringType", parameters = @org.hibernate.annotations.Parameter(name="encryptorRegisteredName", value="hibernateStringEncryptor"))
-    private String secret;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @NonNull
+    private AddressBo address;
 
     @Version //optimistic locking
     private Long version;
