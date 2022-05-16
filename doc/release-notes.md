@@ -1,6 +1,9 @@
 #1.2.3
 - upgrade to Spring Boot 2.6.7
 - upgrade to JDK 17.0.3
+- Address 1:1 Relation added
+- removed Jasypt Database Encryption
+- AuditListener in Native mode is now working
 
 #1.2.2
 - upgrade to Spring Boot 2.6.6
