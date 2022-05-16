@@ -91,7 +91,6 @@ public class AuditBean {
                 .build();
     }
 
-
     private String getJsonValue(final Object object) throws JsonProcessingException {
         return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(object);
     }
