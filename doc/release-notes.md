@@ -3,7 +3,7 @@
 - upgrade to JDK 17.0.3
 - Address 1:1 Example Relation added
 
-- removed Jasypt (Database) Encryption => DB Encryption via Volume Encryption, Props via BAS64
+- removed Jasypt (Database) Encryption => DB Encryption via Volume Encryption, Props via BASE64
 - AuditListener in Native mode is now working
 - Multi Tenancy and Auditing both via TenantAware Base class
 
