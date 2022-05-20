@@ -1,6 +1,11 @@
 #1.2.3
 - upgrade to Spring Boot 2.6.7
 - upgrade to JDK 17.0.3
+- Address 1:1 Example Relation added
+
+- removed Jasypt (Database) Encryption => DB Encryption via Volume Encryption, Props via BASE64
+- Multi Tenancy and Auditing both via TenantAware Base class => Apply to every Transaction Table
+- AuditListener in Native mode is now working
 
 #1.2.2
 - upgrade to Spring Boot 2.6.6

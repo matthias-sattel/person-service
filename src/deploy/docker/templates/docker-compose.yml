@@ -26,10 +26,14 @@ services:
       - server.port=${_Values_service_port}
       - tomcat.max-threads=20
       - security.authentication.enabled=false
-      - security.encryption.key=203fef90-aead-45ca-830e-ca878bb4e987 #this needs to be changed during first deployment to a unique value
       #monitoring
       - management.endpoint.health.show-details=always
       - management.endpoints.web.exposure.include=health,prometheus,heapdump
+      #zipkin / jaeger
+      - spring.zipkin.service.name=person-service
+      - spring.zipkin.baseUrl=http://host.docker.internal:9411
+      - spring.sleuth.enabled=true
+      - spring.zipkin.enabled=true
       #persistence
       - spring.datasource.url=jdbc:postgresql://${_Values_root_name}-postgres:5432/persondb
       - spring.datasource.username=person-service
@@ -70,6 +74,22 @@ services:
 #      - ../config/postgres/initdb/00_pg_statements.sql:/docker-entrypoint-initdb.d/00_pg_statements.sql
     networks:
       - ${_Values_root_name}-net
+
+  nginx:
+    container_name: ${_Values_root_name}-nginx
+    image: nginx:1.21.6
+    restart: 'no'
+    ports:
+      - 8081:80
+      - 443:443
+    networks:
+      - ${_Values_root_name}-net
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./server.pem:/etc/ssl/server.pem
+      - ./server.key:/etc/ssl/server.key
+    depends_on:
+      - person-service
 
 volumes:
     tmp:
