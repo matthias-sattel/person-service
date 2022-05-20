@@ -100,17 +100,6 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
-        
-        <!-- Jasypt -->
-        <dependency>
-            <groupId>org.jasypt</groupId>
-            <artifactId>jasypt</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jasypt</groupId>
-            <artifactId>jasypt-hibernate5</artifactId>
-        </dependency>
 
         <!-- test -->
         <dependency>
