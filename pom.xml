@@ -97,6 +97,12 @@
             <artifactId>postgresql</artifactId>
         </dependency>
 
+        <!--
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        -->
         <!-- test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
