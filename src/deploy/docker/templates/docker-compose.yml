@@ -52,6 +52,7 @@ services:
       - logging.level.org.goafabric=DEBUG
       - logging.level.org.flywaydb.core="INFO"
       - logging.level.org.hibernate.SQL="INFO"
+      - logging.level.org.goafabric.personservice.persistence.audit="INFO"
       #log file settings
       - logging.file.max-size=10MB
       - logging.file.name=/usr/share/logs/application.log
