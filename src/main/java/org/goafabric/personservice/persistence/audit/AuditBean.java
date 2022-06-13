@@ -17,7 +17,7 @@ import java.util.UUID;
 @Component
 @Slf4j
 /** A class that audits all registered entities with @EntityListeners and writes the Audit Entries to the database **/
-@TypeHint(types = org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class, access = {TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS})
+@TypeHint(types = org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class, access = {TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.PUBLIC_METHODS})
 public class AuditBean {
     private enum DbOperation {
         CREATE, READ, UPDATE, DELETE
