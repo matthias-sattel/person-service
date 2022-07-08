@@ -364,7 +364,7 @@
                                             </builder> <!-- to get wget or curl we need build:full but this blows up the image to 700MB -->
                                             <env>
                                                 <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
-                                                <BP_JVM_VERSION>17</BP_JVM_VERSION>
+                                                <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
                                                 <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>-J-Xmx6000m --initialize-at-build-time=org.flywaydb.NativePathLocationScanner</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
                                             </env>
                                             <pullPolicy>IF_NOT_PRESENT</pullPolicy>
@@ -447,12 +447,6 @@
             <name>Spring Releases</name>
             <url>https://repo.spring.io/release</url>
         </repository>
-
-        <repository>
-            <id>spring-snapshot</id>
-            <name>Spring snapshot</name>
-            <url>https://repo.spring.io/snapshot</url>
-        </repository>
     </repositories>
 
     <pluginRepositories>
@@ -460,12 +454,6 @@
             <id>spring-releases</id>
             <name>Spring Releases</name>
             <url>https://repo.spring.io/release</url>
-        </pluginRepository>
-
-        <pluginRepository>
-            <id>spring-snapshot</id>
-            <name>Spring snapshot</name>
-            <url>https://repo.spring.io/snapshot</url>
         </pluginRepository>
     </pluginRepositories>
 </project>
