@@ -1,4 +1,4 @@
-package org.goafabric.personservice.persistence.audit;
+package org.goafabric.audit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +17,7 @@ import java.util.UUID;
 @Component
 @Slf4j
 /** A class that audits all registered entities with @EntityListeners and writes the Audit Entries to the database **/
-@TypeHint(types = org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class, access = {TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.PUBLIC_METHODS})
+@TypeHint(types = AuditBean.AuditEvent.class, access = {TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.PUBLIC_METHODS})
 public class AuditBean {
     private enum DbOperation {
         CREATE, READ, UPDATE, DELETE

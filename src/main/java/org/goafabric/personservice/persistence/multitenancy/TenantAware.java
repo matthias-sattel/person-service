@@ -1,7 +1,7 @@
 package org.goafabric.personservice.persistence.multitenancy;
 
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
-import org.goafabric.personservice.persistence.audit.AuditJpaListener;
+import org.goafabric.audit.AuditJpaListener;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;

@@ -1,4 +1,4 @@
-package org.goafabric.personservice.persistence.audit;
+package org.goafabric.audit;
 
 import lombok.NonNull;
 import org.goafabric.personservice.persistence.multitenancy.TenantAware;
