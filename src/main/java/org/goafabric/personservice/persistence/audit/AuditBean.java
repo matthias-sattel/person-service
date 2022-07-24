@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.nativex.hint.TypeAccess;
-import org.springframework.nativex.hint.TypeHint;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -17,7 +15,7 @@ import java.util.UUID;
 @Component
 @Slf4j
 /** A class that audits all registered entities with @EntityListeners and writes the Audit Entries to the database **/
-@TypeHint(types = org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class, access = {TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.PUBLIC_METHODS})
+//@TypeHint(types = org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class, access = {TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.PUBLIC_METHODS})
 public class AuditBean {
     private enum DbOperation {
         CREATE, READ, UPDATE, DELETE
