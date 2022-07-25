@@ -118,11 +118,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- native -->
-        <dependency>
-            <groupId>org.springframework.experimental</groupId>
-            <artifactId>spring-native</artifactId>
-        </dependency>
     </dependencies>
 
     <!-- application build -->
