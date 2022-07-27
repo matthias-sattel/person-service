@@ -53,6 +53,7 @@ dependencies {
 	implementation 'com.h2database:h2'
 	implementation 'org.postgresql:postgresql'
 
+	//test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
