@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
 public class DurationLogger {
 
     @Around("execution(public * org.goafabric.personservice.logic.PersonLogic.*(..))")
-    //@Around("execution(public * *(..)) && within(@org.goafabric.calleeservice.crossfunctional.DurationLog *)")
-    //@Around("execution(public * org.goafabric.calleeservice.logic..*(..)) )")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         final long startTime = System.currentTimeMillis();
         try {
@@ -35,8 +33,7 @@ public class DurationLogger {
 
     private String toString(final Method method) {
         final String parameterTypes = Arrays.stream(method.getParameterTypes())
-                .map(Class::getSimpleName)
-                .collect(Collectors.joining(","));
+                .map(Class::getSimpleName).collect(Collectors.joining(","));
         return String.format("%s.%s(%s)", method.getDeclaringClass().getSimpleName(),
                 method.getName(), parameterTypes);
     }
