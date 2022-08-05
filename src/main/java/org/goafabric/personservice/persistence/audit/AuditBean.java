@@ -1,4 +1,4 @@
-package org.goafabric.audit;
+package org.goafabric.personservice.persistence.audit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
