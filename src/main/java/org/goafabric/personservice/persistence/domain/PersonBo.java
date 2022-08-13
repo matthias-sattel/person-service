@@ -11,6 +11,7 @@ import jakarta.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "person")
 @Where(clause = TenantAware.TENANT_FILTER)
