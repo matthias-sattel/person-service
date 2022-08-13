@@ -1,0 +1,100 @@
+//TODO: toggle AOT Compiler + Gradle Github
+plugins {
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'org.springframework.experimental.aot' version '0.12.1'
+	id 'org.graalvm.buildtools.native' version '0.9.13'
+	id 'com.google.cloud.tools.jib' version '3.2.1'
+	id 'jacoco'
+	id 'java'
+}
+
+ext {
+	set('dockerRegistry', "goafabric")
+	set('baseImage', "ibm-semeru-runtimes:open-17.0.3_7-jre-focal@sha256:e89df25f95379321ef61d5119eee68c28884ff8f8c5deaf2d474f3cdb1dbbb7e")
+}
+
+dependencies {
+	constraints {
+		implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+		implementation 'org.springdoc:springdoc-openapi-native:1.6.9'
+		implementation 'org.mapstruct:mapstruct:1.5.2.Final'
+		annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+	}
+
+	dependencyManagement.imports {
+		mavenBom 'org.springframework.cloud:spring-cloud-dependencies:2021.0.3'
+	}
+}
+
+group = 'org.goafabric'
+version = '2.0.1-gradle-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	maven { url 'https://repo.spring.io/release' }
+	mavenCentral()
+}
+
+dependencies {
+	//web
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	//monitoring
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'io.micrometer:micrometer-registry-prometheus'
+
+	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+	implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
+
+	implementation 'org.springdoc:springdoc-openapi-ui'
+	implementation 'org.springdoc:springdoc-openapi-native'
+
+	//crosscuting
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+	//code generation
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	implementation 'org.mapstruct:mapstruct'
+	annotationProcessor 'org.mapstruct:mapstruct-processor'
+
+	//persistence
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'com.h2database:h2'
+	implementation 'org.postgresql:postgresql'
+
+	//adapter
+	implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+
+	//test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+	finalizedBy jacocoTestReport
+	jacocoTestReport.dependsOn(test)
+}
+
+jacoco.reportsDirectory = layout.buildDirectory.dir('reports/jacoco')
+
+jib {
+	from.image = "${baseImage}"
+	from.platforms = [com.google.cloud.tools.jib.gradle.PlatformParameters.of("linux/amd64"), com.google.cloud.tools.jib.gradle.PlatformParameters.of("linux/arm64")]
+	to.image = "${dockerRegistry}/${project.name}"
+	to.tags = project.provider{[version]}
+	container.jvmFlags = ['-Xms256m', '-Xmx256m']
+}
+
+tasks.named('bootBuildImage') {
+	builder = 'paketobuildpacks/builder:tiny'
+	buildpacks = ["gcr.io/paketo-buildpacks/java-native-image:7.23.0"]
+	bootBuildImage.imageName = "${dockerRegistry}/${project.name}-native:${project.version}"
+	environment = ['BP_NATIVE_IMAGE': 'true', 'BP_JVM_VERSION': '17', 'BP_NATIVE_IMAGE_BUILD_ARGUMENTS': '-J-Xmx6000m']
+}
+
