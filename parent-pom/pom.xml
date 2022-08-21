@@ -5,7 +5,7 @@
 
     <groupId>org.goafabric</groupId>
     <artifactId>spring-parent</artifactId>
-    <version>2.7.2</version>
+    <version>2.7.3</version>
     <packaging>pom</packaging>
     <name>goa parent pom</name>
     <description>goa parent pom</description>
@@ -20,8 +20,13 @@
 
         <docker.baseimage>ibm-semeru-runtimes:open-17.0.3_7-jre-focal@sha256:e89df25f95379321ef61d5119eee68c28884ff8f8c5deaf2d474f3cdb1dbbb7e</docker.baseimage>
 
+        <!-- Kotlin -->
+        <kotlin.version>1.6.21</kotlin.version>
+        <kotlin.code.style>official</kotlin.code.style>
+        <kotlin.compiler.jvmTarget>${java.version}</kotlin.compiler.jvmTarget>
+        
         <!-- Spring Boot -->
-        <spring.boot.version>2.7.2</spring.boot.version>
+        <spring.boot.version>2.7.3</spring.boot.version>
         <spring.cloud.version>2021.0.3</spring.cloud.version>
         <spring.native.version>0.12.1</spring.native.version>
         <spring.native.buildpack.version>gcr.io/paketo-buildpacks/java-native-image:7.23.0</spring.native.buildpack.version>
@@ -194,6 +199,42 @@
                         <execution>
                             <goals>
                                 <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-maven-plugin</artifactId>
+                    <version>${kotlin.version}</version>
+                    <configuration>
+                        <args>
+                            <arg>-Xjsr305=strict</arg>
+                        </args>
+                        <compilerPlugins>
+                            <plugin>spring</plugin>
+                        </compilerPlugins>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.jetbrains.kotlin</groupId>
+                            <artifactId>kotlin-maven-allopen</artifactId>
+                            <version>${kotlin.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <id>compile</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>test-compile</id>
+                            <phase>test-compile</phase>
+                            <goals>
+                                <goal>test-compile</goal>
                             </goals>
                         </execution>
                     </executions>
