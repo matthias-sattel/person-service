@@ -4,12 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.logic.PersonLogic;
 import org.goafabric.personservice.service.dto.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping(value = "/persons", produces = "application/json")
+@RequestMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_VALUE)
 @RestController
 @Slf4j
 public class PersonService {
@@ -37,7 +38,7 @@ public class PersonService {
     }
 
 
-    @PostMapping(value = "save", consumes = "application/json")
+    @PostMapping(value = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Person save(@RequestBody @Valid Person person) {
         return personLogic.save(person);
     }
