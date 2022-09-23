@@ -2,6 +2,7 @@ package org.goafabric.personservice;
 
 import org.goafabric.personservice.adapter.Callee;
 import org.goafabric.personservice.persistence.DatabaseProvisioning;
+import org.springframework.aot.hint.ExecutableMode;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.boot.CommandLineRunner;
@@ -41,14 +42,14 @@ public class Application {
         @Override
         public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
             Arrays.stream(Callee.class.getConstructors()).forEach(
-                    r -> hints.reflection().registerConstructor(r));
+                    r -> hints.reflection().registerConstructor(r, ExecutableMode.INVOKE));
             Arrays.stream(Callee.class.getDeclaredMethods()).forEach(
-                    r -> hints.reflection().registerMethod(r));
+                    r -> hints.reflection().registerMethod(r, ExecutableMode.INVOKE));
 
             Arrays.stream(SimpleClientHttpRequestFactory.class.getConstructors()).forEach(
-                    r -> hints.reflection().registerConstructor(r));
+                    r -> hints.reflection().registerConstructor(r, ExecutableMode.INVOKE));
             Arrays.stream(SimpleClientHttpRequestFactory.class.getMethods()).forEach(
-                    r -> hints.reflection().registerMethod(r));
+                    r -> hints.reflection().registerMethod(r, ExecutableMode.INVOKE));
         }
 
     }
