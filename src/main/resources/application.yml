@@ -19,10 +19,7 @@ management:
 springdoc.swagger-ui.path: /swagger-ui/index.html
 
 #jaeger / zipkin
-spring.zipkin.service.name: "person-service"
-spring.zipkin.enabled: true
-spring.sleuth.enabled: ${spring.zipkin.enabled}
-
+spring.application.name: person-service
 management.zipkin.tracing.endpoint: "http://localhost:9411/api/v2/spans"
 
 #security
