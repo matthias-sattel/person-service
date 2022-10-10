@@ -55,7 +55,11 @@ public class Application {
                     r -> hints.reflection().registerConstructor(r, ExecutableMode.INVOKE));
             Arrays.stream(SimpleClientHttpRequestFactory.class.getMethods()).forEach(
                     r -> hints.reflection().registerMethod(r, ExecutableMode.INVOKE));
+
+            Arrays.stream(org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class.getMethods()).forEach(
+                    r -> hints.reflection().registerMethod(r, ExecutableMode.INVOKE));
         }
+
     }
 
     @Bean

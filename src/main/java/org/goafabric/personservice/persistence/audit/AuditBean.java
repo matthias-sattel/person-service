@@ -23,7 +23,7 @@ public class AuditBean {
 
     @Data
     @Builder
-    static class AuditEvent {
+    public static class AuditEvent {
         private String id;
         private String tenantId;
         private String referenceId;
