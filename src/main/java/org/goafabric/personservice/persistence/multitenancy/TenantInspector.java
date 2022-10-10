@@ -1,3 +1,4 @@
+/*
 package org.goafabric.personservice.persistence.multitenancy;
 
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
@@ -18,3 +19,5 @@ public class TenantInspector implements StatementInspector {
         return hibernateProperties -> hibernateProperties.put("hibernate.session_factory.statement_inspector", TenantInspector.class.getName());
     }
 }
+
+ */
