@@ -47,9 +47,11 @@ public class Application {
 
         @Override
         public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
+            //REST and JBDC Pojos
             registerReflection(Callee.class, hints);
             registerReflection(org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class, hints);
-            
+
+            //additional nod needed for boot 2.x
             registerReflection(SimpleClientHttpRequestFactory.class, hints);
             registerReflection(org.goafabric.personservice.persistence.multitenancy.TenantInspector.class, hints);
             hints.resources().registerResource(new ClassPathResource("db/migration/V1__init.sql"));
