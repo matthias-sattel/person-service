@@ -50,6 +50,8 @@ public class Application {
             registerReflection(Callee.class, hints);
             registerReflection(org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class, hints);
 
+            registerReflection(org.goafabric.personservice.persistence.multitenancy.TenantInspector.class, hints);
+
             registerReflection(SimpleClientHttpRequestFactory.class, hints);
             hints.resources().registerResource(new ClassPathResource("db/migration/V1__init.sql"));
         }

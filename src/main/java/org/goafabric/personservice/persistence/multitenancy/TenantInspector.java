@@ -1,4 +1,3 @@
-/*
 package org.goafabric.personservice.persistence.multitenancy;
 
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
@@ -20,4 +19,4 @@ public class TenantInspector implements StatementInspector {
     }
 }
 
- */
+
