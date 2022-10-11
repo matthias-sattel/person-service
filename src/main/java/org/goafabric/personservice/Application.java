@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportRuntimeHints;
 import org.springframework.core.Ordered;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.observation.HttpRequestsObservationFilter;
 
@@ -46,17 +47,17 @@ public class Application {
 
         @Override
         public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
-            Arrays.stream(Callee.class.getConstructors()).forEach(
-                    r -> hints.reflection().registerConstructor(r, ExecutableMode.INVOKE));
-            Arrays.stream(Callee.class.getDeclaredMethods()).forEach(
-                    r -> hints.reflection().registerMethod(r, ExecutableMode.INVOKE));
+            registerReflection(Callee.class, hints);
+            registerReflection(org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class, hints);
 
-            Arrays.stream(SimpleClientHttpRequestFactory.class.getConstructors()).forEach(
-                    r -> hints.reflection().registerConstructor(r, ExecutableMode.INVOKE));
-            Arrays.stream(SimpleClientHttpRequestFactory.class.getMethods()).forEach(
-                    r -> hints.reflection().registerMethod(r, ExecutableMode.INVOKE));
+            registerReflection(SimpleClientHttpRequestFactory.class, hints);
+            hints.resources().registerResource(new ClassPathResource("db/migration/V1__init.sql"));
+        }
 
-            Arrays.stream(org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class.getMethods()).forEach(
+        private void registerReflection(Class clazz, RuntimeHints hints) {
+            Arrays.stream(clazz.getConstructors()).forEach(
+                    r -> hints.reflection().registerConstructor(r, ExecutableMode.INVOKE));
+            Arrays.stream(clazz.getDeclaredMethods()).forEach(
                     r -> hints.reflection().registerMethod(r, ExecutableMode.INVOKE));
         }
 
