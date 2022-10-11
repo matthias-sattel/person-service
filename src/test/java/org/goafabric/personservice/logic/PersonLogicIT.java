@@ -1,4 +1,3 @@
-/*
 package org.goafabric.personservice.logic;
 
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
@@ -75,5 +74,3 @@ class PersonLogicIT {
         assertThat(person).isNotNull();
     }
 }
-
- */
