@@ -49,10 +49,9 @@ public class Application {
         public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
             registerReflection(Callee.class, hints);
             registerReflection(org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class, hints);
-
-            registerReflection(org.goafabric.personservice.persistence.multitenancy.TenantInspector.class, hints);
-
+            
             registerReflection(SimpleClientHttpRequestFactory.class, hints);
+            registerReflection(org.goafabric.personservice.persistence.multitenancy.TenantInspector.class, hints);
             hints.resources().registerResource(new ClassPathResource("db/migration/V1__init.sql"));
         }
 
