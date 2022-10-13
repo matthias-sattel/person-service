@@ -47,6 +47,10 @@ public class Application {
 
         @Override
         public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
+            //Logger and ExceptionHandler
+            registerReflection(org.goafabric.personservice.crossfunctional.DurationLogger.class, hints);
+            registerReflection(org.goafabric.personservice.crossfunctional.ExceptionHandler.class, hints);
+            
             //REST and JBDC Pojos
             registerReflection(Callee.class, hints);
             registerReflection(org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class, hints);
@@ -58,7 +62,7 @@ public class Application {
         }
 
         private void registerReflection(Class clazz, RuntimeHints hints) {
-            Arrays.stream(clazz.getConstructors()).forEach(
+            Arrays.stream(clazz.getDeclaredConstructors()).forEach(
                     r -> hints.reflection().registerConstructor(r, ExecutableMode.INVOKE));
             Arrays.stream(clazz.getDeclaredMethods()).forEach(
                     r -> hints.reflection().registerMethod(r, ExecutableMode.INVOKE));
