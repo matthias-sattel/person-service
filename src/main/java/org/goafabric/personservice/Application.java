@@ -14,7 +14,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportRuntimeHints;
 import org.springframework.core.Ordered;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.observation.HttpRequestsObservationFilter;
 
 
@@ -64,7 +63,7 @@ public class Application {
             hints.reflection().registerType(org.goafabric.personservice.persistence.multitenancy.TenantInspector.class,
                     MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
 
-            hints.resources().registerResource(new ClassPathResource("db/migration/V1__init.sql"));
+            hints.resources().registerPattern("catalogdata/*.csv");
         }
 
 
