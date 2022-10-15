@@ -63,7 +63,7 @@ public class Application {
             hints.reflection().registerType(org.goafabric.personservice.persistence.multitenancy.TenantInspector.class,
                     MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
 
-            hints.resources().registerPattern("catalogdata/*.csv");
+            hints.resources().registerPattern("db/migration/*.sql");
         }
 
 
