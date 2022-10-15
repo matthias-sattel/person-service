@@ -53,10 +53,10 @@ public class Application {
             hints.reflection().registerType(org.goafabric.personservice.adapter.Callee.class,
                     MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
 
-            hints.reflection().registerType(org.springframework.http.client.SimpleClientHttpRequestFactory.class,
+            hints.reflection().registerType(org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class,
                     MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
 
-            hints.reflection().registerType(org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class,
+            hints.reflection().registerType(org.springframework.http.client.SimpleClientHttpRequestFactory.class,
                     MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
 
             //Persistence
