@@ -2,9 +2,8 @@ package org.goafabric.personservice;
 
 import io.micrometer.observation.ObservationRegistry;
 import jakarta.servlet.DispatcherType;
-import org.goafabric.personservice.adapter.Callee;
 import org.goafabric.personservice.persistence.DatabaseProvisioning;
-import org.springframework.aot.hint.ExecutableMode;
+import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.boot.CommandLineRunner;
@@ -16,10 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportRuntimeHints;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.observation.HttpRequestsObservationFilter;
-
-import java.util.Arrays;
 
 
 /**
@@ -48,25 +44,29 @@ public class Application {
         @Override
         public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
             //Logger and ExceptionHandler
-            registerReflection(org.goafabric.personservice.crossfunctional.DurationLogger.class, hints);
-            registerReflection(org.goafabric.personservice.crossfunctional.ExceptionHandler.class, hints);
-            
+            hints.reflection().registerType(org.goafabric.personservice.crossfunctional.DurationLogger.class,
+                    MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
+
+            hints.reflection().registerType(org.goafabric.personservice.crossfunctional.ExceptionHandler.class,
+                    MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
+
             //REST and JBDC Pojos
-            registerReflection(Callee.class, hints);
-            registerReflection(SimpleClientHttpRequestFactory.class, hints);
-            registerReflection(org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class, hints);
+            hints.reflection().registerType(org.goafabric.personservice.adapter.Callee.class,
+                    MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
+
+            hints.reflection().registerType(org.springframework.http.client.SimpleClientHttpRequestFactory.class,
+                    MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
+
+            hints.reflection().registerType(org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class,
+                    MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
 
             //Persistence
-            registerReflection(org.goafabric.personservice.persistence.multitenancy.TenantInspector.class, hints);
+            hints.reflection().registerType(org.goafabric.personservice.persistence.multitenancy.TenantInspector.class,
+                    MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
+
             hints.resources().registerResource(new ClassPathResource("db/migration/V1__init.sql"));
         }
 
-        private void registerReflection(Class clazz, RuntimeHints hints) {
-            Arrays.stream(clazz.getDeclaredConstructors()).forEach(
-                    r -> hints.reflection().registerConstructor(r, ExecutableMode.INVOKE));
-            Arrays.stream(clazz.getDeclaredMethods()).forEach(
-                    r -> hints.reflection().registerMethod(r, ExecutableMode.INVOKE));
-        }
 
     }
 
