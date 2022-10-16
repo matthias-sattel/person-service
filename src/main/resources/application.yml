@@ -17,6 +17,7 @@ management:
       enabled: true
 
 springdoc.swagger-ui.path: /swagger-ui/index.html
+springdoc.enable-native-support: "true"
 
 #jaeger / zipkin
 spring.application.name: person-service
