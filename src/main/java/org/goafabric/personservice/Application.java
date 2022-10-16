@@ -64,6 +64,9 @@ public class Application {
                     MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
 
             hints.resources().registerPattern("db/migration/*.sql");
+
+            hints.reflection().registerType(java.lang.Module.class,
+                    MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
         }
 
 
