@@ -20,7 +20,7 @@ dependencies {
 	}
 
 	dependencyManagement.imports {
-		mavenBom 'org.springframework.cloud:spring-cloud-dependencies:2022.0.0-M4'
+		mavenBom 'org.springframework.cloud:spring-cloud-dependencies:2022.0.0-M5'
 	}
 }
 
@@ -51,6 +51,9 @@ dependencies {
 	//crosscuting
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+	//adapter
+	implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
 
 	//code generation
 	compileOnly 'org.projectlombok:lombok'
