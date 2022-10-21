@@ -20,10 +20,10 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
         
-#    - name: JVM Build
-#      run: mvn -B clean deploy -P docker-image --file pom.xml
-#    - name: Native Build
-#      run: mvn -B clean deploy -P docker-image-native --file pom.xml
+    - name: JVM Build
+      run: mvn -B clean deploy -P docker-image --file pom.xml
+    - name: Native Build
+      run: mvn -B clean deploy -P docker-image-native --file pom.xml
    
     - name: Multiarch Image
       uses: gradle/gradle-build-action@v2
