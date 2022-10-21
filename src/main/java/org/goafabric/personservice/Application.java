@@ -41,9 +41,6 @@ public class Application {
             hints.reflection().registerType(org.goafabric.personservice.crossfunctional.DurationLogger.class,
                     MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
 
-            hints.reflection().registerType(org.goafabric.personservice.crossfunctional.ExceptionHandler.class,
-                    MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
-
             //REST and JBDC Pojos
             hints.reflection().registerType(org.goafabric.personservice.adapter.Callee.class,
                     MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
