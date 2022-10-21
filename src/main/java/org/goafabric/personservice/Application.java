@@ -62,6 +62,8 @@ public class Application {
 
             //openapi
             hints.reflection().registerType(java.lang.Module.class, MemberCategory.INVOKE_DECLARED_METHODS);
+            //java.lang.ModuleLayer.parents
+            //org.springframework.cloud.client.circuitbreaker.observation.CircuitBreakerDocumentedObservation
         }
     }
 
