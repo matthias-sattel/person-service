@@ -1,7 +1,5 @@
 package org.goafabric.personservice;
 
-import io.micrometer.observation.ObservationRegistry;
-import jakarta.servlet.DispatcherType;
 import org.goafabric.personservice.persistence.DatabaseProvisioning;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
@@ -9,12 +7,9 @@ import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportRuntimeHints;
-import org.springframework.core.Ordered;
-import org.springframework.web.observation.HttpRequestsObservationFilter;
 
 
 /**
@@ -70,6 +65,7 @@ public class Application {
         }
     }
 
+    /*
     @Bean
     FilterRegistrationBean traceWebFilter(ObservationRegistry observationRegistry) {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new HttpRequestsObservationFilter(observationRegistry));
@@ -78,5 +74,7 @@ public class Application {
         filterRegistrationBean.setOrder(Ordered.LOWEST_PRECEDENCE);
         return filterRegistrationBean;
     }
+
+     */
 
 }
