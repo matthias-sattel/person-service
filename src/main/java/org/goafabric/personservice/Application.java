@@ -48,9 +48,6 @@ public class Application {
             hints.reflection().registerType(org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class,
                     MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
 
-            hints.reflection().registerType(org.springframework.http.client.SimpleClientHttpRequestFactory.class,
-                    MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
-
             //Persistence
             hints.reflection().registerType(org.goafabric.personservice.persistence.multitenancy.TenantInspector.class,
                     MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
