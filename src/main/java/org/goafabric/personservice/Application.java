@@ -45,9 +45,6 @@ public class Application {
                     MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
 
             //Persistence
-            hints.reflection().registerType(org.goafabric.personservice.persistence.multitenancy.TenantInspector.class,
-                    MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
-
             hints.resources().registerPattern("db/migration/*.sql");
 
             //openapi
