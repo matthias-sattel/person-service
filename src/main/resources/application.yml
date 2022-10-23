@@ -2,7 +2,6 @@
 server:
   port: 50800
   tomcat.max-threads: 20
-  tomcat:
 
 #monitoring
 management:
