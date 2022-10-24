@@ -1,8 +1,8 @@
-package org.goafabric.personservice.service;
+package org.goafabric.personservice.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.logic.PersonLogic;
-import org.goafabric.personservice.service.dto.Person;
+import org.goafabric.personservice.controller.dto.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_VALUE)
 @RestController
 @Slf4j
-public class PersonService {
+public class PersonController {
     @Autowired
     PersonLogic personLogic;
 
