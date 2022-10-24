@@ -1,6 +1,7 @@
 package org.goafabric.personservice.adapter;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
@@ -10,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Component
+@RegisterReflectionForBinding(Callee.class)
 public class CalleeServiceAdapter {
     @Autowired
     private RestTemplate restTemplate;

@@ -37,21 +37,11 @@ public class Application {
 
         @Override
         public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
-            //REST and JBDC Pojos
-            hints.reflection().registerType(org.goafabric.personservice.adapter.Callee.class,
-                    MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
-
-            hints.reflection().registerType(org.goafabric.personservice.persistence.audit.AuditBean.AuditEvent.class,
-                    MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
-
-
             //openapi
             hints.reflection().registerType(java.lang.Module.class, MemberCategory.INVOKE_DECLARED_METHODS);
             hints.reflection().registerType(java.lang.ModuleLayer.class, MemberCategory.INVOKE_DECLARED_METHODS);
             hints.reflection().registerType(java.lang.module.Configuration.class, MemberCategory.INVOKE_DECLARED_METHODS);
             hints.reflection().registerType(java.lang.module.ResolvedModule.class, MemberCategory.INVOKE_DECLARED_METHODS);
-
-            //org.springframework.cloud.client.circuitbreaker.observation.CircuitBreakerDocumentedObservation
         }
     }
 
