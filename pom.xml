@@ -13,7 +13,7 @@
 
     <groupId>org.goafabric</groupId>
     <artifactId>person-service</artifactId>
-    <version>2.0.1-kotlin-SNAPSHOT</version>
+    <version>2.0.1-SNAPSHOT</version>
 
     <dependencies>
         <!-- web -->
@@ -133,10 +133,6 @@
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
