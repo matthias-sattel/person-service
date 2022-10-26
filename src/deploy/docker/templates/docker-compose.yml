@@ -32,10 +32,8 @@ services:
       - management.endpoint.health.show-details=always
       - management.endpoints.web.exposure.include=health,prometheus,heapdump
       #zipkin / jaeger
-      - spring.zipkin.service.name=person-service
-      - spring.zipkin.baseUrl=http://host.docker.internal:9411
-      - spring.sleuth.enabled=true
-      - spring.zipkin.enabled=true
+      - management.zipkin.tracing.endpoint=http://host.docker.internal:9411/api/v2/spans
+      - spring.application.name=person-service
       #persistence
       - spring.datasource.url=jdbc:postgresql://${_Values_root_name}-postgres:5432/persondb
       - spring.datasource.username=person-service
