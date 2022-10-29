@@ -146,13 +146,13 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.springframework.experimental</groupId>
-                        <artifactId>spring-aot-maven-plugin</artifactId>
-                    </plugin>
-                    <plugin>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
                         <executions>
+                            <execution>
+                                <id>process-aot</id>
+                                <goals><goal>process-aot</goal></goals>
+                            </execution>
                             <execution>
                                 <id>build-image</id>
                                 <goals><goal>build-image</goal></goals>
@@ -182,13 +182,13 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.springframework.experimental</groupId>
-                        <artifactId>spring-aot-maven-plugin</artifactId>
-                    </plugin>
-                    <plugin>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
                         <executions>
+                            <execution>
+                                <id>process-aot</id>
+                                <goals><goal>process-aot</goal></goals>
+                            </execution>
                             <execution>
                                 <id>build-image</id>
                                 <goals><goal>build-image</goal></goals>
@@ -208,7 +208,6 @@
             </build>
         </profile>
     </profiles>
-
 
     <repositories>
         <repository>
