@@ -19,7 +19,7 @@ springdoc.enable-native-support: "true"
 #jaeger / zipkin
 spring.application.name: person-service
 management.zipkin.tracing.endpoint: "http://localhost:9411/api/v2/spans"
-#management.zipkin.tracing.read-timeout: "1s"
+management.zipkin.tracing.read-timeout: "1s"
 
 #security
 security.authentication.enabled: true
