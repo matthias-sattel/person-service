@@ -18,7 +18,7 @@ public class DatabaseProvisioning {
     String goals;
 
     @Autowired
-    PersonLogic personRepository;
+    PersonLogic personLogic;
 
     @Autowired
     ApplicationContext applicationContext;
@@ -38,7 +38,7 @@ public class DatabaseProvisioning {
 
     private void importDemoData() {
         HttpInterceptor.setTenantId("0");
-        if (personRepository.findAll().isEmpty()) {
+        if (personLogic.findAll().isEmpty()) {
             HttpInterceptor.setTenantId("0");
             insertData();
             HttpInterceptor.setTenantId("5a2f");
@@ -47,17 +47,17 @@ public class DatabaseProvisioning {
     }
 
     private void insertData() {
-        personRepository.save(Person.builder()
+        personLogic.save(Person.builder()
                 .firstName("Homer").lastName("Simpson")
                 .address(createAddress("Evergreen Terrace 1"))
                 .build());
 
-        personRepository.save(Person.builder()
+        personLogic.save(Person.builder()
                 .firstName("Bart").lastName("Simpson")
                 .address(createAddress("Everblue Terrace 1"))
                 .build());
 
-        personRepository.save(Person.builder()
+        personLogic.save(Person.builder()
                 .firstName("Monty").lastName("Burns")
                 .address(createAddress("Monty Mansion"))
                 .build());
