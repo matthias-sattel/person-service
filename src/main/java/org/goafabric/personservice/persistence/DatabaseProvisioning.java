@@ -1,9 +1,10 @@
 package org.goafabric.personservice.persistence;
 
 import lombok.extern.slf4j.Slf4j;
+import org.goafabric.personservice.controller.dto.Address;
+import org.goafabric.personservice.controller.dto.Person;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
-import org.goafabric.personservice.persistence.domain.AddressBo;
-import org.goafabric.personservice.persistence.domain.PersonBo;
+import org.goafabric.personservice.logic.PersonLogic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -17,7 +18,7 @@ public class DatabaseProvisioning {
     String goals;
 
     @Autowired
-    PersonRepository personRepository;
+    PersonLogic personRepository;
 
     @Autowired
     ApplicationContext applicationContext;
@@ -26,6 +27,7 @@ public class DatabaseProvisioning {
         if (goals.contains("-import-demo-data")) {
             log.info("Importing demo data ...");
             importDemoData();
+            log.info("Demodata import done ...");
         }
 
         if (goals.contains("-terminate")) {
@@ -35,6 +37,7 @@ public class DatabaseProvisioning {
     }
 
     private void importDemoData() {
+        HttpInterceptor.setTenantId("0");
         if (personRepository.findAll().isEmpty()) {
             HttpInterceptor.setTenantId("0");
             insertData();
@@ -44,24 +47,24 @@ public class DatabaseProvisioning {
     }
 
     private void insertData() {
-        personRepository.save(PersonBo.builder()
+        personRepository.save(Person.builder()
                 .firstName("Homer").lastName("Simpson")
                 .address(createAddress("Evergreen Terrace 1"))
                 .build());
 
-        personRepository.save(PersonBo.builder()
+        personRepository.save(Person.builder()
                 .firstName("Bart").lastName("Simpson")
                 .address(createAddress("Everblue Terrace 1"))
                 .build());
 
-        personRepository.save(PersonBo.builder()
+        personRepository.save(Person.builder()
                 .firstName("Monty").lastName("Burns")
                 .address(createAddress("Monty Mansion"))
                 .build());
     }
 
-    private AddressBo createAddress(String street) {
-        return AddressBo.builder()
+    private Address createAddress(String street) {
+        return Address.builder()
                 .street(street).city("Springfield " + HttpInterceptor.getTenantId())
                 .build();
     }
