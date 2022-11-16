@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  person-service:
+  application:
     container_name: ${_Values_root_name}-application
     image:  ${_Values_image_repository}${_Values_image_native}:${_Values_image_tag}
     restart: 'no'
@@ -96,7 +96,7 @@ services:
       - ./server.pem:/etc/ssl/server.pem
       - ./server.key:/etc/ssl/server.key
     depends_on:
-      - person-service
+      - application
 
 volumes:
     tmp:
