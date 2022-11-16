@@ -27,7 +27,7 @@ public class DatabaseProvisioning {
         if (goals.contains("-import-demo-data")) {
             log.info("Importing demo data ...");
             importDemoData();
-            log.info("Demodata import done ...");
+            log.info("Demo data import done ...");
         }
 
         if (goals.contains("-terminate")) {
