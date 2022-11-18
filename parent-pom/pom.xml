@@ -27,7 +27,7 @@
 
         <!-- Spring Boot -->
         <spring.boot.version>2.7.5</spring.boot.version>
-        <spring.boot-3.version>3.0.0-RC2</spring.boot-3.version>
+        <spring.boot-3.version>3.0.0-RC3</spring.boot-3.version>
         <spring.cloud.version>2021.0.4</spring.cloud.version>
 
         <native-maven-plugin.version>0.9.17</native-maven-plugin.version>
