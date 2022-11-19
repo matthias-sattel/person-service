@@ -1,5 +1,5 @@
 # docker compose
-go to /src/deploy/docker and do "./stack up"
+go to /src/deploy/docker and do "./stack up" or "./stack up -native"
 
 # run jvm multi image
 docker run --pull always --name person-service --rm -p50800:50800 goafabric/person-service:3.0.0-RC3
