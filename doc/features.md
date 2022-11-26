@@ -30,3 +30,8 @@ Adapter
 - console: 4m
 - web: 10m
 - jpa: 15m
+
+# CPU (JVM / Native)
+- 10 req/s : ~ 25%
+- 100 req/s : ~ 40% / 120% 
+- 500 req/s : ~ 40% / 
