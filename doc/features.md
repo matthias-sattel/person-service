@@ -34,4 +34,4 @@ Adapter
 # CPU (JVM / Native)
 - 10 req/s : ~ 25%
 - 100 req/s : ~ 40% / 120% 
-- 500 req/s : ~ 40% / 
+- 500 req/s : ~ 160% / cap out at 100 req/s 
