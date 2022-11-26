@@ -1,4 +1,4 @@
-#Working
+# Working
 Core
 - Web, ExceptionHandler
 - Lombok, Mapstruct
@@ -22,13 +22,11 @@ Adapter
 - REST Call
 - CircuitBreaker
 
-#Not Working
-- Arm Builds (https://github.com/paketo-buildpacks/stacks/issues/51)
 
-#build times apple silicon:
+# build times apple silicon:
 - not working
 
-#build times github:
+# build times github:
 - console: 4m
 - web: 10m
 - jpa: 15m
