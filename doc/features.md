@@ -32,6 +32,6 @@ Adapter
 - jpa: 15m
 
 # CPU (JVM / Native)
-- 10 req/s : ~ 25%
+- 10 req/s : ~ 25% / 25%
 - 100 req/s : ~ 40% / 120% 
 - 500 req/s : ~ 160% / cap out at 100 req/s 
