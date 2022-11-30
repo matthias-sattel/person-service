@@ -31,7 +31,7 @@ Adapter
 - web: 10m
 - jpa: 15m
 
-# CPU (JVM / Native / Quarkus)
+# CPU JPA App (JVM / Spring Native / Quarkus)
 - 10 req/s  : 25% / 25% / 15% 
 - 100 req/s : 40% / 120% / 40% 
 - 500 req/s : 160% / cap at 100 req/s / cap at 250 req/s
