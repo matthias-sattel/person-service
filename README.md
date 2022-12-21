@@ -9,3 +9,6 @@ docker run --pull always --name person-service-native --rm -p50800:50800 goafabr
 
 # run native image arm
 docker run --pull always --name person-service-native-arm64v8 --rm -p50800:50800 goafabric/person-service-native-arm64v8:3.0.1-SNAPSHOT -Xmx64m
+
+# loki logger
+docker run --pull always --name person-service --rm -p50800:50800 --log-driver=loki --log-opt loki-url="http://host.docker.internal:3100/loki/api/v1/push" goafabric/person-service:3.0.1-SNAPSHOT
