@@ -1,17 +1,18 @@
 package org.goafabric.personservice.adapter;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
-import org.springframework.cloud.client.circuitbreaker.NoFallbackAvailableException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Component
 @RegisterReflectionForBinding(Callee.class)
+@CircuitBreaker(name = "CalleeService")
 public class CalleeServiceAdapter {
     @Autowired
     private RestTemplate restTemplate;
@@ -24,12 +25,7 @@ public class CalleeServiceAdapter {
 
     public Callee sayMyName(String name) {
         log.info("Calling CalleService ...");
-        final Callee callee =
-                cbFactory.create(this.getClass().getSimpleName()).run(() ->
-                restTemplate.getForObject(url + "/callees/sayMyName?name={name}", Callee.class, name)
-                ,(throwable) -> {
-                    throw new NoFallbackAvailableException(throwable.getMessage(), throwable);
-                });
+        final Callee callee = restTemplate.getForObject(url + "/callees/sayMyName?name={name}", Callee.class, name);
         log.info("got: " + callee);
         return callee;
     }

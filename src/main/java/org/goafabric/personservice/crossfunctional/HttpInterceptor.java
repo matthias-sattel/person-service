@@ -1,5 +1,6 @@
 package org.goafabric.personservice.crossfunctional;
 
+import io.micrometer.observation.ObservationPredicate;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -50,4 +51,10 @@ public class HttpInterceptor implements WebMvcConfigurer {
         else { http.authorizeHttpRequests().anyRequest().permitAll(); }
         return http.build();
     }
+
+    @Bean
+    ObservationPredicate disableHttpServerObservationsFromName() {
+        return (name, context) -> !name.startsWith("spring.security.");
+    }
+
 }

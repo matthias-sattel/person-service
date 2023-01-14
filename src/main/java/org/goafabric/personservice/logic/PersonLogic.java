@@ -2,6 +2,7 @@ package org.goafabric.personservice.logic;
 
 import lombok.NonNull;
 import org.goafabric.personservice.adapter.CalleeServiceAdapter;
+import org.goafabric.personservice.crossfunctional.DurationLog;
 import org.goafabric.personservice.persistence.PersonRepository;
 import org.goafabric.personservice.controller.dto.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Component
 @Transactional
+@DurationLog
 public class PersonLogic {
     @Autowired
     PersonMapper personMapper;

@@ -1,11 +1,8 @@
 package org.goafabric.personservice.crossfunctional;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.web.FilterChainProxy;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
@@ -42,15 +39,3 @@ public class ExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
-
-@Component
-class FilterChainProxyPostProcessor implements BeanPostProcessor {
-    @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) {
-        if (bean instanceof FilterChainProxy) {
-            ((FilterChainProxy) bean).setFilterChainDecorator(new FilterChainProxy.VirtualFilterChainDecorator());
-        }
-        return bean;
-    }
-}
-
