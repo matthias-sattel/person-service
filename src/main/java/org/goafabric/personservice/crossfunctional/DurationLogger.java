@@ -1,6 +1,5 @@
 package org.goafabric.personservice.crossfunctional;
 
-import io.github.resilience4j.spring6.circuitbreaker.configure.CircuitBreakerAspect;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -45,8 +44,6 @@ public class DurationLogger {
         @Override
         public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
             hints.reflection().registerType(DurationLogger.class, MemberCategory.INVOKE_DECLARED_METHODS);
-            hints.reflection().registerType(io.github.resilience4j.spring6.circuitbreaker.configure.CircuitBreakerAspect.class,
-                    builder -> builder.withMembers(MemberCategory.INVOKE_DECLARED_METHODS));
         }
     }
 
