@@ -49,7 +49,7 @@ services:
 
       #adapter
       adapter.calleeservice.url: "http://${_Values_host_docker_internal}:50900"
-      adapter.calleeservice.timeout: "1000"
+      adapter.calleeservice.timeout: "10000"
 
       #log levels
       logging.level.root: "WARN"
@@ -58,6 +58,13 @@ services:
       logging.level.org.springframework: "INFO"
       logging.level.org.flywaydb.core: "INFO"
       logging.level.org.hibernate.SQL: "INFO"
+
+      #secrets
+      spring.datasource.username: "person-service"
+      spring.datasource.password: "person-service"
+
+      adapter.calleeservice.user: "YWRtaW4="
+      adapter.calleeservice.password: "YWRtaW4="
 
     depends_on:
       postgres:
@@ -73,7 +80,7 @@ services:
       TZ: "Europe/Berlin"
       POSTGRES_USER: "person-service"
       POSTGRES_PASSWORD: "person-service"
-      POSTGRES_DB: "persondb"
+      POSTGRES_DB: "person"
     command: postgres -c 'shared_buffers=64MB' -c 'max_connections=30' -c 'shared_preload_libraries=pg_stat_statements'
     healthcheck:
       test: "sh -c pg_isready"
