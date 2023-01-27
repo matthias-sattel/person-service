@@ -22,38 +22,42 @@ services:
       - ${_Values_root_name}-net
     environment:
       #application
-      - TZ=Europe/Berlin
-      - server.port=${_Values_service_port}
-      - server.tomcat.threads.max=20
-      - security.authentication.enabled=false
-      #forwarding sub url
-      - server.forward-headers-strategy=FRAMEWORK
+      TZ: Europe/Berlin
+      server.port: "${_Values_service_port}"
+      server.tomcat.threads.max: "20"
+      server.forward-headers-strategy: FRAMEWORK
+
+      #security
+      security.authentication.enabled: "false"
+
       #monitoring
-      - management.endpoint.health.show-details=always
-      - management.endpoints.web.exposure.include=health,prometheus,heapdump
-      #zipkin / jaeger
-      - management.zipkin.tracing.endpoint=http://host.docker.internal:9411/api/v2/spans
-      - spring.application.name=person-service
+      management.endpoint.health.show-details: always
+      management.endpoints.web.exposure.include: "health,heapdump,circuitbreakers,prometheus"
+
+      #zipkin/jaeger
+      spring.application.name: "person-service"
+      management.zipkin.tracing.endpoint: "http://${_Values_host_docker_internal}:9411/api/v2/spans"
+      management.tracing.sampling.probability: "1.0"
+      management.tracing.enabled: "true"
+
       #persistence
-      - spring.datasource.url=jdbc:postgresql://${_Values_root_name}-postgres:5432/persondb
-      - spring.datasource.username=person-service
-      - spring.datasource.password=person-service
-      - database.provisioning.goals=-import-demo-data
+      spring.datasource.url: "jdbc:postgresql://postgres:5432/person"
+      spring.datasource.hikari.maximum-pool-size: "10"
+      spring.datasource.hikari.connection-timeout: "10000"
+
+      database.provisioning.goals: "-import-demo-data"
+
       #adapter
-      - adapter.calleeservice.url=http://host.docker.internal:50900
-      - adapter.calleeservice.user=YWRtaW4=
-      - adapter.calleeservice.password=YWRtaW4=
-      - adapter.timeout=10000
+      adapter.calleeservice.url: "http://${_Values_host_docker_internal}:50900"
+      adapter.calleeservice.timeout: "1000"
+
       #log levels
-      - logging.level.root=WARN
-      - logging.level.org.springframework=INFO
-      - logging.level.org.goafabric=DEBUG
-      - logging.level.org.flywaydb.core="INFO"
-      - logging.level.org.hibernate.SQL="INFO"
-      - logging.level.org.goafabric.personservice.persistence.audit="INFO"
-      #log file settings
-      - logging.file.max-size=10MB
-      - logging.file.name=/usr/share/logs/application.log
+      logging.level.root: "WARN"
+      logging.level.org.goafabric: "INFO"
+
+      logging.level.org.springframework: "INFO"
+      logging.level.org.flywaydb.core: "INFO"
+      logging.level.org.hibernate.SQL: "INFO"
 
     depends_on:
       postgres:
@@ -66,10 +70,10 @@ services:
     ports:
       - 50810:5432
     environment:
-      - TZ=Europe/Berlin
-      - POSTGRES_USER=person-service
-      - POSTGRES_PASSWORD=person-service
-      - POSTGRES_DB=persondb
+      TZ: "Europe/Berlin"
+      POSTGRES_USER: "person-service"
+      POSTGRES_PASSWORD: "person-service"
+      POSTGRES_DB: "persondb"
     command: postgres -c 'shared_buffers=64MB' -c 'max_connections=30' -c 'shared_preload_libraries=pg_stat_statements'
     healthcheck:
       test: "sh -c pg_isready"
@@ -78,7 +82,6 @@ services:
       retries: 5
     volumes:
       - pgdata:/var/lib/postgresql/data
-#      - ../config/postgres/initdb/00_pg_statements.sql:/docker-entrypoint-initdb.d/00_pg_statements.sql
     networks:
       - ${_Values_root_name}-net
 
@@ -95,7 +98,8 @@ services:
       - ./nginx/:/etc/nginx/
       - ./ssl:/etc/ssl/
     depends_on:
-      - application
+      application:
+        condition: service_started
 
 volumes:
     tmp:
