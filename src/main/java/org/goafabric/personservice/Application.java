@@ -1,6 +1,7 @@
 package org.goafabric.personservice;
 
 import org.goafabric.personservice.persistence.DatabaseProvisioning;
+import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Bean;
  */
 
 @SpringBootApplication
+@RegisterReflectionForBinding(org.postgresql.util.PGobject.class)
 public class Application {
 
     public static void main(String[] args){
