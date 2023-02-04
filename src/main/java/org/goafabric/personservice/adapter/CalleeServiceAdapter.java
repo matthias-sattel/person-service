@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -19,10 +18,7 @@ public class CalleeServiceAdapter {
 
     @Value("${adapter.calleeservice.url}")
     private String url;
-
-    @Autowired
-    private CircuitBreakerFactory cbFactory;
-
+    
     public Callee sayMyName(String name) {
         log.info("Calling CalleService ...");
         final Callee callee = restTemplate.getForObject(url + "/callees/sayMyName?name={name}", Callee.class, name);
