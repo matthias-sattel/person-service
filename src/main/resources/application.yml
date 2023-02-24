@@ -41,9 +41,6 @@ spring.datasource.hikari.connection-timeout: "10000"
 
 database.provisioning.goals: -import-demo-data
 
-#spring.flyway.enabled: true
-#spring.data.jpa.repositories.bootstrap-mode: lazy
-
 
 #adapter
 adapter:
