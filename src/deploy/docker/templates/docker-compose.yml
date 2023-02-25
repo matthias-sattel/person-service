@@ -7,7 +7,7 @@ services:
     restart: 'no'
     ports:
       - "${_Values_service_port}:${_Values_service_port}"
-    command: ["-Xmx${_Values_resources_requests_memory}"]
+    command: ["-Xmx${_Values_resources_native_memory}"]
 
     healthcheck:
       test: "curl -f http://localhost:${_Values_service_port}/actuator/health || exit 1"
@@ -37,7 +37,7 @@ services:
 
       #zipkin/jaeger
       spring.application.name: "person-service"
-      management.zipkin.tracing.endpoint: "http://${_Values_host_docker_internal}:9411/api/v2/spans"
+      management.zipkin.tracing.endpoint: "http://host.docker.internal:9411/api/v2/spans"
       management.tracing.sampling.probability: "1.0"
       management.tracing.enabled: "true"
       logging.level.zipkin2.reporter: "ERROR"
@@ -50,7 +50,7 @@ services:
       database.provisioning.goals: "-import-demo-data"
 
       #adapter
-      adapter.calleeservice.url: "http://${_Values_host_docker_internal}:50900"
+      adapter.calleeservice.url: "http://host.docker.internal:50900"
       adapter.calleeservice.timeout: "10000"
 
       #secrets
