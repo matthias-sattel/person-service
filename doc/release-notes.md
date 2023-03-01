@@ -1,3 +1,6 @@
+# 3.0.4
+- maven build (re) moved to doc/maven
+
 # 3.0.3
 - spring cloud kicked out
 - various native image fixes 
