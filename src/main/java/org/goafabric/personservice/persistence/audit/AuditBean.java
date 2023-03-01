@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -42,8 +41,11 @@ public class AuditBean {
         void insertAudit(AuditEvent auditEvent, Object object);
     }
 
-    @Autowired
     private AuditInserter auditInserter;
+
+    public AuditBean(AuditInserter auditInserter) {
+        this.auditInserter = auditInserter;
+    }
 
     public void afterRead(Object object, String id) {
         insertAudit(DbOperation.READ, id, object, object);

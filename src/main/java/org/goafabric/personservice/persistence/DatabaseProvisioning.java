@@ -5,7 +5,6 @@ import org.goafabric.personservice.controller.dto.Address;
 import org.goafabric.personservice.controller.dto.Person;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.goafabric.personservice.logic.PersonLogic;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
@@ -14,14 +13,18 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class DatabaseProvisioning {
-    @Value("${database.provisioning.goals:}")
-    String goals;
 
-    @Autowired
-    PersonLogic personLogic;
+    private final String goals;
 
-    @Autowired
-    ApplicationContext applicationContext;
+    private final PersonLogic personLogic;
+
+    private final ApplicationContext applicationContext;
+
+    public DatabaseProvisioning(@Value("${database.provisioning.goals:}") String goals, PersonLogic personLogic, ApplicationContext applicationContext) {
+        this.goals = goals;
+        this.personLogic = personLogic;
+        this.applicationContext = applicationContext;
+    }
 
     public void run() {
         if (goals.contains("-import-demo-data")) {

@@ -2,10 +2,9 @@ package org.goafabric.personservice.logic;
 
 import lombok.NonNull;
 import org.goafabric.personservice.adapter.CalleeServiceAdapter;
+import org.goafabric.personservice.controller.dto.Person;
 import org.goafabric.personservice.crossfunctional.DurationLog;
 import org.goafabric.personservice.persistence.PersonRepository;
-import org.goafabric.personservice.controller.dto.Person;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,14 +14,17 @@ import java.util.List;
 @Transactional
 @DurationLog
 public class PersonLogic {
-    @Autowired
-    PersonMapper personMapper;
+    private final PersonMapper personMapper;
 
-    @Autowired
-    PersonRepository personRepository;
+    private final PersonRepository personRepository;
 
-    @Autowired
-    CalleeServiceAdapter calleeServiceAdapter;
+    private final CalleeServiceAdapter calleeServiceAdapter;
+
+    public PersonLogic(PersonMapper personMapper, PersonRepository personRepository, CalleeServiceAdapter calleeServiceAdapter) {
+        this.personMapper = personMapper;
+        this.personRepository = personRepository;
+        this.calleeServiceAdapter = calleeServiceAdapter;
+    }
 
     public Person getById(@NonNull String id) {
         return personMapper.map(

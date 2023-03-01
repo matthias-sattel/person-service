@@ -1,21 +1,23 @@
 package org.goafabric.personservice.controller;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.goafabric.personservice.logic.PersonLogic;
 import org.goafabric.personservice.controller.dto.Person;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.goafabric.personservice.logic.PersonLogic;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
 import java.util.List;
 
 @RequestMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_VALUE)
 @RestController
 @Slf4j
 public class PersonController {
-    @Autowired
-    PersonLogic personLogic;
+    private final PersonLogic personLogic;
+
+    public PersonController(PersonLogic personLogic) {
+        this.personLogic = personLogic;
+    }
 
     @GetMapping("getById/{id}")
     public Person getById(@PathVariable("id") String id) {
@@ -36,7 +38,6 @@ public class PersonController {
     public List<Person> findByLastName(@RequestParam("lastName") String lastName) {
         return personLogic.findByLastName(lastName);
     }
-
 
     @PostMapping(value = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Person save(@RequestBody @Valid Person person) {

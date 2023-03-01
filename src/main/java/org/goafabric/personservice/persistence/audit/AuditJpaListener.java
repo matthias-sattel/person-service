@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.NonNull;
 import org.goafabric.personservice.persistence.multitenancy.TenantAware;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -56,8 +55,11 @@ public class AuditJpaListener implements ApplicationContextAware {
 
     @Component
     static class AuditJpaInserter implements AuditBean.AuditInserter {
-        @Autowired
         private DataSource dataSource;
+
+        public AuditJpaInserter(DataSource dataSource) {
+            this.dataSource = dataSource;
+        }
 
         public void insertAudit(AuditBean.AuditEvent auditEvent, Object object) { //we cannot use jpa because of the dynamic table name
             new SimpleJdbcInsert(dataSource).withTableName(getTableName(object) + "_audit")
