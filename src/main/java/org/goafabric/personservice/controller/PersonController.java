@@ -1,7 +1,6 @@
 package org.goafabric.personservice.controller;
 
 import jakarta.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.controller.dto.Person;
 import org.goafabric.personservice.logic.PersonLogic;
 import org.springframework.http.MediaType;
@@ -11,7 +10,6 @@ import java.util.List;
 
 @RequestMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_VALUE)
 @RestController
-@Slf4j
 public class PersonController {
     private final PersonLogic personLogic;
 

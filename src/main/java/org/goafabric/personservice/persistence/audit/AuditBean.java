@@ -4,8 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Builder;
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.stereotype.Component;
 
@@ -13,10 +14,11 @@ import java.util.Date;
 import java.util.UUID;
 
 @Component
-@Slf4j
 @RegisterReflectionForBinding(AuditBean.AuditEvent.class)
 /** A class that audits all registered entities with @EntityListeners and writes the Audit Entries to the database **/
 public class AuditBean {
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     private enum DbOperation {
         CREATE, READ, UPDATE, DELETE
     }

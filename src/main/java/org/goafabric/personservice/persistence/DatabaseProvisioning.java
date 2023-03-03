@@ -1,18 +1,19 @@
 package org.goafabric.personservice.persistence;
 
-import lombok.extern.slf4j.Slf4j;
 import org.goafabric.personservice.controller.dto.Address;
 import org.goafabric.personservice.controller.dto.Person;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.goafabric.personservice.logic.PersonLogic;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
-@Slf4j
 public class DatabaseProvisioning {
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final String goals;
 
