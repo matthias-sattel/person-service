@@ -1,5 +1,6 @@
 package org.goafabric.personservice.logic;
 
+import org.goafabric.personservice.controller.dto.Address;
 import org.goafabric.personservice.controller.dto.Person;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.junit.jupiter.api.Test;
@@ -66,14 +67,20 @@ class PersonLogicIT {
     }
     @Test
     void save() {
-        /*
+
         HttpInterceptor.setTenantId("4711");
 
         final Person person = personLogic.save(
-            Person.builder().firstName("Homer").lastName("Simpson").address(Address.builder().build()).build()
-        );
+            new Person(null,
+                    "Homer", "Simpson", createAddress("Evergreen Terrace")
+        ));
+
         assertThat(person).isNotNull();
 
-         */
+    }
+
+    private Address createAddress(String street) {
+        return new Address(null,
+                street, "Springfield " + HttpInterceptor.getTenantId());
     }
 }

@@ -51,7 +51,6 @@ public class DatabaseProvisioning {
     }
 
     private void insertData() {
-
         personLogic.save(new Person(null,
                 "Homer", "Simpson", createAddress("Evergreen Terrace 1")));
 
