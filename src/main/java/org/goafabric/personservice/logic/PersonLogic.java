@@ -1,6 +1,5 @@
 package org.goafabric.personservice.logic;
 
-import lombok.NonNull;
 import org.goafabric.personservice.adapter.CalleeServiceAdapter;
 import org.goafabric.personservice.controller.dto.Person;
 import org.goafabric.personservice.crossfunctional.DurationLog;
@@ -26,7 +25,7 @@ public class PersonLogic {
         this.calleeServiceAdapter = calleeServiceAdapter;
     }
 
-    public Person getById(@NonNull String id) {
+    public Person getById(String id) {
         return personMapper.map(
                 personRepository.findById(id).get());
     }
@@ -36,22 +35,22 @@ public class PersonLogic {
                 personRepository.findAll());
     }
 
-    public List<Person> findByFirstName(@NonNull String firstName) {
+    public List<Person> findByFirstName(String firstName) {
         return personMapper.map(
                 personRepository.findByFirstName(firstName));
     }
 
-    public List<Person> findByLastName(@NonNull String lastName) {
+    public List<Person> findByLastName(String lastName) {
         return personMapper.map(
                 personRepository.findByLastName(lastName));
     }
 
-    public Person save(@NonNull Person person) {
+    public Person save(Person person) {
         return personMapper.map(personRepository.save(
                 personMapper.map(person)));
     }
 
-    public Person sayMyName(@NonNull String name) {
+    public Person sayMyName(String name) {
         return Person.builder().firstName(
                 calleeServiceAdapter.sayMyName(name).getMessage()).build();
     }
