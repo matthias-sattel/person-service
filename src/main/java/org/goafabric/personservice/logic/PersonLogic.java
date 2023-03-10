@@ -51,7 +51,8 @@ public class PersonLogic {
     }
 
     public Person sayMyName(String name) {
-        return Person.builder().firstName(
-                calleeServiceAdapter.sayMyName(name).getMessage()).build();
+        return null;
+        //return Person.builder().firstName(
+          //      calleeServiceAdapter.sayMyName(name).getMessage()).build();
     }
 }

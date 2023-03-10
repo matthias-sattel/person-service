@@ -51,26 +51,20 @@ public class DatabaseProvisioning {
     }
 
     private void insertData() {
-        personLogic.save(Person.builder()
-                .firstName("Homer").lastName("Simpson")
-                .address(createAddress("Evergreen Terrace 1"))
-                .build());
 
-        personLogic.save(Person.builder()
-                .firstName("Bart").lastName("Simpson")
-                .address(createAddress("Everblue Terrace 1"))
-                .build());
+        personLogic.save(new Person(null,
+                "Homer", "Simpson", createAddress("Evergreen Terrace 1")));
 
-        personLogic.save(Person.builder()
-                .firstName("Monty").lastName("Burns")
-                .address(createAddress("Monty Mansion"))
-                .build());
+        personLogic.save(new Person(null,
+                "Bart", "Simpson", createAddress("Everblue Terrace 1")));
+
+        personLogic.save(new Person(null,
+                "Monty", "Burns", createAddress("Monty Mansion")));
     }
 
     private Address createAddress(String street) {
-        return Address.builder()
-                .street(street).city("Springfield " + HttpInterceptor.getTenantId())
-                .build();
+        return new Address(null,
+                street, "Springfield " + HttpInterceptor.getTenantId());
     }
 
 }
