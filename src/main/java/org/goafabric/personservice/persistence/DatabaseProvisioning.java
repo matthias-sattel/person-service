@@ -52,13 +52,16 @@ public class DatabaseProvisioning {
 
     private void insertData() {
         personLogic.save(new Person(null,
-                "Homer", "Simpson", createAddress("Evergreen Terrace 1")));
+                "Homer", "Simpson",
+                createAddress("Evergreen Terrace 1")));
 
         personLogic.save(new Person(null,
-                "Bart", "Simpson", createAddress("Everblue Terrace 1")));
+                "Bart", "Simpson",
+                createAddress("Everblue Terrace 1")));
 
         personLogic.save(new Person(null,
-                "Monty", "Burns", createAddress("Monty Mansion")));
+                "Monty", "Burns",
+                createAddress("Monty Mansion")));
     }
 
     private Address createAddress(String street) {
