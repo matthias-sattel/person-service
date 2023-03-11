@@ -1,10 +1,9 @@
-package org.goafabric.personservice.persistence.audit;
+package org.goafabric.personservice.persistence.multitenancy;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
-import org.goafabric.personservice.persistence.multitenancy.TenantAware;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
@@ -21,16 +20,14 @@ import javax.sql.DataSource;
 import java.util.Date;
 import java.util.UUID;
 
-public class AuditJpaListener implements ApplicationContextAware {
+public class AuditListener implements ApplicationContextAware {
     private static ApplicationContext context;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private enum DbOperation {
-        CREATE, READ, UPDATE, DELETE
-    }
+    private enum DbOperation { CREATE, READ, UPDATE, DELETE }
 
-    public static record AuditEvent (
+    record AuditEvent (
             String id,
             String tenantId,
             String referenceId,
@@ -51,39 +48,24 @@ public class AuditJpaListener implements ApplicationContextAware {
 
     @PostLoad
     public void afterRead(Object object) {
-        afterRead(object, ((TenantAware) object).getId());
+        insertAudit(DbOperation.READ, ((TenantAware) object).getId(), object, object);
     }
 
     @PostPersist
     public void afterCreate(Object object)  {
-        afterCreate(object, ((TenantAware) object).getId());
+        insertAudit(DbOperation.CREATE, ((TenantAware) object).getId(), null, object);
     }
 
     @PostUpdate
     public void afterUpdate(Object object) {
-        afterUpdate(object, ((TenantAware) object).getId(),
-                context.getBean(AuditJpaUpdater.class).findOldObject(object.getClass(), ((TenantAware) object).getId()));
+        final String id = ((TenantAware) object).getId();
+        insertAudit(DbOperation.UPDATE, id,
+                context.getBean(AuditJpaUpdater.class).findOldObject(object.getClass(), id), object);
     }
 
     @PostRemove
     public void afterDelete(Object object) {
-        afterDelete(object, ((TenantAware) object).getId());
-    }
-
-    public void afterRead(Object object, String id) {
-        insertAudit(DbOperation.READ, id, object, object);
-    }
-
-    public void afterCreate(Object object, String id) {
-        insertAudit(DbOperation.CREATE, id, null, object);
-    }
-
-    public void afterUpdate(Object object, String id, Object oldObject) {
-        insertAudit(DbOperation.UPDATE, id, oldObject, object);
-    }
-
-    public void afterDelete(Object object, String id) {
-        insertAudit(DbOperation.DELETE, id, object, null);
+        insertAudit(DbOperation.DELETE, ((TenantAware) object).getId(), object, null);
     }
 
     private void insertAudit(final DbOperation operation, String referenceId, final Object oldObject, final Object newObject) {
