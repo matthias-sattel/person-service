@@ -52,15 +52,18 @@ public class DatabaseProvisioning {
 
     private void insertData() {
         personLogic.save(new Person(null,
-                "Homer", "Simpson",
+                "Homer",
+                "Simpson",
                 createAddress("Evergreen Terrace 1")));
 
         personLogic.save(new Person(null,
-                "Bart", "Simpson",
+                "Bart",
+                "Simpson",
                 createAddress("Everblue Terrace 1")));
 
         personLogic.save(new Person(null,
-                "Monty", "Burns",
+                "Monty",
+                "Burns",
                 createAddress("Monty Mansion")));
     }
 
