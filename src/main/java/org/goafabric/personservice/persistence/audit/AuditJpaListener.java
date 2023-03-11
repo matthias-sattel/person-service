@@ -1,7 +1,6 @@
 package org.goafabric.personservice.persistence.audit;
 
 import jakarta.persistence.*;
-import lombok.NonNull;
 import org.goafabric.personservice.persistence.multitenancy.TenantAware;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -66,7 +65,7 @@ public class AuditJpaListener implements ApplicationContextAware {
                 .execute(new BeanPropertySqlParameterSource(auditEvent));
         }
 
-        private String getTableName(@NonNull Object object) {
+        private String getTableName(Object object) {
             return object.getClass().getSimpleName().replaceAll("Bo", "").toLowerCase();
         }
     }

@@ -54,10 +54,6 @@ dependencies {
 	implementation "io.github.resilience4j:resilience4j-spring-boot3"
 
 	//code generation
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testAnnotationProcessor 'org.projectlombok:lombok'
-
 	implementation 'org.mapstruct:mapstruct'
 	annotationProcessor 'org.mapstruct:mapstruct-processor'
 
