@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Component
-@Transactional
 @DurationLog
+@Transactional
 public class PersonLogic {
     private final PersonMapper personMapper;
 

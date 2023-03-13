@@ -37,10 +37,6 @@ public class HttpInterceptor implements WebMvcConfigurer {
         });
     }
 
-    public static void setTenantId(String tenantId) {
-        HttpInterceptor.tenantId.set(tenantId);
-    }
-
     public static String getTenantId() {
         return tenantId.get() != null ? tenantId.get() : "0"; //tdo
     }
