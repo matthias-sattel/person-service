@@ -42,6 +42,13 @@ spring.datasource.hikari.connection-timeout: "10000"
 database.provisioning.goals: -import-demo-data
 
 
+spring:
+  flyway:
+    locations:
+      -
+
+spring.flyway.locations: "db/migration,db/demodata"
+
 #adapter
 adapter:
   timeout: 10000

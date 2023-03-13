@@ -85,4 +85,13 @@ class PersonLogicIT {
         return new Address(null,
                 street, "Springfield " + HttpInterceptor.getTenantId());
     }
+
+    /*
+    if ((goals.contains("-import-demo-data")) && (personLogic.findAll().isEmpty())) {
+        Arrays.asList(new ObjectMapper().readValue(new ClassPathResource("demodata/persons.json").getFile(), Person[].class))
+                .forEach(person -> personLogic.save(person));
+        if (goals.contains("-terminate")) { SpringApplication.exit(applicationContext, () -> 0); }
+    }
+    */
+
 }
