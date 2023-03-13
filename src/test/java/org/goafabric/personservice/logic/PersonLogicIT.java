@@ -72,7 +72,9 @@ class PersonLogicIT {
 
         final Person person = personLogic.save(
             new Person(null,
-                    "Homer", "Simpson", createAddress("Evergreen Terrace")
+                    "Homer",
+                    "Simpson",
+                    createAddress("Evergreen Terrace")
         ));
 
         assertThat(person).isNotNull();
