@@ -70,8 +70,7 @@ public class AuditListener implements ApplicationContextAware {
 
     private void insertAudit(final DbOperation operation, String referenceId, final Object oldObject, final Object newObject) {
         try {
-            final AuditEvent auditEvent =
-                    createAuditEvent(operation, referenceId, oldObject, newObject);
+            var auditEvent = createAuditEvent(operation, referenceId, oldObject, newObject);
             log.debug("New audit event :\n{}", auditEvent);
             context.getBean(AuditJpaInserter.class).insertAudit(auditEvent, oldObject != null ? oldObject : newObject);
         } catch (Exception e) {

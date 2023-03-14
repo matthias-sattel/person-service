@@ -30,8 +30,6 @@ class PersonLogicIT {
         assertThat(person.lastName()).isEqualTo(persons.get(0).lastName());
 
         HttpInterceptor.setTenantId("5a2f");
-        //assertThatThrownBy(() ->  personLogic.getById(persons.get(0).getId()))
-          //      .isInstanceOf(NoSuchElementException.class);
     }
 
     @Test
@@ -65,6 +63,8 @@ class PersonLogicIT {
         HttpInterceptor.setTenantId("5a2f");
         assertThat(personLogic.findByLastName("Simpson")).isNotNull().hasSize(2);
     }
+
+
     @Test
     void save() {
 
