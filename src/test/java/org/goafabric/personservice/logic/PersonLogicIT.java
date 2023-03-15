@@ -1,8 +1,8 @@
 package org.goafabric.personservice.logic;
 
-import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.goafabric.personservice.controller.dto.Address;
 import org.goafabric.personservice.controller.dto.Person;
+import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,14 +24,12 @@ class PersonLogicIT {
         assertThat(persons).isNotNull().hasSize(3);
 
         final Person person
-                = personLogic.getById(persons.get(0).getId());
+                = personLogic.getById(persons.get(0).id());
         assertThat(person).isNotNull();
-        assertThat(person.getFirstName()).isEqualTo(persons.get(0).getFirstName());
-        assertThat(person.getLastName()).isEqualTo(persons.get(0).getLastName());
+        assertThat(person.firstName()).isEqualTo(persons.get(0).firstName());
+        assertThat(person.lastName()).isEqualTo(persons.get(0).lastName());
 
         HttpInterceptor.setTenantId("5a2f");
-        //assertThatThrownBy(() ->  personLogic.getById(persons.get(0).getId()))
-          //      .isInstanceOf(NoSuchElementException.class);
     }
 
     @Test
@@ -48,8 +46,8 @@ class PersonLogicIT {
         HttpInterceptor.setTenantId("0");
         List<Person> persons = personLogic.findByFirstName("Monty");
         assertThat(persons).isNotNull().hasSize(1);
-        assertThat(persons.get(0).getFirstName()).isEqualTo("Monty");
-        assertThat(persons.get(0).getLastName()).isEqualTo("Burns");
+        assertThat(persons.get(0).firstName()).isEqualTo("Monty");
+        assertThat(persons.get(0).lastName()).isEqualTo("Burns");
 
         HttpInterceptor.setTenantId("5a2f");
         assertThat(personLogic.findByFirstName("Monty")).isNotNull().hasSize(1);
@@ -60,17 +58,40 @@ class PersonLogicIT {
         HttpInterceptor.setTenantId("0");
         List<Person> persons = personLogic.findByLastName("Simpson");
         assertThat(persons).isNotNull().hasSize(2);
-        assertThat(persons.get(0).getLastName()).isEqualTo("Simpson");
+        assertThat(persons.get(0).lastName()).isEqualTo("Simpson");
 
         HttpInterceptor.setTenantId("5a2f");
         assertThat(personLogic.findByLastName("Simpson")).isNotNull().hasSize(2);
     }
+
+
     @Test
     void save() {
+
         HttpInterceptor.setTenantId("4711");
+
         final Person person = personLogic.save(
-            Person.builder().firstName("Homer").lastName("Simpson").address(Address.builder().build()).build()
-        );
+            new Person(null,
+                    "Homer",
+                    "Simpson",
+                    createAddress("Evergreen Terrace")
+        ));
+
         assertThat(person).isNotNull();
+
     }
+
+    private Address createAddress(String street) {
+        return new Address(null,
+                street, "Springfield " + HttpInterceptor.getTenantId());
+    }
+
+    /*
+    if ((goals.contains("-import-demo-data")) && (personLogic.findAll().isEmpty())) {
+        Arrays.asList(new ObjectMapper().readValue(new ClassPathResource("demodata/persons.json").getFile(), Person[].class))
+                .forEach(person -> personLogic.save(person));
+        if (goals.contains("-terminate")) { SpringApplication.exit(applicationContext, () -> 0); }
+    }
+    */
+
 }

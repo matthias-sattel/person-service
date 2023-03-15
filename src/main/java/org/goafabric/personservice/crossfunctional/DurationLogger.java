@@ -22,9 +22,9 @@ import java.util.stream.Collectors;
 public class DurationLogger {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Around("@within(org.goafabric.personservice.crossfunctional.DurationLog)")
+    @Around("@within(DurationLog)")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-        final long startTime = System.currentTimeMillis();
+        var startTime = System.currentTimeMillis();
         try {
             return joinPoint.proceed();
         } finally {
@@ -34,7 +34,7 @@ public class DurationLogger {
     }
 
     private String toString(final Method method) {
-        final String parameterTypes = Arrays.stream(method.getParameterTypes())
+        var parameterTypes = Arrays.stream(method.getParameterTypes())
                 .map(Class::getSimpleName).collect(Collectors.joining(","));
         return String.format("%s.%s(%s)", method.getDeclaringClass().getSimpleName(),
                 method.getName(), parameterTypes);

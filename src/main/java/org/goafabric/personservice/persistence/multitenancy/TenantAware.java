@@ -5,10 +5,9 @@ import jakarta.persistence.AccessType;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
-import org.goafabric.personservice.persistence.audit.AuditJpaListener;
 
 @MappedSuperclass
-@EntityListeners(AuditJpaListener.class)
+@EntityListeners(AuditListener.class)
 public abstract class TenantAware {
     public static final String TENANT_FILTER = "TENANT_FILTER";
 
