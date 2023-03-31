@@ -10,13 +10,12 @@ Core
 - Security
 
 - DurationLogger Aspect
+- Bean Validation
          
 Persistence
 - JPA
-- Bean Validation
 - Auditing 
-- Multi Tenancy 
-- Jaspyt Database Encryption
+- Multi Tenancy
 
 Adapter
 - REST Call
