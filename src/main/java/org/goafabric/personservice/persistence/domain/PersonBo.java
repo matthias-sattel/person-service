@@ -1,17 +1,18 @@
 package org.goafabric.personservice.persistence.domain;
 
 import jakarta.persistence.*;
-import org.goafabric.personservice.persistence.multitenancy.TenantAware;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Where;
+import org.hibernate.annotations.TenantId;
 
 @Entity
 @Table(name = "person")
-@Where(clause = TenantAware.TENANT_FILTER)
-public class PersonBo extends TenantAware {
+public class PersonBo {
     @Id
     @GeneratedValue(generator = "uuid") @GenericGenerator(name = "uuid", strategy = "uuid2")
     public String id;
+
+    @TenantId
+    public String tenantId;
 
     public String firstName;
 
@@ -24,8 +25,4 @@ public class PersonBo extends TenantAware {
     @Version //optimistic locking
     public Long version;
 
-    @Override
-    public String getId() {
-        return id;
-    }
 }
