@@ -2,7 +2,6 @@ package org.goafabric.personservice.persistence.encryption;
 
 
 import jakarta.persistence.AttributeConverter;
-import org.springframework.stereotype.Component;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -10,7 +9,6 @@ import java.security.Key;
 import java.util.Base64;
 
 //Source: https://sultanov.dev/blog/database-column-level-encryption-with-spring-data-jpa/
-@Component
 public class StringEncryptor implements AttributeConverter<String, String> {
 
     private static final String SECRET = "secret-key-12345"; //should be injected by @Value from a secure environment

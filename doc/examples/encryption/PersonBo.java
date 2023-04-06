@@ -14,7 +14,7 @@ public class PersonBo extends TenantAware {
     @GeneratedValue(generator = "uuid") @GenericGenerator(name = "uuid", strategy = "uuid2")
     public String id;
 
-    @Convert(converter = StringEncryptor.class)
+    @Convert(converter = StringEncryptor.class) // be aware that colum size needs to be increased to hold encrypted value
     public String firstName;
 
     public String lastName;
