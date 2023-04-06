@@ -3,7 +3,6 @@ package org.goafabric.personservice.persistence.domain;
 import jakarta.persistence.*;
 import org.goafabric.personservice.persistence.multitenancy.AuditAware;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.TenantId;
 
 
 @Entity
@@ -14,8 +13,7 @@ public class AddressBo extends AuditAware {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     public String id;
 
-    @TenantId
-    public String tenantId;
+    public String tenantId = "0";
 
     public String street;
     public String city;
