@@ -8,7 +8,8 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.util.Base64;
 
-//Source: https://sultanov.dev/blog/database-column-level-encryption-with-spring-data-jpa/
+// Adds Encryption to JPA Columns, works for all CRUD operations, as well as simple search, as long as a non RANDOM Salt is used
+// Source: https://sultanov.dev/blog/database-column-level-encryption-with-spring-data-jpa/
 public class StringEncryptor implements AttributeConverter<String, String> {
 
     private static final String SECRET = "secret-key-12345"; //should be injected by @Value from a secure environment
