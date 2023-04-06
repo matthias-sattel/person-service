@@ -8,7 +8,9 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import java.util.Base64;
 
-// Adds Encryption to JPA Columns, works for all CRUD operations, as well as simple search, as long as a non RANDOM Salt is used
+// Adds Encryption to JPA Columns via Annotation (@Convert(converter = StringEncryptor.class)
+// Works for all CRUD operations, as well as simple search, as long as a non RANDOM Salt is used
+// Drawback vs Infrastructure Volume Encryption: Potentially Insecure, Error Prone and Inconsistent as it is handled individually for each App during Devlopment Time
 // Source: https://sultanov.dev/blog/database-column-level-encryption-with-spring-data-jpa/
 public class StringEncryptor implements AttributeConverter<String, String> {
 
