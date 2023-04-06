@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 @Component
-public class TenantResolver implements CurrentTenantIdentifierResolver, HibernatePropertiesCustomizer {
+public class TenantIdResolver implements CurrentTenantIdentifierResolver, HibernatePropertiesCustomizer {
 
     @Override
     public String resolveCurrentTenantIdentifier() {
