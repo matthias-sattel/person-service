@@ -1,7 +1,3 @@
-CREATE SCHEMA IF NOT EXISTS TENANT_0;
-CREATE SCHEMA IF NOT EXISTS TENANT_5A2F;
-
-
 drop table if exists person;
 
 create table person
