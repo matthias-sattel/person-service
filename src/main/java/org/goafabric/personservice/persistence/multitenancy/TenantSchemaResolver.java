@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -21,7 +22,7 @@ class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTena
 
     @Override
     public String resolveCurrentTenantIdentifier() {
-        return "tenant_" + HttpInterceptor.getTenantId();
+        return "TENANT_" + HttpInterceptor.getTenantId().toUpperCase();
     }
 
     @Override
@@ -42,6 +43,13 @@ class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTena
     @Override
     public Connection getConnection(String schema) throws SQLException {
         Connection connection = dataSource.getConnection();
+        try(ResultSet schemas = dataSource.getConnection().getMetaData().getSchemas()){
+            while (schemas.next()){
+                String table_schem = schemas.getString("TABLE_SCHEM");
+                String table_catalog = schemas.getString("TABLE_CATALOG");
+                System.out.println(table_schem);
+            }
+        }
         connection.setSchema(schema);
         return connection;
     }
