@@ -1,6 +1,8 @@
 package org.goafabric.personservice.persistence.multitenancy;
 
+import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.hibernate.cfg.AvailableSettings;
+import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
@@ -12,10 +14,20 @@ import java.sql.SQLException;
 import java.util.Map;
 
 @Component
-class ExampleConnectionProvider implements MultiTenantConnectionProvider, HibernatePropertiesCustomizer {
+class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTenantIdentifierResolver, HibernatePropertiesCustomizer {
 
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
+
+    @Override
+    public String resolveCurrentTenantIdentifier() {
+        return "tenant_" + HttpInterceptor.getTenantId();
+    }
+
+    @Override
+    public boolean validateExistingCurrentSessions() {
+        return false;
+    }
 
     @Override
     public Connection getAnyConnection() throws SQLException {
@@ -41,11 +53,6 @@ class ExampleConnectionProvider implements MultiTenantConnectionProvider, Hibern
     }
 
     @Override
-    public void customize(Map<String, Object> hibernateProperties) {
-        hibernateProperties.put(AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER, this);
-    }
-
-    @Override
     public boolean supportsAggressiveRelease() {
         return false;
     }
@@ -60,5 +67,10 @@ class ExampleConnectionProvider implements MultiTenantConnectionProvider, Hibern
         return null;
     }
 
-    // empty overrides skipped for brevity
+    @Override
+    public void customize(Map<String, Object> hibernateProperties) {
+        hibernateProperties.put(AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER, this);
+        hibernateProperties.put(AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER, this);
+    }
+
 }
