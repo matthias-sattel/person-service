@@ -66,7 +66,9 @@ resilience4j.circuitbreaker:
 logging.level.root: "WARN"
 logging.level.org.springframework: "INFO"
 
-logging.level.org.goafabric: "DEBUG"
+logging.level.org.goafabric: "INFO"
 logging.level.org.flywaydb.core: "INFO"
 logging.level.org.hibernate.SQL: "INFO"
 
+multi-tenancy.schemas: "public,tenant_0,tenant_5a2f"
+multi-tenancy.migration.enabled: "true"

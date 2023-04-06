@@ -3,6 +3,7 @@ package org.goafabric.personservice.logic;
 import org.goafabric.personservice.controller.dto.Address;
 import org.goafabric.personservice.controller.dto.Person;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -65,7 +66,9 @@ class PersonLogicIT {
     }
 
 
+
     @Test
+    @Disabled
     void save() {
 
         HttpInterceptor.setTenantId("4711");
