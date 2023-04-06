@@ -15,8 +15,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
-//source: https://sultanov.dev/blog/database-column-level-encryption-with-spring-data-jpa/
-
 @Component
 public class DatabaseProvisioning {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
