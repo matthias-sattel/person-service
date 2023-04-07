@@ -1,4 +1,4 @@
-package org.goafabric.personservice.persistence.encryption;
+package org.goafabric.personservice.persistence;
 
 
 import jakarta.persistence.AttributeConverter;
@@ -14,13 +14,14 @@ import java.util.Base64;
 // Source: https://sultanov.dev/blog/database-column-level-encryption-with-spring-data-jpa/
 public class StringEncryptor implements AttributeConverter<String, String> {
 
-    private static final String SECRET = "secret-key-12345"; //should be injected by @Value from a secure environment
+    private final String secretKey;
 
     private final Key key;
     private final Cipher cipher;
 
     public StringEncryptor() throws Exception {
-        key = new SecretKeySpec(SECRET.getBytes(), "AES");
+        secretKey = new String(Base64.getDecoder().decode("c2VjcmV0LWtleS0xMjM0NQ==")); //should be injected by @Value from a secure environment
+        key = new SecretKeySpec(secretKey.getBytes(), "AES");
         cipher = Cipher.getInstance("AES");
     }
 
