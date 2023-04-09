@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Map;
@@ -29,6 +28,8 @@ class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTena
 
     @Autowired
     private DataSource dataSource;
+
+    private static final String defaultSchema = "PUBLIC";
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -45,7 +46,7 @@ class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTena
 
     @Override
     public Connection getAnyConnection() throws SQLException {
-        return getConnection("PUBLIC");
+        return getConnection(defaultSchema);
     }
 
     @Override
@@ -56,20 +57,14 @@ class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTena
     @Override
     public Connection getConnection(String schema) throws SQLException {
         Connection connection = dataSource.getConnection();
-        try(ResultSet schemas = dataSource.getConnection().getMetaData().getSchemas()){
-            while (schemas.next()){
-                String table_schem = schemas.getString("TABLE_SCHEM");
-                String table_catalog = schemas.getString("TABLE_CATALOG");
-                System.out.println(table_schem);
-            }
-        }
+        System.err.println(schema);
         connection.setSchema(schema);
         return connection;
     }
 
     @Override
     public void releaseConnection(String s, Connection connection) throws SQLException {
-        connection.setSchema("PUBLIC");
+        connection.setSchema(defaultSchema);
         connection.close();
     }
 
@@ -106,7 +101,6 @@ class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTena
         return args -> {
             if (enabled) {
                 Arrays.asList(schemas.split(",")).forEach(schema -> {
-                            log.info("migrating schema: " + schema);
                             Flyway.configure()
                                     .configuration(flyway.getConfiguration())
                                     .schemas(schema)
