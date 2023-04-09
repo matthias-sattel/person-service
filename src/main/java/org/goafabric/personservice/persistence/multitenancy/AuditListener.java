@@ -120,7 +120,9 @@ public class AuditListener implements ApplicationContextAware {
         }
 
         public void insertAudit(AuditEvent auditEvent, Object object) { //we cannot use jpa because of the dynamic table name
-            new SimpleJdbcInsert(dataSource).withTableName(getTableName(object) + "_audit")
+            new SimpleJdbcInsert(dataSource)
+                    .withSchemaName("tenant_" + HttpInterceptor.getTenantId())
+                    .withTableName(getTableName(object) + "_audit")
                 .execute(new BeanPropertySqlParameterSource(auditEvent));
         }
 
