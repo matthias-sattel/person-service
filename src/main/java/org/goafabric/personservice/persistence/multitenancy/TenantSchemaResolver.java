@@ -43,7 +43,7 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
 
     @Override
     public String resolveCurrentTenantIdentifier() {
-        return "";
+        return HttpInterceptor.getCompanyId();
     }
 
     @Override
