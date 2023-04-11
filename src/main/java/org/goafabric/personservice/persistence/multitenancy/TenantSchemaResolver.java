@@ -41,7 +41,9 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
         this.schema_prefix = schema_prefix;
     }
 
-    @Override //this is used for @TenantId to resolve the additional CompanyId
+    /** Resolver for optional CompanyId via @TenantId Discriminator **/
+
+    @Override
     public String resolveCurrentTenantIdentifier() {
         return HttpInterceptor.getCompanyId();
     }
@@ -49,6 +51,16 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
     @Override
     public boolean validateExistingCurrentSessions() {
         return false;
+    }
+
+    /** Tenant Resolver for Schema **/
+
+    @Override
+    public Connection getConnection(String schema) throws SQLException {
+        var connection = dataSource.getConnection();
+        connection.setSchema(defaultSchema.equals(schema) ? defaultSchema : schema_prefix + HttpInterceptor.getTenantId());
+        log.info("## setting schema: " + connection.getSchema());
+        return connection;
     }
 
     @Override
@@ -61,13 +73,6 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
         connection.close();
     }
 
-    @Override //this is used for the real TenantId via schema
-    public Connection getConnection(String schema) throws SQLException {
-        var connection = dataSource.getConnection();
-        connection.setSchema(defaultSchema.equals(schema) ? defaultSchema : schema_prefix + HttpInterceptor.getTenantId());
-        log.info("## setting schema: " + connection.getSchema());
-        return connection;
-    }
 
     @Override
     public void releaseConnection(String s, Connection connection) throws SQLException {
@@ -95,6 +100,8 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
         hibernateProperties.put(AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER, this);
         hibernateProperties.put(AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER, this);
     }
+
+    /** Flyway configuration to create database schemas **/
 
     @Bean
     public FlywayMigrationStrategy flywayMigrationStrategy() {
