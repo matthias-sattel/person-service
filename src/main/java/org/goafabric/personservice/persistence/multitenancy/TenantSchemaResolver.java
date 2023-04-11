@@ -23,20 +23,22 @@ import java.util.Map;
 // Source: https://spring.io/blog/2022/07/31/how-to-integrate-hibernates-multitenant-feature-with-spring-data-jpa-in-a-spring-boot-application
 
 @Component
-class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTenantIdentifierResolver, HibernatePropertiesCustomizer {
+public class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTenantIdentifierResolver, HibernatePropertiesCustomizer {
 
     private final DataSource dataSource;
 
-    private static final String tenant_prefix = "tenant_";
+    private final String tenant_prefix;
 
     private final String defaultSchema;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public TenantSchemaResolver(DataSource dataSource,
-                                @Value("${multi-tenancy.default-schema:PUBLIC}") String defaultSchema) {
+                                @Value("${multi-tenancy.default-schema:PUBLIC}") String defaultSchema,
+                                @Value("${multi-tenancy.tenant-prefix:tenant_}") String tenant_prefix) {
         this.dataSource = dataSource;
         this.defaultSchema = defaultSchema;
+        this.tenant_prefix = tenant_prefix;
     }
 
     @Override

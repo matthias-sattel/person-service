@@ -71,4 +71,4 @@ logging.level.org.flywaydb.core: "INFO"
 logging.level.org.hibernate.SQL: "INFO"
 
 multi-tenancy.schemas: "0,5a2f"
-#multi-tenancy.migration.enabled: "true"
+multi-tenancy.migration.enabled: "true"
