@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -120,14 +121,16 @@ public class AuditListener implements ApplicationContextAware {
     @RegisterReflectionForBinding(AuditEvent.class)
     static class AuditJpaInserter {
         private DataSource dataSource;
+        private @Value("${multi-tenancy.schema-prefix:}") String schemaPrefix;
 
-        public AuditJpaInserter(DataSource dataSource) {
+        public AuditJpaInserter(DataSource dataSource, @Value("${multi-tenancy.schema-prefix:}") String schemaPrefix) {
             this.dataSource = dataSource;
+            this.schemaPrefix = schemaPrefix;
         }
 
         public void insertAudit(AuditEvent auditEvent, Object object) { //we cannot use jpa because of the dynamic table name
             new SimpleJdbcInsert(dataSource)
-                    .withSchemaName("tenant_" + HttpInterceptor.getTenantId())
+                    .withSchemaName(schemaPrefix + HttpInterceptor.getTenantId())
                     .withTableName(getTableName(object) + "_audit")
                 .execute(new BeanPropertySqlParameterSource(auditEvent));
         }
