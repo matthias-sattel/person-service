@@ -121,9 +121,9 @@ public class AuditListener implements ApplicationContextAware {
     @RegisterReflectionForBinding(AuditEvent.class)
     static class AuditJpaInserter {
         private DataSource dataSource;
-        private @Value("${multi-tenancy.schema-prefix:}") String schemaPrefix;
+        private String     schemaPrefix;
 
-        public AuditJpaInserter(DataSource dataSource, @Value("${multi-tenancy.schema-prefix:}") String schemaPrefix) {
+        public AuditJpaInserter(DataSource dataSource, @Value("${multi-tenancy.schema-prefix:_}") String schemaPrefix) {
             this.dataSource = dataSource;
             this.schemaPrefix = schemaPrefix;
         }

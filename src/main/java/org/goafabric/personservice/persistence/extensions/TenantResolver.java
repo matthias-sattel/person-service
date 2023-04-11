@@ -35,7 +35,7 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
 
     public TenantResolver(DataSource dataSource,
                           @Value("${multi-tenancy.default-schema:PUBLIC}") String defaultSchema,
-                          @Value("${multi-tenancy.schema-prefix:}") String schemaPrefix) {
+                          @Value("${multi-tenancy.schema-prefix:_}") String schemaPrefix) {
         this.dataSource = dataSource;
         this.defaultSchema = defaultSchema;
         this.schema_prefix = schemaPrefix;
