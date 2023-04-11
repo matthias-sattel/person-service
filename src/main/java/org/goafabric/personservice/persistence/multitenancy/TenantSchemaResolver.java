@@ -13,6 +13,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -29,6 +30,8 @@ class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTena
     @Autowired
     private DataSource dataSource;
 
+    private static final String tenant_prefix = "tenant_";
+
     private static final String defaultSchema = "PUBLIC";
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -36,7 +39,7 @@ class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTena
 
     @Override
     public String resolveCurrentTenantIdentifier() {
-        return "tenant_" + HttpInterceptor.getTenantId();
+        return tenant_prefix + HttpInterceptor.getTenantId();
     }
 
     @Override
@@ -89,28 +92,32 @@ class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTena
         hibernateProperties.put(AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER, this);
     }
 
-    @Bean
-    public FlywayMigrationStrategy flywayMigrationStrategy() {
-        return flyway -> {
-        };
+    @Configuration
+    static class FlywayConfiguration {
+        @Bean
+        public FlywayMigrationStrategy flywayMigrationStrategy() {
+            return flyway -> {
+            };
+        }
+
+        @Bean
+        public CommandLineRunner schemas(Flyway flyway,
+                                         @Value("${multi-tenancy.migration.enabled}") Boolean enabled, @Value("${multi-tenancy.schemas}") String schemas) {
+            return args -> {
+                if (enabled) {
+                    Arrays.asList(schemas.split(",")).forEach(schema -> {
+                                Flyway.configure()
+                                        .configuration(flyway.getConfiguration())
+                                        .schemas(tenant_prefix + schema)
+                                        .defaultSchema(tenant_prefix + schema)
+                                        .load()
+                                        .migrate();
+                            }
+                    );
+                }
+            };
+        }
     }
 
-    @Bean
-    public CommandLineRunner schemas(Flyway flyway,
-             @Value("${multi-tenancy.migration.enabled}") Boolean enabled, @Value("${multi-tenancy.schemas}") String schemas) {
-        return args -> {
-            if (enabled) {
-                Arrays.asList(schemas.split(",")).forEach(schema -> {
-                            Flyway.configure()
-                                    .configuration(flyway.getConfiguration())
-                                    .schemas(schema)
-                                    .defaultSchema(schema)
-                                    .load()
-                                    .migrate();
-                        }
-                );
-            }
-        };
-    }
 
 }
