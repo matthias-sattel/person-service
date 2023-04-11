@@ -13,7 +13,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -92,32 +91,28 @@ class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTena
         hibernateProperties.put(AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER, this);
     }
 
-    @Configuration
-    static class FlywayConfiguration {
-        @Bean
-        public FlywayMigrationStrategy flywayMigrationStrategy() {
-            return flyway -> {
-            };
-        }
-
-        @Bean
-        public CommandLineRunner schemas(Flyway flyway,
-                                         @Value("${multi-tenancy.migration.enabled}") Boolean enabled, @Value("${multi-tenancy.schemas}") String schemas) {
-            return args -> {
-                if (enabled) {
-                    Arrays.asList(schemas.split(",")).forEach(schema -> {
-                                Flyway.configure()
-                                        .configuration(flyway.getConfiguration())
-                                        .schemas(tenant_prefix + schema)
-                                        .defaultSchema(tenant_prefix + schema)
-                                        .load()
-                                        .migrate();
-                            }
-                    );
-                }
-            };
-        }
+    @Bean
+    public FlywayMigrationStrategy flywayMigrationStrategy() {
+        return flyway -> {
+        };
     }
 
+    @Bean
+    public CommandLineRunner schemas(Flyway flyway,
+                                     @Value("${multi-tenancy.migration.enabled}") Boolean enabled, @Value("${multi-tenancy.schemas}") String schemas) {
+        return args -> {
+            if (enabled) {
+                Arrays.asList(schemas.split(",")).forEach(schema -> {
+                            Flyway.configure()
+                                    .configuration(flyway.getConfiguration())
+                                    .schemas(tenant_prefix + schema)
+                                    .defaultSchema(tenant_prefix + schema)
+                                    .load()
+                                    .migrate();
+                        }
+                );
+            }
+        };
+    }
 
 }
