@@ -43,7 +43,7 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
 
     @Override
     public String resolveCurrentTenantIdentifier() {
-        return tenant_prefix + HttpInterceptor.getTenantId();
+        return HttpInterceptor.getTenantId();
     }
 
     @Override
@@ -63,9 +63,9 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
 
     @Override
     public Connection getConnection(String schema) throws SQLException {
-        Connection connection = dataSource.getConnection();
-        log.info("## setting schema: " + schema);
-        connection.setSchema(schema);
+        var connection = dataSource.getConnection();
+        connection.setSchema(defaultSchema.equals(schema) ? defaultSchema : tenant_prefix + schema);
+        log.info("## setting schema: " + connection.getSchema());
         return connection;
     }
 
@@ -98,8 +98,7 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
 
     @Bean
     public FlywayMigrationStrategy flywayMigrationStrategy() {
-        return flyway -> {
-        };
+        return flyway -> {};
     }
 
     @Bean
