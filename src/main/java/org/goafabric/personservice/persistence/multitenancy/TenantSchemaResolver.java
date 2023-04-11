@@ -7,7 +7,6 @@ import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy;
@@ -26,15 +25,19 @@ import java.util.Map;
 @Component
 class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTenantIdentifierResolver, HibernatePropertiesCustomizer {
 
-    @Autowired
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
     private static final String tenant_prefix = "tenant_";
 
-    private static final String defaultSchema = "PUBLIC";
+    private final String defaultSchema;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+    public TenantSchemaResolver(DataSource dataSource,
+                                @Value("${multi-tenancy.default-schema:PUBLIC}") String defaultSchema) {
+        this.dataSource = dataSource;
+        this.defaultSchema = defaultSchema;
+    }
 
     @Override
     public String resolveCurrentTenantIdentifier() {
@@ -59,7 +62,7 @@ class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTena
     @Override
     public Connection getConnection(String schema) throws SQLException {
         Connection connection = dataSource.getConnection();
-        System.err.println(schema);
+        log.info("## setting schema: " + schema);
         connection.setSchema(schema);
         return connection;
     }
