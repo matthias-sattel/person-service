@@ -1,4 +1,4 @@
-package org.goafabric.personservice.persistence.multitenancy;
+package org.goafabric.personservice.persistence.extensions;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,6 +21,12 @@ import java.util.Date;
 import java.util.UUID;
 
 public class AuditListener implements ApplicationContextAware {
+    @MappedSuperclass
+    @EntityListeners(AuditListener.class)
+    public static abstract class AuditAware {
+        public abstract String getId();
+    }
+
     private static ApplicationContext context;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -29,7 +35,7 @@ public class AuditListener implements ApplicationContextAware {
 
     record AuditEvent (
             String id,
-            String tenantId,
+            String companyId,
             String referenceId,
             String type,
             DbOperation operation,
@@ -47,18 +53,18 @@ public class AuditListener implements ApplicationContextAware {
     }
 
     @PostLoad
-    public void afterRead(Object object) {
-        insertAudit(DbOperation.READ, ((AuditAware) object).getId(), object, object);
+    public void afterRead(AuditAware object) {
+        insertAudit(DbOperation.READ, object.getId(), object, object);
     }
 
     @PostPersist
-    public void afterCreate(Object object)  {
-        insertAudit(DbOperation.CREATE, ((AuditAware) object).getId(), null, object);
+    public void afterCreate(AuditAware object)  {
+        insertAudit(DbOperation.CREATE,  object.getId(), null, object);
     }
 
     @PostUpdate
-    public void afterUpdate(Object object) {
-        final String id = ((AuditAware) object).getId();
+    public void afterUpdate(AuditAware object) {
+        final String id =  object.getId();
         insertAudit(DbOperation.UPDATE, id,
                 context.getBean(AuditJpaUpdater.class).findOldObject(object.getClass(), id), object);
     }
@@ -83,9 +89,9 @@ public class AuditListener implements ApplicationContextAware {
         final Date date = new Date(System.currentTimeMillis());
         return new AuditEvent(
                 UUID.randomUUID().toString(),
-                HttpInterceptor.getTenantId(),
+                HttpInterceptor.getCompanyId(),
                 referenceId,
-                newObject.getClass().getSimpleName(),
+                newObject != null ? newObject.getClass().getSimpleName() : oldObject.getClass().getSimpleName(),
                 dbOperation,
                 (dbOperation == DbOperation.CREATE ? HttpInterceptor.getUserName() : null),
                 (dbOperation == DbOperation.CREATE ? date : null),
@@ -120,7 +126,9 @@ public class AuditListener implements ApplicationContextAware {
         }
 
         public void insertAudit(AuditEvent auditEvent, Object object) { //we cannot use jpa because of the dynamic table name
-            new SimpleJdbcInsert(dataSource).withTableName(getTableName(object) + "_audit")
+            new SimpleJdbcInsert(dataSource)
+                    .withSchemaName("tenant_" + HttpInterceptor.getTenantId())
+                    .withTableName(getTableName(object) + "_audit")
                 .execute(new BeanPropertySqlParameterSource(auditEvent));
         }
 

@@ -45,4 +45,7 @@ public class HttpInterceptor implements WebMvcConfigurer {
                 : SecurityContextHolder.getContext().getAuthentication() != null ? SecurityContextHolder.getContext().getAuthentication().getName() : "";
     }
 
+    public static String getCompanyId() {
+        return "1";
+    }
 }

@@ -3,6 +3,7 @@ package org.goafabric.personservice.logic;
 import org.goafabric.personservice.controller.dto.Address;
 import org.goafabric.personservice.controller.dto.Person;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
+import org.goafabric.personservice.persistence.PersonRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +17,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 class PersonLogicIT {
     @Autowired
     private PersonLogic personLogic;
+
+    @Autowired
+    private PersonRepository personRepository;
 
     @Test
     public void findById() {
@@ -64,14 +68,12 @@ class PersonLogicIT {
         assertThat(personLogic.findByLastName("Simpson")).isNotNull().hasSize(2);
     }
 
-
     @Test
     void save() {
-
-        HttpInterceptor.setTenantId("4711");
+        HttpInterceptor.setTenantId("0");
 
         final Person person = personLogic.save(
-            new Person(null,
+            new Person("null",
                     "Homer",
                     "Simpson",
                     createAddress("Evergreen Terrace")
@@ -79,6 +81,7 @@ class PersonLogicIT {
 
         assertThat(person).isNotNull();
 
+        personRepository.deleteById(person.id());
     }
 
     private Address createAddress(String street) {
