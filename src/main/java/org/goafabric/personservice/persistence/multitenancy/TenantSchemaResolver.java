@@ -27,7 +27,7 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
 
     private final DataSource dataSource;
 
-    private final String tenant_prefix;
+    private final String schema_prefix;
 
     private final String defaultSchema;
 
@@ -35,10 +35,10 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
 
     public TenantSchemaResolver(DataSource dataSource,
                                 @Value("${multi-tenancy.default-schema:PUBLIC}") String defaultSchema,
-                                @Value("${multi-tenancy.tenant-prefix:tenant_}") String tenant_prefix) {
+                                @Value("${multi-tenancy.schema-prefix:tenant_}") String schema_prefix) {
         this.dataSource = dataSource;
         this.defaultSchema = defaultSchema;
-        this.tenant_prefix = tenant_prefix;
+        this.schema_prefix = schema_prefix;
     }
 
     @Override //this is used for @TenantId to resolve the additional CompanyId
@@ -64,7 +64,7 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
     @Override //this is used for the real TenantId via schema
     public Connection getConnection(String schema) throws SQLException {
         var connection = dataSource.getConnection();
-        connection.setSchema(defaultSchema.equals(schema) ? defaultSchema : tenant_prefix + HttpInterceptor.getTenantId());
+        connection.setSchema(defaultSchema.equals(schema) ? defaultSchema : schema_prefix + HttpInterceptor.getTenantId());
         log.info("## setting schema: " + connection.getSchema());
         return connection;
     }
@@ -109,8 +109,8 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
                 Arrays.asList(schemas.split(",")).forEach(schema -> {
                             Flyway.configure()
                                     .configuration(flyway.getConfiguration())
-                                    .schemas(tenant_prefix + schema)
-                                    .defaultSchema(tenant_prefix + schema)
+                                    .schemas(schema_prefix + schema)
+                                    .defaultSchema(schema_prefix + schema)
                                     .load()
                                     .migrate();
                         }
