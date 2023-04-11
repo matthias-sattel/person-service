@@ -43,7 +43,7 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
 
     @Override
     public String resolveCurrentTenantIdentifier() {
-        return HttpInterceptor.getTenantId();
+        return "";
     }
 
     @Override
@@ -64,7 +64,7 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
     @Override
     public Connection getConnection(String schema) throws SQLException {
         var connection = dataSource.getConnection();
-        connection.setSchema(defaultSchema.equals(schema) ? defaultSchema : tenant_prefix + schema);
+        connection.setSchema(defaultSchema.equals(schema) ? defaultSchema : tenant_prefix + HttpInterceptor.getTenantId());
         log.info("## setting schema: " + connection.getSchema());
         return connection;
     }
