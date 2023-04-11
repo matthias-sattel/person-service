@@ -119,6 +119,7 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
                                     .configuration(flyway.getConfiguration())
                                     .schemas(schema_prefix + schema)
                                     .defaultSchema(schema_prefix + schema)
+                                    .placeholders(Map.of("tenantId", schema))
                                     .load()
                                     .migrate();
                         }
