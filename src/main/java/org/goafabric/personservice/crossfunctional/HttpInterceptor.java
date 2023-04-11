@@ -46,6 +46,6 @@ public class HttpInterceptor implements WebMvcConfigurer {
     }
 
     public static String getCompanyId() {
-        return "42";
+        return "1";
     }
 }

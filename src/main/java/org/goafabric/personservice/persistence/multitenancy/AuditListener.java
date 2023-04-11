@@ -29,7 +29,7 @@ public class AuditListener implements ApplicationContextAware {
 
     record AuditEvent (
             String id,
-            String tenantId,
+            String companyId,
             String referenceId,
             String type,
             DbOperation operation,
