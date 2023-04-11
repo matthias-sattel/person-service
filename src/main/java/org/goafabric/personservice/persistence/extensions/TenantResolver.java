@@ -23,7 +23,7 @@ import java.util.Map;
 // Source: https://spring.io/blog/2022/07/31/how-to-integrate-hibernates-multitenant-feature-with-spring-data-jpa-in-a-spring-boot-application
 
 @Component
-public class TenantSchemaResolver implements MultiTenantConnectionProvider, CurrentTenantIdentifierResolver, HibernatePropertiesCustomizer {
+public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTenantConnectionProvider, HibernatePropertiesCustomizer {
 
     private final DataSource dataSource;
 
@@ -33,9 +33,9 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public TenantSchemaResolver(DataSource dataSource,
-                                @Value("${multi-tenancy.default-schema:PUBLIC}") String defaultSchema,
-                                @Value("${multi-tenancy.schema-prefix:tenant_}") String schema_prefix) {
+    public TenantResolver(DataSource dataSource,
+                          @Value("${multi-tenancy.default-schema:PUBLIC}") String defaultSchema,
+                          @Value("${multi-tenancy.schema-prefix:tenant_}") String schema_prefix) {
         this.dataSource = dataSource;
         this.defaultSchema = defaultSchema;
         this.schema_prefix = schema_prefix;
@@ -51,6 +51,12 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
     @Override
     public boolean validateExistingCurrentSessions() {
         return false;
+    }
+
+    @Override
+    public void customize(Map<String, Object> hibernateProperties) {
+        hibernateProperties.put(AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER, this);
+        hibernateProperties.put(AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER, this);
     }
 
     /** Tenant Resolver for Schema **/
@@ -93,12 +99,6 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
     @Override
     public <T> T unwrap(Class<T> unwrapType) {
         return null;
-    }
-
-    @Override
-    public void customize(Map<String, Object> hibernateProperties) {
-        hibernateProperties.put(AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER, this);
-        hibernateProperties.put(AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER, this);
     }
 
     /** Flyway configuration to create database schemas **/

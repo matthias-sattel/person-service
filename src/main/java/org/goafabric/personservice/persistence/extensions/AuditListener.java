@@ -21,6 +21,12 @@ import java.util.Date;
 import java.util.UUID;
 
 public class AuditListener implements ApplicationContextAware {
+    @MappedSuperclass
+    @EntityListeners(AuditListener.class)
+    public static abstract class AuditAware {
+        public abstract String getId();
+    }
+
     private static ApplicationContext context;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
