@@ -41,9 +41,9 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
         this.tenant_prefix = tenant_prefix;
     }
 
-    @Override
+    @Override //this is used for @TenantId to resolve the additional CompanyId
     public String resolveCurrentTenantIdentifier() {
-        return HttpInterceptor.getCompanyId(); //this is used for @TenantId Column Annotation
+        return HttpInterceptor.getCompanyId();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
         connection.close();
     }
 
-    @Override
+    @Override //this is used for the real TenantId via schema
     public Connection getConnection(String schema) throws SQLException {
         var connection = dataSource.getConnection();
         connection.setSchema(defaultSchema.equals(schema) ? defaultSchema : tenant_prefix + HttpInterceptor.getTenantId());
