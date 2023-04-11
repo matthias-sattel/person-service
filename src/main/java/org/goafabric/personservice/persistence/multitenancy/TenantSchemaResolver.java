@@ -103,10 +103,11 @@ public class TenantSchemaResolver implements MultiTenantConnectionProvider, Curr
 
     @Bean
     public CommandLineRunner schemas(Flyway flyway,
-                                     @Value("${multi-tenancy.migration.enabled}") Boolean enabled, @Value("${multi-tenancy.schemas}") String schemas) {
+                                     @Value("${multi-tenancy.migration.enabled}") Boolean enabled,
+                                     @Value("${multi-tenancy.schemas}") String[] schemas) {
         return args -> {
             if (enabled) {
-                Arrays.asList(schemas.split(",")).forEach(schema -> {
+                Arrays.asList(schemas).forEach(schema -> {
                             Flyway.configure()
                                     .configuration(flyway.getConfiguration())
                                     .schemas(schema_prefix + schema)
