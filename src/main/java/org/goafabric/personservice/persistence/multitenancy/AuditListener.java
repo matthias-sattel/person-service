@@ -47,18 +47,18 @@ public class AuditListener implements ApplicationContextAware {
     }
 
     @PostLoad
-    public void afterRead(Object object) {
-        insertAudit(DbOperation.READ, ((AuditAware) object).getId(), object, object);
+    public void afterRead(AuditAware object) {
+        insertAudit(DbOperation.READ, object.getId(), object, object);
     }
 
     @PostPersist
-    public void afterCreate(Object object)  {
-        insertAudit(DbOperation.CREATE, ((AuditAware) object).getId(), null, object);
+    public void afterCreate(AuditAware object)  {
+        insertAudit(DbOperation.CREATE,  object.getId(), null, object);
     }
 
     @PostUpdate
-    public void afterUpdate(Object object) {
-        final String id = ((AuditAware) object).getId();
+    public void afterUpdate(AuditAware object) {
+        final String id =  object.getId();
         insertAudit(DbOperation.UPDATE, id,
                 context.getBean(AuditJpaUpdater.class).findOldObject(object.getClass(), id), object);
     }
