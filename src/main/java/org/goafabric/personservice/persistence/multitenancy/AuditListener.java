@@ -85,7 +85,7 @@ public class AuditListener implements ApplicationContextAware {
                 UUID.randomUUID().toString(),
                 HttpInterceptor.getTenantId(),
                 referenceId,
-                newObject.getClass().getSimpleName(),
+                newObject != null ? newObject.getClass().getSimpleName() : oldObject.getClass().getSimpleName(),
                 dbOperation,
                 (dbOperation == DbOperation.CREATE ? HttpInterceptor.getUserName() : null),
                 (dbOperation == DbOperation.CREATE ? date : null),
