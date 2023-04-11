@@ -1,7 +1,7 @@
 package org.goafabric.personservice.persistence.domain;
 
 import jakarta.persistence.*;
-import org.goafabric.personservice.persistence.multitenancy.AuditAware;
+import org.goafabric.personservice.persistence.extensions.AuditAware;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.TenantId;
 

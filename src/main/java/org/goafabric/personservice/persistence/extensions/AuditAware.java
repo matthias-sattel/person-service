@@ -1,4 +1,4 @@
-package org.goafabric.personservice.persistence.multitenancy;
+package org.goafabric.personservice.persistence.extensions;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;

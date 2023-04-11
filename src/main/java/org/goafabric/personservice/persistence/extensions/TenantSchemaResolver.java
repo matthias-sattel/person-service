@@ -1,4 +1,4 @@
-package org.goafabric.personservice.persistence.multitenancy;
+package org.goafabric.personservice.persistence.extensions;
 
 import org.flywaydb.core.Flyway;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
