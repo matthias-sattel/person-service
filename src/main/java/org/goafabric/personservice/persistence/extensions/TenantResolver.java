@@ -27,7 +27,7 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
 
     private final DataSource dataSource;
 
-    private final String schema_prefix;
+    private final String schemaPrefix;
 
     private final String defaultSchema;
 
@@ -38,7 +38,7 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
                           @Value("${multi-tenancy.schema-prefix:_}") String schemaPrefix) {
         this.dataSource = dataSource;
         this.defaultSchema = defaultSchema;
-        this.schema_prefix = schemaPrefix;
+        this.schemaPrefix = schemaPrefix;
     }
 
     /** Resolver for optional CompanyId via @TenantId Discriminator **/
@@ -64,7 +64,7 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
     @Override
     public Connection getConnection(String schema) throws SQLException {
         var connection = dataSource.getConnection();
-        connection.setSchema(defaultSchema.equals(schema) ? defaultSchema : schema_prefix + HttpInterceptor.getTenantId());
+        connection.setSchema(defaultSchema.equals(schema) ? defaultSchema : schemaPrefix + HttpInterceptor.getTenantId());
         return connection;
     }
 
@@ -110,14 +110,14 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
     @Bean
     public CommandLineRunner schemas(Flyway flyway,
                                      @Value("${multi-tenancy.migration.enabled}") Boolean enabled,
-                                     @Value("${multi-tenancy.schemas}") String[] schemas) {
+                                     @Value("${multi-tenancy.schemas}") String schemas) {
         return args -> {
             if (enabled) {
-                Arrays.asList(schemas).forEach(schema -> {
+                Arrays.asList(schemas.split(",")).forEach(schema -> {
                             Flyway.configure()
                                     .configuration(flyway.getConfiguration())
-                                    .schemas(schema_prefix + schema)
-                                    .defaultSchema(schema_prefix + schema)
+                                    .schemas(schemaPrefix + schema)
+                                    .defaultSchema(schemaPrefix + schema)
                                     .placeholders(Map.of("tenantId", schema))
                                     .load()
                                     .migrate();
