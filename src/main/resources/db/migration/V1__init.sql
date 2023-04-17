@@ -23,7 +23,7 @@ create table person_audit
 	id varchar(36) not null
 		constraint pk_person_audit
 			primary key,
-    company_id varchar(36) not null,
+    company_id varchar(36),
 
     reference_id varchar(255),
     operation varchar(255),
@@ -45,7 +45,7 @@ create table address
 		constraint pk_address
 			primary key,
 
-    company_id varchar(36) not null,
+    company_id varchar(36),
 
 	street varchar(255) NULL,
 	city varchar(255) NULL,
