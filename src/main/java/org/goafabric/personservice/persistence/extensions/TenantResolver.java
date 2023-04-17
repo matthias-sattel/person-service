@@ -65,7 +65,6 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
     public Connection getConnection(String schema) throws SQLException {
         var connection = dataSource.getConnection();
         connection.setSchema(defaultSchema.equals(schema) ? defaultSchema : schema_prefix + HttpInterceptor.getTenantId());
-        log.info("## setting schema: " + connection.getSchema());
         return connection;
     }
 
