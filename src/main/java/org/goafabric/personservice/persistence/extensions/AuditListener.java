@@ -36,7 +36,7 @@ public class AuditListener implements ApplicationContextAware {
 
     record AuditEvent (
             String id,
-            String companyId,
+            //String companyId,
             String referenceId,
             String type,
             DbOperation operation,
@@ -90,7 +90,7 @@ public class AuditListener implements ApplicationContextAware {
         final Date date = new Date(System.currentTimeMillis());
         return new AuditEvent(
                 UUID.randomUUID().toString(),
-                HttpInterceptor.getCompanyId(),
+                //HttpInterceptor.getCompanyId(),
                 referenceId,
                 newObject != null ? newObject.getClass().getSimpleName() : oldObject.getClass().getSimpleName(),
                 dbOperation,
