@@ -8,9 +8,13 @@ import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aot.hint.MemberCategory;
+import org.springframework.aot.hint.RuntimeHints;
+import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ImportRuntimeHints;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -20,10 +24,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 // Source: https://spring.io/blog/2022/07/31/how-to-integrate-hibernates-multitenant-feature-with-spring-data-jpa-in-a-spring-boot-application
 
 @Component
+@ImportRuntimeHints(TenantResolver.ApplicationRuntimeHints.class)
+
 public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTenantConnectionProvider, HibernatePropertiesCustomizer {
 
     private final DataSource dataSource;
@@ -103,35 +110,46 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
 
 
     @Bean
+    SpringLiquibase liquibase(DataSource dataSource) {
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setShouldRun(false);
+        return liquibase;
+    }
+
+    @Bean
     MultiTenantSpringLiquibase multiTenantSpringLiquibase(DataSource dataSource,
                                                           @Value("${multi-tenancy.migration.enabled}") Boolean enabled,
-                                                          @Value("${multi-tenancy.schemas}") String schemas) {
-        var completeSchemas = new ArrayList<String>();
+                                                          @Value("${multi-tenancy.schemas}") String schemas,
+                                                          @Value("${spring.liquibase.change-log}") String changeLog) {
 
+        var completeSchemas = new ArrayList<String>();
         Arrays.asList(schemas.split(",")).forEach(schema -> {
-            new JdbcTemplate(dataSource).execute("CREATE SCHEMA IF NOT EXISTS " + getSchemaName(schema));
             completeSchemas.add(getSchemaName(schema));
+            if (enabled) {
+                new JdbcTemplate(dataSource).execute("CREATE SCHEMA IF NOT EXISTS " + getSchemaName(schema));
+            }
         });
 
         var liquibase = new MultiTenantSpringLiquibase();
-        liquibase.setChangeLog("classpath:db/changelog/changelog.xml");
+        liquibase.setChangeLog(changeLog);
         liquibase.setDataSource(dataSource);
         liquibase.setSchemas(completeSchemas);
         liquibase.setShouldRun(enabled);
         return liquibase;
     }
 
-    @Bean
-    SpringLiquibase liquibase(DataSource dataSource) {
-        SpringLiquibase liquibase = new SpringLiquibase();
-        liquibase.setShouldRun(false);
-        //liquibase.setChangeLog("classpath:db/changelog/changelog.xml");
-        //liquibase.setDataSource(dataSource);
-        return liquibase;
+    private @Value("${spring.datasource.url}") String datasourceUrl;
+    private String getSchemaName(String tenantId) {
+        return datasourceUrl.contains("jdbc:h2") ? (schemaPrefix + tenantId).toUpperCase() : (schemaPrefix + tenantId);
     }
 
-    private String getSchemaName(String tenantId) {
-        return (schemaPrefix + tenantId).toUpperCase();
+    static class ApplicationRuntimeHints implements RuntimeHintsRegistrar {
+        @Override
+        public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
+            //resources
+            hints.reflection().registerType(java.util.ArrayList.class, MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
+            hints.reflection().registerType(ConcurrentHashMap.class, MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS);
+        }
     }
 
 }
