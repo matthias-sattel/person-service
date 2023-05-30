@@ -1,16 +1,16 @@
 package org.goafabric.personservice;
 
 import io.micrometer.observation.ObservationPredicate;
+import org.springframework.aot.hint.MemberCategory;
+import org.springframework.aot.hint.RuntimeHints;
+import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.context.annotation.ImportRuntimeHints;
 
 
 /**
@@ -19,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @SpringBootApplication
 @RegisterReflectionForBinding(org.postgresql.util.PGobject.class)
+@ImportRuntimeHints(Application.ApplicationRuntimeHints.class)
 public class Application {
 
     public static void main(String[] args){
@@ -33,13 +34,14 @@ public class Application {
     }
 
     @Bean
-    @ConditionalOnMissingClass("org.springframework.security.oauth2.client.OAuth2AuthorizationContext")
-    public SecurityFilterChain filterChain(HttpSecurity http, @Value("${security.authentication.enabled:true}") Boolean isAuthenticationEnabled) throws Exception {
-        return isAuthenticationEnabled ? http.authorizeHttpRequests().requestMatchers("/actuator/**").permitAll().anyRequest().authenticated().and().httpBasic().and().csrf().disable().build()
-                : http.authorizeHttpRequests().anyRequest().permitAll().and().build();
-    }
-
-    @Bean
     ObservationPredicate disableHttpServerObservationsFromName() { return (name, context) -> !name.startsWith("spring.security."); }
+
+    static class ApplicationRuntimeHints implements RuntimeHintsRegistrar {
+        @Override
+        public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
+            hints.reflection().registerType(io.github.resilience4j.spring6.circuitbreaker.configure.CircuitBreakerAspect.class,
+                    builder -> builder.withMembers(MemberCategory.INVOKE_DECLARED_METHODS));
+        }
+    }
 
 }
