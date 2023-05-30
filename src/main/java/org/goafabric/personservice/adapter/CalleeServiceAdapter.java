@@ -1,25 +1,17 @@
 package org.goafabric.personservice.adapter;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.service.annotation.GetExchange;
 
-@Component
-@RegisterReflectionForBinding(Callee.class)
-@CircuitBreaker(name = "CalleeService")
-public class CalleeServiceAdapter {
-    private final RestTemplate restTemplate;
+@CircuitBreaker(name = "calleeservice")
+public interface CalleeServiceAdapter {
 
-    private final String url;
+    @GetExchange("/callees/sayMyName")
+    Callee sayMyName(@RequestParam("name") String name);
 
-    public CalleeServiceAdapter(RestTemplate restTemplate, @Value("${adapter.calleeservice.url}") String url) {
-        this.restTemplate = restTemplate;
-        this.url = url;
-    }
+    @GetExchange("/callees/sayMyOtherName/{name}")
+    Callee sayMyOtherName(@PathVariable("name") String name);
 
-    public Callee sayMyName(String name) {
-        return restTemplate.getForObject(url + "/callees/sayMyName?name={name}", Callee.class, name);
-    }
 }
