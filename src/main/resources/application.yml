@@ -36,6 +36,7 @@ spring.datasource.url: jdbc:h2:mem:person;DATABASE_TO_UPPER=FALSE
 spring.datasource.username: postgres
 spring.datasource.password: postgres
 
+spring.jpa.hibernate.ddl-auto: "none"
 spring.datasource.hikari.maximum-pool-size: "10"
 spring.datasource.hikari.connection-timeout: "10000"
 
@@ -70,4 +71,4 @@ logging.level.org.springframework: "INFO"
 
 logging.level.org.goafabric: "INFO"
 logging.level.org.flywaydb.core: "INFO"
-logging.level.org.hibernate.SQL: "INFO"
+logging.level.org.hibernate.SQL: "DEBUG"
