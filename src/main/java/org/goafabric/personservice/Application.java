@@ -38,8 +38,10 @@ public class Application {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, @Value("${security.authentication.enabled:true}") Boolean isAuthenticationEnabled) throws Exception {
-        return isAuthenticationEnabled ? http.authorizeHttpRequests().anyRequest().authenticated().and().httpBasic().and().csrf().disable().build()
-                : http.authorizeHttpRequests().anyRequest().permitAll().and().build();
+        return isAuthenticationEnabled
+                ? http.authorizeHttpRequests(auth -> auth.requestMatchers("/actuator/**").permitAll().anyRequest().authenticated())
+                .httpBasic(httpBasic -> {}).csrf(csrf -> csrf.disable()).build()
+                : http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll()).build();
     }
 
     @Bean
