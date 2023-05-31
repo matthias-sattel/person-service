@@ -16,6 +16,5 @@ implementation("org.springframework.cloud:spring-cloud-starter-consul-all:4.0.2"
 implementation("org.springframework.cloud:spring-cloud-starter-kubernetes-client-loadbalancer:3.0.3")
                                                  
 # props
-adapter.calleeservice.url=http://callee-service
 
 spring.cloud.kubernetes.loadbalancer.mode: "POD"
