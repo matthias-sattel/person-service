@@ -13,8 +13,12 @@ management:
       exposure:
         include: "health,prometheus,heapdump"
 
+spring.cloud.consul.config.enabled: "false"
+
+# openapi
 springdoc.swagger-ui.path: /swagger-ui/index.html
 springdoc.enable-native-support: "true"
+
 
 #jaeger / zipkin
 spring.application.name: person-service
