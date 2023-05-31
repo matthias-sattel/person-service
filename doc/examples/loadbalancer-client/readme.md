@@ -10,8 +10,11 @@ https://docs.spring.io/spring-cloud-kubernetes/docs/current/reference/html/#load
                 
 # dependency
 
+implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer:4.0.2")
+
 implementation("org.springframework.cloud:spring-cloud-starter-kubernetes-client-loadbalancer:3.0.3")
                                                  
 # props
+adapter.calleeservice.url=http://callee-service
+
 spring.cloud.kubernetes.loadbalancer.mode: "POD"
-#spring.cloud.loadbalancer.ribbon.enabled: "false"
