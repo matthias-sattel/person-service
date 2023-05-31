@@ -11,6 +11,7 @@ https://docs.spring.io/spring-cloud-kubernetes/docs/current/reference/html/#load
 # dependency
 
 implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer:4.0.2")
+implementation("org.springframework.cloud:spring-cloud-starter-consul-all:4.0.2")
 
 implementation("org.springframework.cloud:spring-cloud-starter-kubernetes-client-loadbalancer:3.0.3")
                                                  
