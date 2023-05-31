@@ -67,9 +67,6 @@ dependencies {
 	//test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-	//implementation("org.springframework.cloud:spring-cloud-starter-consul-all:4.0.2")
-	//implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer:4.0.2")
-
 }
 
 tasks.withType<Test> {
