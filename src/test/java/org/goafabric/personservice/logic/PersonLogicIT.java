@@ -2,7 +2,6 @@ package org.goafabric.personservice.logic;
 
 import org.goafabric.personservice.controller.dto.Address;
 import org.goafabric.personservice.controller.dto.Person;
-import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.goafabric.personservice.persistence.PersonRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ class PersonLogicIT {
 
     @Test
     public void findById() {
-        HttpInterceptor.setTenantId("0");
         List<Person> persons = personLogic.findAll();
         assertThat(persons).isNotNull().hasSize(3);
 
@@ -32,52 +30,38 @@ class PersonLogicIT {
         assertThat(person).isNotNull();
         assertThat(person.firstName()).isEqualTo(persons.get(0).firstName());
         assertThat(person.lastName()).isEqualTo(persons.get(0).lastName());
-
-        HttpInterceptor.setTenantId("5a2f");
     }
 
     @Test
     public void findAll() {
-        HttpInterceptor.setTenantId("0");
         assertThat(personLogic.findAll()).isNotNull().hasSize(3);
 
-        HttpInterceptor.setTenantId("5a2f");
         assertThat(personLogic.findAll()).isNotNull().hasSize(3);
     }
 
     @Test
     public void findByFirstName() {
-        HttpInterceptor.setTenantId("0");
         List<Person> persons = personLogic.findByFirstName("Monty");
         assertThat(persons).isNotNull().hasSize(1);
         assertThat(persons.get(0).firstName()).isEqualTo("Monty");
         assertThat(persons.get(0).lastName()).isEqualTo("Burns");
-
-        HttpInterceptor.setTenantId("5a2f");
-        assertThat(personLogic.findByFirstName("Monty")).isNotNull().hasSize(1);
     }
 
     @Test
     public void findByLastName() {
-        HttpInterceptor.setTenantId("0");
         List<Person> persons = personLogic.findByLastName("Simpson");
         assertThat(persons).isNotNull().hasSize(2);
         assertThat(persons.get(0).lastName()).isEqualTo("Simpson");
-
-        HttpInterceptor.setTenantId("5a2f");
-        assertThat(personLogic.findByLastName("Simpson")).isNotNull().hasSize(2);
     }
 
     @Test
     void save() {
-        HttpInterceptor.setTenantId("0");
-
         final Person person = personLogic.save(
-            new Person("null",
-                    "Homer",
-                    "Simpson",
-                    createAddress("Evergreen Terrace")
-        ));
+                new Person("null",
+                        "Homer",
+                        "Simpson",
+                        createAddress("Evergreen Terrace")
+                ));
 
         assertThat(person).isNotNull();
 
@@ -86,15 +70,7 @@ class PersonLogicIT {
 
     private Address createAddress(String street) {
         return new Address(null,
-                street, "Springfield " + HttpInterceptor.getTenantId());
+                street, "Springfield");
     }
-
-    /*
-    if ((goals.contains("-import-demo-data")) && (personLogic.findAll().isEmpty())) {
-        Arrays.asList(new ObjectMapper().readValue(new ClassPathResource("demodata/persons.json").getFile(), Person[].class))
-                .forEach(person -> personLogic.save(person));
-        if (goals.contains("-terminate")) { SpringApplication.exit(applicationContext, () -> 0); }
-    }
-    */
 
 }

@@ -110,7 +110,7 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
     @Bean
     public CommandLineRunner schemas(Flyway flyway,
                                      @Value("${multi-tenancy.migration.enabled}") Boolean enabled,
-                                     @Value("${multi-tenancy.schemas}") String schemas) {
+                                     @Value("${multi-tenancy.tenants}") String schemas) {
         return args -> {
             if (enabled) {
                 Arrays.asList(schemas.split(",")).forEach(schema -> {

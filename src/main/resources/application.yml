@@ -44,8 +44,8 @@ spring.jpa.hibernate.ddl-auto: "none"
 spring.datasource.hikari.maximum-pool-size: "10"
 spring.datasource.hikari.connection-timeout: "10000"
 
-multi-tenancy.schemas: "0,5a2f"
-multi-tenancy.schema-prefix: "tenant_"
+multi-tenancy.tenants: "0,5"
+multi-tenancy.schema-prefix: "core_"
 multi-tenancy.migration.enabled: "true"
 
 #adapter
