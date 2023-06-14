@@ -17,12 +17,12 @@ public class CalleeServiceAdapterConfiguration {
 
     @Bean
     public CalleeServiceAdapter calleeServiceAdapter(//ReactorLoadBalancerExchangeFilterFunction lbFunction,
+                                                     WebClient.Builder builder,
             @Value("${adapter.calleeservice.url}") String url, @Value("${adapter.timeout}") Long timeout, @Value("${adapter.maxlifetime:-1}") Long maxLifeTime) {
-        return createAdapter(CalleeServiceAdapter.class, url, timeout, maxLifeTime);
+        return createAdapter(builder, CalleeServiceAdapter.class, url, timeout, maxLifeTime);
     }
 
-    public static <A> A createAdapter(Class<A> adapterType, String url, Long timeout, Long maxLifeTime) {
-        var builder = WebClient.builder();
+    public static <A> A createAdapter(WebClient.Builder builder, Class<A> adapterType, String url, Long timeout, Long maxLifeTime) {
         builder.baseUrl(url)
                 .defaultHeaders(header -> header.setBasicAuth("admin", "admin"))
                 .clientConnector(new ReactorClientHttpConnector(HttpClient.create(ConnectionProvider.builder("custom").maxLifeTime(Duration.ofMillis(maxLifeTime)).build())));
