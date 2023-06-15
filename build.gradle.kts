@@ -94,3 +94,7 @@ tasks.named<BootBuildImage>("bootBuildImage") {
 		exec { commandLine("docker", "push", nativeImageName) }
 	}
 }
+
+graalvmNative {
+	nativeBuild.buildArgs("-Ob")
+}
