@@ -7,7 +7,7 @@ create table audit
     orgunit_id varchar(36),
     object_type varchar(255),
 
-    reference_id varchar(255),
+    object_id varchar(255),
     operation varchar(255),
     created_by varchar(255),
     created_at date,

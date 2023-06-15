@@ -38,8 +38,7 @@ public class AuditListener implements ApplicationContextAware {
             String id,
             String orgunitId,
             String objectType,
-            String referenceId,
-            String type,
+            String objectId,
             DbOperation operation,
             String createdBy,
             Date createdAt,
@@ -92,9 +91,8 @@ public class AuditListener implements ApplicationContextAware {
         return new AuditEvent(
                 UUID.randomUUID().toString(),
                 HttpInterceptor.getOrgunitId(),
-                "person",
+                getTableName(newObject != null ? newObject : oldObject),
                 referenceId,
-                newObject != null ? newObject.getClass().getSimpleName() : oldObject.getClass().getSimpleName(),
                 dbOperation,
                 (dbOperation == DbOperation.CREATE ? HttpInterceptor.getUserName() : null),
                 (dbOperation == DbOperation.CREATE ? date : null),
@@ -137,9 +135,10 @@ public class AuditListener implements ApplicationContextAware {
                 .execute(new BeanPropertySqlParameterSource(auditEvent));
         }
 
-        private String getTableName(Object object) {
-            return object.getClass().getSimpleName().replaceAll("Bo", "").toLowerCase();
-        }
+    }
+
+    private static String getTableName(Object object) {
+        return object.getClass().getSimpleName().replaceAll("Bo", "").toLowerCase();
     }
 }
 
