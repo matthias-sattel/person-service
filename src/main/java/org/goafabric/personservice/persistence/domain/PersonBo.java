@@ -12,7 +12,7 @@ public class PersonBo extends AuditListener.AuditAware {
     public String id;
 
     @TenantId
-    public String companyId;
+    public String orgunitId;
 
     public String firstName;
 

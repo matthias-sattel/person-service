@@ -20,7 +20,7 @@ public class HttpInterceptor implements WebMvcConfigurer {
             @Override
             public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
                 tenantId.set(request.getHeader("X-TenantId"));
-                userName.set(request.getHeader("X-Auth-Request-Preferred-Username"));
+                userName.set(request.getHeader("X-Auth-Re1quest-Preferred-Username"));
                 return true;
             }
 
@@ -45,7 +45,7 @@ public class HttpInterceptor implements WebMvcConfigurer {
                 : SecurityContextHolder.getContext().getAuthentication() != null ? SecurityContextHolder.getContext().getAuthentication().getName() : "";
     }
 
-    public static String getCompanyId() {
+    public static String getOrgunitId() {
         return "1";
     }
 }

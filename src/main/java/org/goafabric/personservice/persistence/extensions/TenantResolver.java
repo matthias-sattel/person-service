@@ -45,7 +45,7 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
 
     @Override
     public String resolveCurrentTenantIdentifier() {
-        return HttpInterceptor.getCompanyId();
+        return HttpInterceptor.getOrgunitId();
     }
 
     @Override
