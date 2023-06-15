@@ -48,6 +48,8 @@ multi-tenancy.tenants: "0,5"
 multi-tenancy.schema-prefix: "core_"
 multi-tenancy.migration.enabled: "true"
 
+database.provisioning.goals: "-import-demo-data"
+
 #adapter
 adapter:
   timeout: 10000
@@ -75,4 +77,4 @@ logging.level.org.springframework: "INFO"
 
 logging.level.org.goafabric: "INFO"
 logging.level.org.flywaydb.core: "INFO"
-logging.level.org.hibernate.SQL: "DEBUG"
+logging.level.org.hibernate.SQL: "INFO"

@@ -108,9 +108,10 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
     }
 
     @Bean
-    public CommandLineRunner schemas(Flyway flyway,
+    public CommandLineRunner schemaRunner(Flyway flyway,
                                      @Value("${multi-tenancy.migration.enabled}") Boolean enabled,
-                                     @Value("${multi-tenancy.tenants}") String schemas) {
+                                     @Value("${multi-tenancy.tenants}") String schemas,
+                                     DatabaseProvisioning databaseProvisioning) {
         return args -> {
             if (enabled) {
                 Arrays.asList(schemas.split(",")).forEach(schema -> {
@@ -124,6 +125,7 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
                         }
                 );
             }
+            databaseProvisioning.run();
         };
     }
 
