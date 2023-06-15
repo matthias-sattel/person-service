@@ -13,7 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DatabaseProvisioning {
+public class Provisioning {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Value("${database.provisioning.goals:}")
