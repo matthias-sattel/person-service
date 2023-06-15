@@ -10,9 +10,9 @@ import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PersonMapper {
-    Person map(PersonBo person);
+    Person map(PersonBo value);
 
-    PersonBo map(Person person);
+    PersonBo map(Person value);
 
-    List<Person> map(List<PersonBo> countries);
+    List<Person> map(List<PersonBo> value);
 }
