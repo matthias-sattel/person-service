@@ -36,7 +36,8 @@ public class AuditListener implements ApplicationContextAware {
 
     record AuditEvent (
             String id,
-            //String companyId,
+            String orgunitId,
+            String objectType,
             String referenceId,
             String type,
             DbOperation operation,
@@ -90,7 +91,8 @@ public class AuditListener implements ApplicationContextAware {
         final Date date = new Date(System.currentTimeMillis());
         return new AuditEvent(
                 UUID.randomUUID().toString(),
-                //HttpInterceptor.getCompanyId(),
+                HttpInterceptor.getOrgunitId(),
+                "person",
                 referenceId,
                 newObject != null ? newObject.getClass().getSimpleName() : oldObject.getClass().getSimpleName(),
                 dbOperation,
@@ -131,7 +133,7 @@ public class AuditListener implements ApplicationContextAware {
         public void insertAudit(AuditEvent auditEvent, Object object) { //we cannot use jpa because of the dynamic table name
             new SimpleJdbcInsert(dataSource)
                     .withSchemaName(schemaPrefix + HttpInterceptor.getTenantId())
-                    .withTableName(getTableName(object) + "_audit")
+                    .withTableName("audit")
                 .execute(new BeanPropertySqlParameterSource(auditEvent));
         }
 
