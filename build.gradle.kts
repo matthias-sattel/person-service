@@ -94,6 +94,9 @@ tasks.named<BootBuildImage>("bootBuildImage") {
 	}
 }
 
+/*
 graalvmNative {
 	nativeBuild.buildArgs("-Ob")
 }
+
+ */

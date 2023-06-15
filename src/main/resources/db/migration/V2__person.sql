@@ -26,3 +26,5 @@ create table address
 	city varchar(255) NULL,
 	version bigint default 0
 );
+
+create index idx_address_orgunit_id on address(orgunit_id);
