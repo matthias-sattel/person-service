@@ -47,7 +47,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
         if (personLogic.findAll().isEmpty()) {
             HttpInterceptor.setTenantId("0");
             insertData();
-            HttpInterceptor.setTenantId("5a2f");
+            HttpInterceptor.setTenantId("5");
             insertData();
         }
     }
