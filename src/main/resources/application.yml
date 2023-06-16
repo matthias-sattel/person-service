@@ -72,6 +72,8 @@ resilience4j.circuitbreaker:
       permittedNumberOfCallsInHalfOpenState: 10 #Number of permitted calls when the CircuitBreaker is half open.
 
 #logging
+logging.pattern.level: "%5p [${spring.application.name:}] tenantId=%X{tenantId:-}"
+
 logging.level.root: "WARN"
 logging.level.org.springframework: "INFO"
 
