@@ -42,11 +42,11 @@ public class DatabaseProvisioning {
     }
 
     private void importDemoData() {
-        HttpInterceptor.setTenantId("0");
+        HttpInterceptor.setTenantId("0", null);
         if (personLogic.findAll().isEmpty()) {
-            HttpInterceptor.setTenantId("0");
+            HttpInterceptor.setTenantId("0", null);
             insertData();
-            HttpInterceptor.setTenantId("5");
+            HttpInterceptor.setTenantId("5", null);
             insertData();
         }
     }
