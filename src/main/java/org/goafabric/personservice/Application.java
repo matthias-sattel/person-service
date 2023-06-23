@@ -1,8 +1,6 @@
 package org.goafabric.personservice;
 
 import io.micrometer.observation.ObservationPredicate;
-import org.hibernate.binder.internal.TenantIdBinder;
-import org.hibernate.generator.internal.TenantIdGeneration;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
@@ -23,7 +21,7 @@ import org.springframework.security.web.SecurityFilterChain;
  */
 
 @SpringBootApplication
-@RegisterReflectionForBinding({org.postgresql.util.PGobject.class, TenantIdBinder.class, TenantIdGeneration.class})
+@RegisterReflectionForBinding({org.hibernate.binder.internal.TenantIdBinder.class, org.hibernate.generator.internal.TenantIdGeneration.class})
 @ImportRuntimeHints(Application.ApplicationRuntimeHints.class)
 public class Application {
 
