@@ -1,6 +1,12 @@
-# 3.0.8
-- version upgrade
+# 3.1.1
+- upgrade to Spring Boot 3.1.1
+- support for Opentelemetry
+- maven build (re) moved to doc/maven in favour of gradle
+- kicked lombok in favour of java records
+- converted gradle build file to kotlin dsl
 
+- upgrade to springdoc 2.1.0
+- upgrade to mapstruct 1.5.4
 # 3.0.7
 - upgrade to Spring Boot 3.0.7
 - maven build (re) moved to doc/maven in favour of gradle
