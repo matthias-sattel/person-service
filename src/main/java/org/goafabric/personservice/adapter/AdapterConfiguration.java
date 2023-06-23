@@ -13,7 +13,7 @@ import reactor.netty.resources.ConnectionProvider;
 import java.time.Duration;
 
 @Configuration
-public class CalleeServiceAdapterConfiguration {
+public class AdapterConfiguration {
 
     @Bean
     public CalleeServiceAdapter calleeServiceAdapter(//ReactorLoadBalancerExchangeFilterFunction lbFunction,

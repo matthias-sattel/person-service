@@ -21,7 +21,7 @@ import org.springframework.security.web.SecurityFilterChain;
  */
 
 @SpringBootApplication
-@RegisterReflectionForBinding(org.postgresql.util.PGobject.class)
+@RegisterReflectionForBinding({org.hibernate.binder.internal.TenantIdBinder.class, org.hibernate.generator.internal.TenantIdGeneration.class})
 @ImportRuntimeHints(Application.ApplicationRuntimeHints.class)
 public class Application {
 

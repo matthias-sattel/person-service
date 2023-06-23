@@ -1,7 +1,7 @@
 import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 group = "org.goafabric"
-version = "3.0.8-SNAPSHOT"
+version = "3.1.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 val dockerRegistry = "goafabric"
@@ -11,10 +11,10 @@ val baseImage = "ibm-semeru-runtimes:open-17.0.6_10-jre-focal@sha256:739eab970ff
 plugins {
 	java
 	jacoco
-	id("org.springframework.boot") version "3.0.7"
+	id("org.springframework.boot") version "3.1.1"
 	id("io.spring.dependency-management") version "1.1.0"
-	id("org.graalvm.buildtools.native") version "0.9.20"
-	id("com.google.cloud.tools.jib") version "3.3.1"
+	id("org.graalvm.buildtools.native") version "0.9.23"
+	id("com.google.cloud.tools.jib") version "3.3.2"
 }
 
 repositories {
@@ -29,6 +29,7 @@ dependencies {
 		implementation("org.mapstruct:mapstruct:1.5.4.Final")
 		annotationProcessor("org.mapstruct:mapstruct-processor:1.5.4.Final")
 		implementation("io.github.resilience4j:resilience4j-spring-boot3:2.0.2")
+		implementation("net.ttddyy.observation:datasource-micrometer-spring-boot:1.0.2")
 	}
 }
 
@@ -41,9 +42,10 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("io.micrometer:micrometer-registry-prometheus")
 
-	implementation("io.micrometer:micrometer-tracing-bridge-brave")
-	implementation("io.zipkin.reporter2:zipkin-reporter-brave")
-	implementation("net.ttddyy.observation:datasource-micrometer-spring-boot:1.0.2")
+	implementation("io.micrometer:micrometer-tracing-bridge-otel")
+	implementation("io.opentelemetry:opentelemetry-exporter-otlp")
+
+	implementation("net.ttddyy.observation:datasource-micrometer-spring-boot")
 
 	//crosscuting
 	implementation("org.springframework.boot:spring-boot-starter-security")
