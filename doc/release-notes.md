@@ -7,6 +7,7 @@
 
 - upgrade to springdoc 2.1.0
 - upgrade to mapstruct 1.5.4
+
 # 3.0.7
 - upgrade to Spring Boot 3.0.7
 - maven build (re) moved to doc/maven in favour of gradle
