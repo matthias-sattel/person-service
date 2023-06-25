@@ -54,8 +54,8 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     private void importDemoData() {
         Arrays.asList(tenants.split(",")).forEach(tenant -> {
+            HttpInterceptor.setTenantId(tenant);
             if (applicationContext.getBean(PersonLogic.class).findAll().isEmpty()) {
-                HttpInterceptor.setTenantId(tenant);
                 insertData();
             }
         });
