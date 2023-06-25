@@ -6,28 +6,39 @@ import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.goafabric.personservice.logic.PersonLogic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 @Component
-public class DatabaseProvisioning {
+public class DatabaseProvisioning implements CommandLineRunner {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    @Value("${database.provisioning.goals:}")
-    String goals;
+    private final String goals;
 
-    @Autowired
-    PersonLogic personLogic;
+    private final String tenants;
 
-    @Autowired
-    ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
 
-    //@Override
+    private final Runnable schemaCreator;
+
+    public DatabaseProvisioning(@Value("${database.provisioning.goals:}")String goals, @Value("${multi-tenancy.tenants}") String tenants,
+                                ApplicationContext applicationContext, Runnable schemaCreator) {
+        this.goals = goals;
+        this.tenants = tenants;
+        this.applicationContext = applicationContext;
+        this.schemaCreator = schemaCreator;
+    }
+
+    @Override
     public void run(String... args) {
         if ((args.length > 0) && ("-check-integrity".equals(args[0]))) { return; }
+
+        schemaCreator.run();
 
         if (goals.contains("-import-demo-data")) {
             log.info("Importing demo data ...");
@@ -42,23 +53,22 @@ public class DatabaseProvisioning {
     }
 
     private void importDemoData() {
-        HttpInterceptor.setTenantId("0");
-        if (personLogic.findAll().isEmpty()) {
-            HttpInterceptor.setTenantId("0");
-            insertData();
-            HttpInterceptor.setTenantId("5");
-            insertData();
-        }
+        Arrays.asList(tenants.split(",")).forEach(tenant -> {
+            if (applicationContext.getBean(PersonLogic.class).findAll().isEmpty()) {
+                HttpInterceptor.setTenantId(tenant);
+                insertData();
+            }
+        });
     }
 
     private void insertData() {
-        personLogic.save(new Person(null, "Homer", "Simpson"
+        applicationContext.getBean(PersonLogic.class).save(new Person(null, "Homer", "Simpson"
                         , createAddress("Evergreen Terrace 1")));
 
-        personLogic.save(new Person(null, "Bart", "Simpson"
+        applicationContext.getBean(PersonLogic.class).save(new Person(null, "Bart", "Simpson"
                 , createAddress("Everblue Terrace 1")));
 
-        personLogic.save(new Person(null, "Monty", "Burns"
+        applicationContext.getBean(PersonLogic.class).save(new Person(null, "Monty", "Burns"
                 , createAddress("Monty Mansion")));
 
     }

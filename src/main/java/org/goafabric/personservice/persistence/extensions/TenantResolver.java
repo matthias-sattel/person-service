@@ -8,7 +8,6 @@ import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -97,7 +96,7 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
 
     @Override
     public <T> T unwrap(Class<T> unwrapType) {
-        return null;
+        throw new IllegalStateException("unwrap not supported");
     }
 
     /** Flyway configuration to create database schemas **/
@@ -108,24 +107,23 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
     }
 
     @Bean
-    public CommandLineRunner schemaRunner(Flyway flyway,
-                                     @Value("${multi-tenancy.migration.enabled}") Boolean enabled,
-                                     @Value("${multi-tenancy.tenants}") String schemas,
-                                     DatabaseProvisioning databaseProvisioning) {
-        return args -> {
+    public Runnable schemaCreator(Flyway flyway,
+                                  @Value("${multi-tenancy.migration.enabled}") Boolean enabled,
+                                  @Value("${multi-tenancy.tenants}") String tenants,
+                                  @Value("${multi-tenancy.schema-prefix:_}") String schemaPrefix) {
+        return () -> {
             if (enabled) {
-                Arrays.asList(schemas.split(",")).forEach(schema -> {
+                Arrays.asList(tenants.split(",")).forEach(tenant -> {
                             Flyway.configure()
                                     .configuration(flyway.getConfiguration())
-                                    .schemas(schemaPrefix + schema)
-                                    .defaultSchema(schemaPrefix + schema)
-                                    .placeholders(Map.of("tenantId", schema))
+                                    .schemas(schemaPrefix + tenant)
+                                    .defaultSchema(schemaPrefix + tenant)
+                                    .placeholders(Map.of("tenantId", tenant))
                                     .load()
                                     .migrate();
                         }
                 );
             }
-            databaseProvisioning.run();
         };
     }
 
