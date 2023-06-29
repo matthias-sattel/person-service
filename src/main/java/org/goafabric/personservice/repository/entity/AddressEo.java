@@ -7,7 +7,7 @@ import org.hibernate.annotations.TenantId;
 
 @Entity
 @Table(name="address")
-public class AddressBo extends AuditListener.AuditAware {
+public class AddressEo extends AuditListener.AuditAware {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     public String id;

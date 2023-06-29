@@ -138,7 +138,7 @@ public class AuditListener implements ApplicationContextAware {
     }
 
     private static String getTableName(Object object) {
-        return object.getClass().getSimpleName().replaceAll("Bo", "").toLowerCase();
+        return object.getClass().getSimpleName().replaceAll("Eo", "").toLowerCase();
     }
 }
 
