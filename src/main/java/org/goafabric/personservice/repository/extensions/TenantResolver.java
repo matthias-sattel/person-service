@@ -1,4 +1,4 @@
-package org.goafabric.personservice.persistence.extensions;
+package org.goafabric.personservice.repository.extensions;
 
 import org.flywaydb.core.Flyway;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;

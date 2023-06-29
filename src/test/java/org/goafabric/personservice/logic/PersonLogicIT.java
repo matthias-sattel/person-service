@@ -1,8 +1,8 @@
 package org.goafabric.personservice.logic;
 
-import org.goafabric.personservice.controller.dto.Address;
-import org.goafabric.personservice.controller.dto.Person;
-import org.goafabric.personservice.persistence.PersonRepository;
+import org.goafabric.personservice.controller.vo.Address;
+import org.goafabric.personservice.controller.vo.Person;
+import org.goafabric.personservice.repository.PersonRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
