@@ -14,13 +14,6 @@ management:
       exposure:
         include: "health,prometheus,heapdump"
 
-spring.cloud.consul.config.enabled: "false"
-
-# openapi
-springdoc.swagger-ui.path: /swagger-ui/index.html
-springdoc.enable-native-support: "true"
-
-
 #tracing
 spring.application.name: person-service
 management.tracing.sampling.probability: "1.0"
