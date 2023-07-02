@@ -1,13 +1,13 @@
 package org.goafabric.personservice.repository.entity;
 
 import jakarta.persistence.*;
-import org.goafabric.personservice.repository.extensions.AuditListener;
+import org.goafabric.personservice.repository.extensions.AuditTrail;
 import org.hibernate.annotations.TenantId;
 
 
 @Entity
 @Table(name="address")
-@EntityListeners(AuditListener.class)
+@EntityListeners(AuditTrail.class)
 public class AddressEo {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.persistence.*;
-import org.goafabric.personservice.crossfunctional.HttpInterceptor;
+import org.goafabric.personservice.extensions.TenantInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 import java.util.Date;
 import java.util.UUID;
 
-public class AuditListener implements ApplicationContextAware {
+public class AuditTrail implements ApplicationContextAware {
     private static ApplicationContext context;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -85,13 +85,13 @@ public class AuditListener implements ApplicationContextAware {
         final Date date = new Date(System.currentTimeMillis());
         return new AuditEvent(
                 UUID.randomUUID().toString(),
-                HttpInterceptor.getOrgunitId(),
+                TenantInterceptor.getOrgunitId(),
                 getTableName(newObject != null ? newObject : oldObject),
                 referenceId,
                 dbOperation,
-                (dbOperation == DbOperation.CREATE ? HttpInterceptor.getUserName() : null),
+                (dbOperation == DbOperation.CREATE ? TenantInterceptor.getUserName() : null),
                 (dbOperation == DbOperation.CREATE ? date : null),
-                ((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? HttpInterceptor.getUserName() : null),
+                ((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? TenantInterceptor.getUserName() : null),
                 ((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? date : null),
                 (oldObject == null ? null : getJsonValue(oldObject)),
                 (newObject == null ? null : getJsonValue(newObject))
@@ -125,7 +125,7 @@ public class AuditListener implements ApplicationContextAware {
 
         public void insertAudit(AuditEvent auditEvent, Object object) { //we cannot use jpa because of the dynamic table name
             new SimpleJdbcInsert(dataSource)
-                    .withSchemaName(schemaPrefix + HttpInterceptor.getTenantId())
+                    .withSchemaName(schemaPrefix + TenantInterceptor.getTenantId())
                     .withTableName("audit")
                 .execute(new BeanPropertySqlParameterSource(auditEvent));
         }

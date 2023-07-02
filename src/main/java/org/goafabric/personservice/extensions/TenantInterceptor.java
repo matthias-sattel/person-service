@@ -1,4 +1,4 @@
-package org.goafabric.personservice.crossfunctional;
+package org.goafabric.personservice.extensions;
 
 import io.micrometer.common.KeyValue;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
-public class HttpInterceptor implements WebMvcConfigurer {
+public class TenantInterceptor implements WebMvcConfigurer {
     private static final ThreadLocal<String> tenantId = new ThreadLocal<>();
 
     @Override
@@ -45,7 +45,7 @@ public class HttpInterceptor implements WebMvcConfigurer {
     }
 
     public static void setTenantId(String tenantId) {
-        HttpInterceptor.tenantId.set(tenantId);
+        TenantInterceptor.tenantId.set(tenantId);
     }
 
     public static String getTenantId() {
