@@ -49,10 +49,12 @@ public class AuditTrailListener implements ApplicationContextAware {
         context = applicationContext;
     }
 
+    /*
     @PostLoad
     public void afterRead(Object object) {
         insertAudit(DbOperation.READ, getId(object), object, object);
     }
+    */
 
     @PostPersist
     public void afterCreate(Object object)  {
