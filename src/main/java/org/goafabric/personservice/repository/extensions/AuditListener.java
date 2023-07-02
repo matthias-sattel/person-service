@@ -55,7 +55,6 @@ public class AuditListener implements ApplicationContextAware {
 
     @PostPersist
     public void afterCreate(Object object)  {
-
         insertAudit(DbOperation.CREATE,  getId(object), null, object);
     }
 
