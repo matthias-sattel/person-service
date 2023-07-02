@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -109,11 +110,11 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
     }
 
     @Bean
-    public Runnable schemaCreator(Flyway flyway,
-                                  @Value("${multi-tenancy.migration.enabled}") Boolean enabled,
-                                  @Value("${multi-tenancy.tenants}") String tenants,
-                                  @Value("${multi-tenancy.schema-prefix:_}") String schemaPrefix) {
-        return () -> {
+    public ApplicationRunner schemaCreator(Flyway flyway,
+                                           @Value("${multi-tenancy.migration.enabled}") Boolean enabled,
+                                           @Value("${multi-tenancy.tenants}") String tenants,
+                                           @Value("${multi-tenancy.schema-prefix:_}") String schemaPrefix) {
+        return args -> {
             if (enabled) {
                 Arrays.asList(tenants.split(",")).forEach(tenant -> {
                             Flyway.configure()
