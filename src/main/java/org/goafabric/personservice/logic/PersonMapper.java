@@ -15,4 +15,6 @@ public interface PersonMapper {
     PersonEo map(Person value);
 
     List<Person> map(List<PersonEo> value);
+
+    List<Person> map(Iterable<PersonEo> value);
 }
