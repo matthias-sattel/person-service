@@ -22,12 +22,6 @@ import java.util.Date;
 import java.util.UUID;
 
 public class AuditListener implements ApplicationContextAware {
-    @MappedSuperclass
-    @EntityListeners(AuditListener.class)
-    public static abstract class AuditAware {
-        public abstract String getId();
-    }
-
     private static ApplicationContext context;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -54,25 +48,26 @@ public class AuditListener implements ApplicationContextAware {
     }
 
     @PostLoad
-    public void afterRead(AuditAware object) {
-        insertAudit(DbOperation.READ, object.getId(), object, object);
+    public void afterRead(Object object) {
+        insertAudit(DbOperation.READ, getId(object), object, object);
     }
 
     @PostPersist
-    public void afterCreate(AuditAware object)  {
-        insertAudit(DbOperation.CREATE,  object.getId(), null, object);
+    public void afterCreate(Object object)  {
+
+        insertAudit(DbOperation.CREATE,  getId(object), null, object);
     }
 
     @PostUpdate
-    public void afterUpdate(AuditAware object) {
-        final String id =  object.getId();
+    public void afterUpdate(Object object) {
+        final String id = getId(object);
         insertAudit(DbOperation.UPDATE, id,
                 context.getBean(AuditJpaUpdater.class).findOldObject(object.getClass(), id), object);
     }
 
     @PostRemove
     public void afterDelete(Object object) {
-        insertAudit(DbOperation.DELETE, ((AuditAware) object).getId(), object, null);
+        insertAudit(DbOperation.DELETE, getId(object), object, null);
     }
 
     private void insertAudit(final DbOperation operation, String referenceId, final Object oldObject, final Object newObject) {
@@ -134,7 +129,10 @@ public class AuditListener implements ApplicationContextAware {
                     .withTableName("audit")
                 .execute(new BeanPropertySqlParameterSource(auditEvent));
         }
+    }
 
+    private static String getId(Object object) {
+        return String.valueOf(context.getBean(EntityManagerFactory.class).getPersistenceUnitUtil().getIdentifier(object));
     }
 
     private static String getTableName(Object object) {

@@ -7,7 +7,8 @@ import org.hibernate.annotations.TenantId;
 
 @Entity
 @Table(name="address")
-public class AddressEo extends AuditListener.AuditAware {
+@EntityListeners(AuditListener.class)
+public class AddressEo {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     public String id;
@@ -20,9 +21,4 @@ public class AddressEo extends AuditListener.AuditAware {
 
     @Version //optimistic locking
     public Long version;
-
-    @Override
-    public String getId() {
-        return id;
-    }
 }
