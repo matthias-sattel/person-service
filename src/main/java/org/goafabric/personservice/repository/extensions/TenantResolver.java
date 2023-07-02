@@ -127,7 +127,7 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
                         }
                 );
             }
-            if (goals.contains("-terminate") && goals.contains("-import")) { SpringApplication.exit(context, () -> 0); }
+            if (goals.contains("-terminate") && !goals.contains("-import")) { SpringApplication.exit(context, () -> 0); }
         };
     }
 
