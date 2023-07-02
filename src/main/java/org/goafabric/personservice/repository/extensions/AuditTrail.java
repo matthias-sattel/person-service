@@ -127,7 +127,7 @@ public class AuditTrail implements ApplicationContextAware {
         public void insertAudit(AuditEvent auditEvent, Object object) { //we cannot use jpa because of the dynamic table name
             new SimpleJdbcInsert(dataSource)
                     .withSchemaName(schemaPrefix + TenantInterceptor.getTenantId())
-                    .withTableName("audit")
+                    .withTableName("audit_trail")
                 .execute(new BeanPropertySqlParameterSource(auditEvent));
         }
     }
