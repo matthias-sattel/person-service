@@ -2,6 +2,7 @@ package org.goafabric.personservice.repository.extensions;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.persistence.*;
 import org.goafabric.personservice.crossfunctional.HttpInterceptor;
 import org.slf4j.Logger;
@@ -99,7 +100,7 @@ public class AuditListener implements ApplicationContextAware {
     }
 
     private String getJsonValue(final Object object) throws JsonProcessingException {
-        return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(object);
+        return new ObjectMapper().registerModule(new JavaTimeModule()).writerWithDefaultPrettyPrinter().writeValueAsString(object);
     }
 
     @Component
