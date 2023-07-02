@@ -111,11 +111,11 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
 
     @Bean
     public ApplicationRunner schemaCreator(Flyway flyway,
-                                           @Value("${multi-tenancy.migration.enabled}") Boolean enabled,
+                                           @Value("${database.provisioning.goals}") String goals,
                                            @Value("${multi-tenancy.tenants}") String tenants,
                                            @Value("${multi-tenancy.schema-prefix:_}") String schemaPrefix) {
         return args -> {
-            if (enabled) {
+            if (goals.contains("-migrate")) {
                 Arrays.asList(tenants.split(",")).forEach(tenant -> {
                             Flyway.configure()
                                     .configuration(flyway.getConfiguration())
