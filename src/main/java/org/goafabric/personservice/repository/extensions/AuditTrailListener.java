@@ -23,14 +23,14 @@ import java.util.Date;
 import java.util.UUID;
 
 // Simple Audittrail that fulfills the requirements of logging content changes + user + aot support, could be db independant
-public class AuditTrail implements ApplicationContextAware {
+public class AuditTrailListener implements ApplicationContextAware {
     private static ApplicationContext context;
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private enum DbOperation { CREATE, READ, UPDATE, DELETE }
 
-    record AuditEvent (
+    record AuditTrail(
             String id,
             String orgunitId,
             String objectType,
@@ -73,18 +73,18 @@ public class AuditTrail implements ApplicationContextAware {
 
     private void insertAudit(final DbOperation operation, String referenceId, final Object oldObject, final Object newObject) {
         try {
-            var auditEvent = createAuditEvent(operation, referenceId, oldObject, newObject);
-            log.debug("New audit event :\n{}", auditEvent);
-            context.getBean(AuditJpaInserter.class).insertAudit(auditEvent, oldObject != null ? oldObject : newObject);
+            var auditTrail = createAuditTrail(operation, referenceId, oldObject, newObject);
+            log.debug("New audit:\n{}", auditTrail);
+            context.getBean(AuditJpaInserter.class).insertAudit(auditTrail, oldObject != null ? oldObject : newObject);
         } catch (Exception e) {
             log.error("Error during audit:\n{}", e.getMessage(), e);
         }
     }
 
-    private AuditEvent createAuditEvent(
+    private AuditTrail createAuditTrail(
             DbOperation dbOperation, String referenceId, final Object oldObject, final Object newObject) throws JsonProcessingException {
         final Date date = new Date(System.currentTimeMillis());
-        return new AuditEvent(
+        return new AuditTrail(
                 UUID.randomUUID().toString(),
                 TenantInterceptor.getOrgunitId(),
                 getTableName(newObject != null ? newObject : oldObject),
@@ -114,7 +114,7 @@ public class AuditTrail implements ApplicationContextAware {
     }
 
     @Component
-    @RegisterReflectionForBinding(AuditEvent.class)
+    @RegisterReflectionForBinding(AuditTrail.class)
     static class AuditJpaInserter {
         private final DataSource dataSource;
         private final String     schemaPrefix;
@@ -124,11 +124,11 @@ public class AuditTrail implements ApplicationContextAware {
             this.schemaPrefix = schemaPrefix;
         }
 
-        public void insertAudit(AuditEvent auditEvent, Object object) { //we cannot use jpa because of the dynamic table name
+        public void insertAudit(AuditTrail auditTrail, Object object) { //we cannot use jpa because of the dynamic table name
             new SimpleJdbcInsert(dataSource)
                     .withSchemaName(schemaPrefix + TenantInterceptor.getTenantId())
                     .withTableName("audit_trail")
-                .execute(new BeanPropertySqlParameterSource(auditEvent));
+                .execute(new BeanPropertySqlParameterSource(auditTrail));
         }
     }
 
