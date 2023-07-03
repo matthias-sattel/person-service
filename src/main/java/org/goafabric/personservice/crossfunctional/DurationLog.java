@@ -1,4 +1,4 @@
-package org.goafabric.personservice.extensions;
+package org.goafabric.personservice.crossfunctional;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

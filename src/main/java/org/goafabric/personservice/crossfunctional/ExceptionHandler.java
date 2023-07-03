@@ -1,4 +1,4 @@
-package org.goafabric.personservice.extensions;
+package org.goafabric.personservice.crossfunctional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -2,7 +2,7 @@ package org.goafabric.personservice.logic;
 
 import org.goafabric.personservice.adapter.CalleeServiceAdapter;
 import org.goafabric.personservice.controller.vo.Person;
-import org.goafabric.personservice.extensions.DurationLog;
+import org.goafabric.personservice.crossfunctional.DurationLog;
 import org.goafabric.personservice.repository.PersonRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

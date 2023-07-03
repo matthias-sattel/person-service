@@ -2,7 +2,7 @@ package org.goafabric.personservice.repository.extensions;
 
 import org.goafabric.personservice.controller.vo.Address;
 import org.goafabric.personservice.controller.vo.Person;
-import org.goafabric.personservice.extensions.TenantInterceptor;
+import org.goafabric.personservice.crossfunctional.TenantInterceptor;
 import org.goafabric.personservice.logic.PersonLogic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
