@@ -2,7 +2,7 @@ package org.goafabric.personservice.logic;
 
 import org.goafabric.personservice.adapter.CalleeServiceAdapter;
 import org.goafabric.personservice.controller.vo.Person;
-import org.goafabric.personservice.extensions.AuditLog;
+import org.goafabric.personservice.extensions.DurationLog;
 import org.goafabric.personservice.repository.PersonRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Component
-@AuditLog
+@DurationLog
 @Transactional
 public class PersonLogic {
     private final PersonMapper personMapper;
