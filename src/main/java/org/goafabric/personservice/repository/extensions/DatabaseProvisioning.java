@@ -1,8 +1,8 @@
 package org.goafabric.personservice.repository.extensions;
 
+import org.goafabric.personservice.controller.extensions.HttpInterceptor;
 import org.goafabric.personservice.controller.vo.Address;
 import org.goafabric.personservice.controller.vo.Person;
-import org.goafabric.personservice.crossfunctional.TenantInterceptor;
 import org.goafabric.personservice.logic.PersonLogic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +49,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     private void importDemoData() {
         Arrays.asList(tenants.split(",")).forEach(tenant -> {
-            TenantInterceptor.setTenantId(tenant);
+            HttpInterceptor.setTenantId(tenant);
             if (applicationContext.getBean(PersonLogic.class).findAll().isEmpty()) {
                 insertData();
             }
@@ -69,7 +69,7 @@ public class DatabaseProvisioning implements CommandLineRunner {
     }
 
     private Address createAddress(String street) {
-        return new Address(null, "street", "Springfield " + TenantInterceptor.getTenantId());
+        return new Address(null, "street", "Springfield " + HttpInterceptor.getTenantId());
     }
 
 }

@@ -1,7 +1,7 @@
 package org.goafabric.personservice.repository.extensions;
 
 import org.flywaydb.core.Flyway;
-import org.goafabric.personservice.crossfunctional.TenantInterceptor;
+import org.goafabric.personservice.controller.extensions.HttpInterceptor;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
@@ -72,7 +72,7 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
     @Override
     public Connection getConnection(String schema) throws SQLException {
         var connection = dataSource.getConnection();
-        connection.setSchema(defaultSchema.equals(schema) ? defaultSchema : schemaPrefix + TenantInterceptor.getTenantId());
+        connection.setSchema(defaultSchema.equals(schema) ? defaultSchema : schemaPrefix + HttpInterceptor.getTenantId());
         return connection;
     }
 

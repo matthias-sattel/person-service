@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.persistence.*;
-import org.goafabric.personservice.crossfunctional.TenantInterceptor;
+import org.goafabric.personservice.controller.extensions.HttpInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
@@ -92,9 +92,9 @@ public class AuditTrailListener implements ApplicationContextAware {
                 getTableName(newObject != null ? newObject : oldObject),
                 referenceId,
                 dbOperation,
-                (dbOperation == DbOperation.CREATE ? TenantInterceptor.getUserName() : null),
+                (dbOperation == DbOperation.CREATE ? HttpInterceptor.getUserName() : null),
                 (dbOperation == DbOperation.CREATE ? date : null),
-                ((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? TenantInterceptor.getUserName() : null),
+                ((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? HttpInterceptor.getUserName() : null),
                 ((dbOperation == DbOperation.UPDATE || dbOperation == DbOperation.DELETE) ? date : null),
                 (oldObject == null ? null : getJsonValue(oldObject)),
                 (newObject == null ? null : getJsonValue(newObject))
@@ -128,7 +128,7 @@ public class AuditTrailListener implements ApplicationContextAware {
 
         public void insertAudit(AuditTrail auditTrail, Object object) { //we cannot use jpa because of the dynamic table name
             new SimpleJdbcInsert(dataSource)
-                    .withSchemaName(schemaPrefix + TenantInterceptor.getTenantId())
+                    .withSchemaName(schemaPrefix + HttpInterceptor.getTenantId())
                     .withTableName("audit_trail")
                 .execute(new BeanPropertySqlParameterSource(auditTrail));
         }
