@@ -56,8 +56,4 @@ public class TenantInterceptor implements WebMvcConfigurer {
         return SecurityContextHolder.getContext().getAuthentication() != null ? SecurityContextHolder.getContext().getAuthentication().getName() : "";
     }
 
-    public static String getOrgunitId() {
-        return "1";
-    }
-
 }

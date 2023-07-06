@@ -88,7 +88,7 @@ public class AuditTrailListener implements ApplicationContextAware {
         final Date date = new Date(System.currentTimeMillis());
         return new AuditTrail(
                 UUID.randomUUID().toString(),
-                TenantInterceptor.getOrgunitId(),
+                TenantResolver.getOrgunitId(),
                 getTableName(newObject != null ? newObject : oldObject),
                 referenceId,
                 dbOperation,
