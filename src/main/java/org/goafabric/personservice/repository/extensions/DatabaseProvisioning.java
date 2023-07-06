@@ -1,6 +1,6 @@
 package org.goafabric.personservice.repository.extensions;
 
-import org.goafabric.personservice.controller.extensions.HttpInterceptor;
+import org.goafabric.personservice.extensions.HttpInterceptor;
 import org.goafabric.personservice.controller.vo.Address;
 import org.goafabric.personservice.controller.vo.Person;
 import org.goafabric.personservice.logic.PersonLogic;

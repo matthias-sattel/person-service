@@ -1,7 +1,7 @@
 package org.goafabric.personservice.repository.extensions;
 
 import org.flywaydb.core.Flyway;
-import org.goafabric.personservice.controller.extensions.HttpInterceptor;
+import org.goafabric.personservice.extensions.HttpInterceptor;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
