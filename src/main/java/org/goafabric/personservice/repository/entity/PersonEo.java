@@ -1,7 +1,7 @@
 package org.goafabric.personservice.repository.entity;
 
 import jakarta.persistence.*;
-import org.goafabric.personservice.repository.extensions.AuditTrailListener;
+import org.goafabric.personservice.extensions.AuditTrailListener;
 import org.hibernate.annotations.TenantId;
 
 @Entity

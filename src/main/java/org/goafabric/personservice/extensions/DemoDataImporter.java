@@ -1,6 +1,5 @@
-package org.goafabric.personservice.repository.extensions;
+package org.goafabric.personservice.extensions;
 
-import org.goafabric.personservice.extensions.HttpInterceptor;
 import org.goafabric.personservice.controller.vo.Address;
 import org.goafabric.personservice.controller.vo.Person;
 import org.goafabric.personservice.logic.PersonLogic;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 
 @Component
-public class DatabaseProvisioning implements CommandLineRunner {
+public class DemoDataImporter implements CommandLineRunner {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final String goals;
@@ -24,8 +23,8 @@ public class DatabaseProvisioning implements CommandLineRunner {
 
     private final ApplicationContext applicationContext;
 
-    public DatabaseProvisioning(@Value("${database.provisioning.goals:}")String goals, @Value("${multi-tenancy.tenants}") String tenants,
-                                ApplicationContext applicationContext) {
+    public DemoDataImporter(@Value("${database.provisioning.goals:}")String goals, @Value("${multi-tenancy.tenants}") String tenants,
+                            ApplicationContext applicationContext) {
         this.goals = goals;
         this.tenants = tenants;
         this.applicationContext = applicationContext;
