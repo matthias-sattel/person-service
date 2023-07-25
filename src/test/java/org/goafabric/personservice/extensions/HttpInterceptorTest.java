@@ -20,6 +20,7 @@ class HttpInterceptorTest {
 
     @Test
     void getTenantId() {
+        HttpInterceptor.setTenantId(null);
         assertThat(HttpInterceptor.getTenantId()).isEqualTo("0");
     }
 

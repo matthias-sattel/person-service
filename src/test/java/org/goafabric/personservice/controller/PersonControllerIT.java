@@ -1,4 +1,4 @@
-package org.goafabric.personservice.logic;
+package org.goafabric.personservice.controller;
 
 import org.goafabric.personservice.controller.vo.Address;
 import org.goafabric.personservice.controller.vo.Person;
@@ -13,20 +13,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class PersonLogicIT {
+class PersonControllerIT {
+
     @Autowired
-    private PersonLogic personLogic;
+    private PersonController personController;
 
     @Autowired
     private PersonRepository personRepository;
 
     @Test
     public void findById() {
-        List<Person> persons = personLogic.findAll();
+        List<Person> persons = personController.findAll();
         assertThat(persons).isNotNull().hasSize(3);
 
         final Person person
-                = personLogic.getById(persons.get(0).id());
+                = personController.getById(persons.get(0).id());
         assertThat(person).isNotNull();
         assertThat(person.firstName()).isEqualTo(persons.get(0).firstName());
         assertThat(person.lastName()).isEqualTo(persons.get(0).lastName());
@@ -34,14 +35,14 @@ class PersonLogicIT {
 
     @Test
     public void findAll() {
-        assertThat(personLogic.findAll()).isNotNull().hasSize(3);
+        assertThat(personController.findAll()).isNotNull().hasSize(3);
 
-        assertThat(personLogic.findAll()).isNotNull().hasSize(3);
+        assertThat(personController.findAll()).isNotNull().hasSize(3);
     }
 
     @Test
     public void findByFirstName() {
-        List<Person> persons = personLogic.findByFirstName("Monty");
+        List<Person> persons = personController.findByFirstName("Monty");
         assertThat(persons).isNotNull().hasSize(1);
         assertThat(persons.get(0).firstName()).isEqualTo("Monty");
         assertThat(persons.get(0).lastName()).isEqualTo("Burns");
@@ -49,14 +50,14 @@ class PersonLogicIT {
 
     @Test
     public void findByLastName() {
-        List<Person> persons = personLogic.findByLastName("Simpson");
+        List<Person> persons = personController.findByLastName("Simpson");
         assertThat(persons).isNotNull().hasSize(2);
         assertThat(persons.get(0).lastName()).isEqualTo("Simpson");
     }
 
     @Test
     void save() {
-        final Person person = personLogic.save(
+        final Person person = personController.save(
                 new Person("null",
                         "Homer",
                         "Simpson",
