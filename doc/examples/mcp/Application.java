@@ -54,9 +54,10 @@ public class Application {
         public void run() {
             log.info("reaching deep inside the cow's ass ....");
 
-            //use simple observer pattern to decouple everything, so it still smells low cow shit, but at least does look fancy
+            //use simple observer pattern to decouple everything
             propertySupport.addPropertyChangeListener("callee",
                     evt -> log.info("" + calleeLogic.sayMyName(evt.getNewValue().toString())));
+
             propertySupport.addPropertyChangeListener("person",
                     evt -> log.info("" + personLogic.findByFirstName(evt.getNewValue().toString())));
 
