@@ -61,7 +61,7 @@ class PersonControllerIT {
                 new Person("null",
                         "Homer",
                         "Simpson",
-                        createAddress("Evergreen Terrace")
+                        List.of(createAddress("Evergreen Terrace"))
                 ));
 
         assertThat(person).isNotNull();
@@ -70,7 +70,7 @@ class PersonControllerIT {
     }
 
     private Address createAddress(String street) {
-        return new Address(null,
+        return new Address(null, null,
                 street, "Springfield");
     }
 

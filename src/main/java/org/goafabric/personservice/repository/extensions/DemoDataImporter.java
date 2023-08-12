@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class DemoDataImporter implements CommandLineRunner {
@@ -58,18 +59,18 @@ public class DemoDataImporter implements CommandLineRunner {
 
     private void insertData() {
         applicationContext.getBean(PersonLogic.class).save(new Person(null, "Homer", "Simpson"
-                        , createAddress("Evergreen Terrace 1")));
+                        , List.of(createAddress("Evergreen Terrace 1"))));
 
         applicationContext.getBean(PersonLogic.class).save(new Person(null, "Bart", "Simpson"
-                , createAddress("Everblue Terrace 1")));
+                , List.of(createAddress("Everblue Terrace 1"))));
 
         applicationContext.getBean(PersonLogic.class).save(new Person(null, "Monty", "Burns"
-                , createAddress("Monty Mansion")));
+                , List.of(createAddress("Monty Mansion"))));
 
     }
 
     private Address createAddress(String street) {
-        return new Address(null, "street", "Springfield " + HttpInterceptor.getTenantId());
+        return new Address(null, null, "street", "Springfield " + HttpInterceptor.getTenantId());
     }
 
 }
