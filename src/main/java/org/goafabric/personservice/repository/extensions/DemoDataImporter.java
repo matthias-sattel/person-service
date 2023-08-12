@@ -70,7 +70,7 @@ public class DemoDataImporter implements CommandLineRunner {
     }
 
     private Address createAddress(String street) {
-        return new Address(null, null, "street", "Springfield " + HttpInterceptor.getTenantId());
+        return new Address(null, "street", "Springfield " + HttpInterceptor.getTenantId());
     }
 
 }

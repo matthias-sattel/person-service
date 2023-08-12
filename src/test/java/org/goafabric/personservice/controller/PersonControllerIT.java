@@ -76,7 +76,7 @@ class PersonControllerIT {
     }
 
     private Address createAddress(String street) {
-        return new Address(null, null,
+        return new Address(null,
                 street, "Springfield");
     }
 
