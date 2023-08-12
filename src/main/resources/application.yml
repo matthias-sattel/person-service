@@ -38,7 +38,7 @@ spring.datasource.hikari.connection-timeout: "10000"
 
 multi-tenancy.tenants: "0,5"
 multi-tenancy.schema-prefix: "core_"
-database.provisioning.goals: "-migrate"
+database.provisioning.goals: "-migrate -import-demo-data"
 
 #adapter
 adapter:
@@ -69,4 +69,4 @@ logging.level.org.springframework: "INFO"
 
 logging.level.org.goafabric: "INFO"
 logging.level.org.flywaydb.core: "INFO"
-logging.level.org.hibernate.SQL: "INFO"
+logging.level.org.hibernate.SQL: "DEBUG"

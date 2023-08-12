@@ -20,7 +20,7 @@ create table address
 			primary key,
 
     orgunit_id varchar(36),
-    person_id varchar(36) NOT NULL,
+    person_id varchar(36),
 
 
 	street varchar(255) NULL,

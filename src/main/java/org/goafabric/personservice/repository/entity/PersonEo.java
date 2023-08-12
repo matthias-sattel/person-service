@@ -22,7 +22,7 @@ public class PersonEo {
     public String lastName;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "personId")
+    @JoinColumn(name = "person_id")
     public List<AddressEo> address;
 
     @Version //optimistic locking

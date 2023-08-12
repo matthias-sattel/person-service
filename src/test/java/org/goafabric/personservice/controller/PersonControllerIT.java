@@ -61,10 +61,16 @@ class PersonControllerIT {
                 new Person("null",
                         "Homer",
                         "Simpson",
-                        List.of(createAddress("Evergreen Terrace"))
+                        List.of(
+                                createAddress("Evergreen Terrace"),
+                                createAddress("Everblue Terrace"))
                 ));
 
         assertThat(person).isNotNull();
+
+        var person2 = personController.getById(person.id());
+        assertThat(person2).isNotNull();
+        assertThat(person2.address()).hasSize(2);
 
         personRepository.deleteById(person.id());
     }
