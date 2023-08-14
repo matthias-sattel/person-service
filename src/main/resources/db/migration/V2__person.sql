@@ -8,7 +8,6 @@ create table person
 	first_name varchar(255),
 	last_name varchar(255),
 
-    address_id varchar(36) NOT NULL,
     version bigint default 0
 );
 
@@ -21,6 +20,8 @@ create table address
 			primary key,
 
     orgunit_id varchar(36),
+    person_id varchar(36),
+
 
 	street varchar(255) NULL,
 	city varchar(255) NULL,

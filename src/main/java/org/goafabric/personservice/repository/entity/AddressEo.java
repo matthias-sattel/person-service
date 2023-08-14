@@ -13,6 +13,8 @@ public class AddressEo {
     @GeneratedValue(strategy = GenerationType.UUID)
     public String id;
 
+    //public String personId;
+
     @TenantId
     public String orgunitId;
 

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.goafabric.personservice.repository.extensions.AuditTrailListener;
 import org.hibernate.annotations.TenantId;
 
+import java.util.List;
+
 @Entity
 @Table(name = "person")
 @EntityListeners(AuditTrailListener.class)
@@ -19,9 +21,9 @@ public class PersonEo {
 
     public String lastName;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    public AddressEo address;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "person_id")
+    public List<AddressEo> address;
 
     @Version //optimistic locking
     public Long version;
