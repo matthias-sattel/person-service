@@ -8,6 +8,7 @@ import java.util.List;
 public interface PersonRepository extends CrudRepository<PersonEo, String> {
     List<PersonEo> findByFirstName(String firstName);
 
+    //@EntityGraph(attributePaths = "address")
     List<PersonEo> findByLastName(String lastName);
 }
 

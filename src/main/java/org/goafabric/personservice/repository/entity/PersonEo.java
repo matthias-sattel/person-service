@@ -21,7 +21,7 @@ public class PersonEo {
 
     public String lastName;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
     public List<AddressEo> address;
 
