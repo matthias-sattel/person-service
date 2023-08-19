@@ -49,7 +49,7 @@ public class PersonLogic {
     }
 
     public Person sayMyName(String name) {
-        return new Person(null,
+        return new Person(null, null,
                 calleeServiceAdapter.sayMyName(name).message(), "", null);
     }
 }

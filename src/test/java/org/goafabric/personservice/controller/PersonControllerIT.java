@@ -58,7 +58,8 @@ class PersonControllerIT {
     @Test
     void save() {
         final Person person = personController.save(
-                new Person("null",
+                new Person(null,
+                        null,
                         "Homer",
                         "Simpson",
                         List.of(
@@ -72,11 +73,16 @@ class PersonControllerIT {
         assertThat(person2).isNotNull();
         assertThat(person2.address()).hasSize(2);
 
+        //update
+        assertThat(personController.save(
+                new Person(person.id(), person.version(), person.firstName(), person.lastName(), person.address())).id()).isEqualTo(person.id());
+
+
         personRepository.deleteById(person.id());
     }
 
     private Address createAddress(String street) {
-        return new Address(null,
+        return new Address(null, null,
                 street, "Springfield");
     }
 

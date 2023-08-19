@@ -58,19 +58,19 @@ public class DemoDataImporter implements CommandLineRunner {
     }
 
     private void insertData() {
-        applicationContext.getBean(PersonLogic.class).save(new Person(null, "Homer", "Simpson"
+        applicationContext.getBean(PersonLogic.class).save(new Person(null, null, "Homer", "Simpson"
                         , List.of(createAddress("Evergreen Terrace 1"))));
 
-        applicationContext.getBean(PersonLogic.class).save(new Person(null, "Bart", "Simpson"
+        applicationContext.getBean(PersonLogic.class).save(new Person(null, null, "Bart", "Simpson"
                 , List.of(createAddress("Everblue Terrace 1"))));
 
-        applicationContext.getBean(PersonLogic.class).save(new Person(null, "Monty", "Burns"
+        applicationContext.getBean(PersonLogic.class).save(new Person(null, null, "Monty", "Burns"
                 , List.of(createAddress("Monty Mansion"))));
 
     }
 
     private Address createAddress(String street) {
-        return new Address(null, street, "Springfield " + HttpInterceptor.getTenantId());
+        return new Address(null, null, street, "Springfield " + HttpInterceptor.getTenantId());
     }
 
 }
