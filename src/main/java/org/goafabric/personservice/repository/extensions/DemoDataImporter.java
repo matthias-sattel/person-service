@@ -55,6 +55,7 @@ public class DemoDataImporter implements CommandLineRunner {
                 insertData();
             }
         });
+        HttpInterceptor.setTenantId("0");
     }
 
     private void insertData() {

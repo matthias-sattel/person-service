@@ -37,6 +37,11 @@ public class PersonController {
         return personLogic.findByLastName(lastName);
     }
 
+    @GetMapping("findByAddressCity")
+    public List<Person> findByAddressCity(String city) {
+        return personLogic.findByAddressCity(city);
+    }
+
     @PostMapping(value = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Person save(@RequestBody @Valid Person person) {
         return personLogic.save(person);

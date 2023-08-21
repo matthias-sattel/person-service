@@ -43,6 +43,11 @@ public class PersonLogic {
                 personRepository.findByLastName(lastName));
     }
 
+    public List<Person> findByAddressCity(String city) {
+        return personMapper.map(
+                personRepository.findByAddress_City(city));
+    }
+
     public Person save(Person person) {
         return personMapper.map(personRepository.save(
                 personMapper.map(person)));

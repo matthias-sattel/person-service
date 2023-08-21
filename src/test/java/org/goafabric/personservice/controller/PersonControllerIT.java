@@ -46,6 +46,7 @@ class PersonControllerIT {
         assertThat(persons).isNotNull().hasSize(1);
         assertThat(persons.get(0).firstName()).isEqualTo("Monty");
         assertThat(persons.get(0).lastName()).isEqualTo("Burns");
+        assertThat(persons.get(0).address()).isNotEmpty();
     }
 
     @Test
@@ -53,6 +54,15 @@ class PersonControllerIT {
         List<Person> persons = personController.findByLastName("Simpson");
         assertThat(persons).isNotNull().hasSize(2);
         assertThat(persons.get(0).lastName()).isEqualTo("Simpson");
+        assertThat(persons.get(0).address()).isNotEmpty();
+    }
+
+    @Test
+    public void findByAddressCitty() {
+        List<Person> persons = personController.findByAddressCity("Springfield 0");
+        assertThat(persons).isNotNull().isNotEmpty();
+        assertThat(persons.get(0).address().get(0)).isEqualTo("Springfield 0");
+        //assertThat(persons.get(0).lastName()).isEqualTo("Simpson");
     }
 
     @Test
