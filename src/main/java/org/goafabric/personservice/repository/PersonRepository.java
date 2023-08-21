@@ -13,7 +13,7 @@ public interface PersonRepository extends CrudRepository<PersonEo, String> {
     List<PersonEo> findByLastName(String lastName);
 
     @EntityGraph(attributePaths = "address")
-    List<PersonEo> findByAddress_City(@Param("city") String city);
+    List<PersonEo> findByAddress_CityStartsWithIgnoreCase(@Param("city") String city);
 
 }
 

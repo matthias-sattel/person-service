@@ -45,7 +45,7 @@ public class PersonLogic {
 
     public List<Person> findByAddressCity(String city) {
         return personMapper.map(
-                personRepository.findByAddress_City(city));
+                personRepository.findByAddress_CityStartsWithIgnoreCase(city));
     }
 
     public Person save(Person person) {
