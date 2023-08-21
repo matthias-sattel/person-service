@@ -58,10 +58,10 @@ class PersonControllerIT {
     }
 
     @Test
-    public void findByAddressCitty() {
+    public void findByAddressCity() {
         List<Person> persons = personController.findByAddressCity("Springfield 0");
         assertThat(persons).isNotNull().isNotEmpty();
-        assertThat(persons.get(0).address().get(0)).isEqualTo("Springfield 0");
+        assertThat(persons.get(0).address().get(0).city()).isEqualTo("Springfield 0");
         //assertThat(persons.get(0).lastName()).isEqualTo("Simpson");
     }
 
