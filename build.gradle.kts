@@ -70,6 +70,9 @@ dependencies {
 	//test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
+	//devtools
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+
 }
 
 tasks.withType<Test> {
