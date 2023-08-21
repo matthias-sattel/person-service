@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Component
 public class DemoDataImporter implements CommandLineRunner {
@@ -59,14 +60,16 @@ public class DemoDataImporter implements CommandLineRunner {
     }
 
     private void insertData() {
-        applicationContext.getBean(PersonLogic.class).save(new Person(null, null, "Homer", "Simpson"
-                        , List.of(createAddress("Evergreen Terrace No. 742"))));
+        IntStream.range(0, 1).forEach(i -> {
+            applicationContext.getBean(PersonLogic.class).save(new Person(null, null, "Homer", "Simpson"
+                    , List.of(createAddress("Evergreen Terrace No. " + i))));
 
-        applicationContext.getBean(PersonLogic.class).save(new Person(null, null, "Bart", "Simpson"
-                , List.of(createAddress("Everblue Terrace No. 743"))));
+            applicationContext.getBean(PersonLogic.class).save(new Person(null, null, "Bart", "Simpson"
+                    , List.of(createAddress("Everblue Terrace No. " + i))));
 
-        applicationContext.getBean(PersonLogic.class).save(new Person(null, null, "Monty", "Burns"
-                , List.of(createAddress("Mammon Street No. 1000 on the corner of Croesus"))));
+            applicationContext.getBean(PersonLogic.class).save(new Person(null, null, "Monty", "Burns"
+                    , List.of(createAddress("Mammon Street No. 1000 on the corner of Croesus"))));
+        });
 
     }
 
