@@ -96,7 +96,7 @@ tasks.named<BootBuildImage>("bootBuildImage") {
 	//builder.set(nativeBuilder)
 	if (System.getProperty("os.arch").equals("aarch64")) builder.set(nativeBuilder) else buildpacks.set(listOf("gcr.io/paketo-buildpacks/java-native-image:8.16.0"))
 	imageName.set(nativeImageName)
-	environment.set(mapOf("BP_NATIVE_IMAGE" to "true", "BP_JVM_VERSION" to "17", "BP_NATIVE_IMAGE_BUILD_ARGUMENTS" to "-J-Xmx4500m"))
+	environment.set(mapOf("BP_NATIVE_IMAGE" to "true", "BP_JVM_VERSION" to "17", "BP_NATIVE_IMAGE_BUILD_ARGUMENTS" to "-J-Xmx4500m -march=compatibility"))
 	doLast {
 		exec { commandLine("docker", "run", "--rm", nativeImageName, "-check-integrity") }
 		exec { commandLine("docker", "push", nativeImageName) }
