@@ -93,7 +93,8 @@ jib {
 tasks.register("dockerImageNative") { group = "build"; dependsOn("bootBuildImage") }
 tasks.named<BootBuildImage>("bootBuildImage") {
 	val nativeImageName = "${dockerRegistry}/${project.name}-native" + (if (System.getProperty("os.arch").equals("aarch64")) "-arm64v8" else "") + ":${project.version}"
-	builder.set(nativeBuilder)
+	//builder.set(nativeBuilder)
+	if (System.getProperty("os.arch").equals("aarch64")) builder.set(nativeBuilder) else buildpacks.set(listOf("gcr.io/paketo-buildpacks/java-native-image:8.16.0"))
 	imageName.set(nativeImageName)
 	environment.set(mapOf("BP_NATIVE_IMAGE" to "true", "BP_JVM_VERSION" to "17", "BP_NATIVE_IMAGE_BUILD_ARGUMENTS" to "-J-Xmx4500m"))
 	doLast {
