@@ -90,21 +90,7 @@ jib {
 	from.platforms.set(listOf(amd64, arm64))
 }
 
-/*
-tasks.register("dockerImageNative") { group = "build"; dependsOn("bootBuildImage") }
-tasks.named<BootBuildImage>("bootBuildImage") {
-	val nativeImageName = "${dockerRegistry}/${project.name}-native" + (if (System.getProperty("os.arch").equals("aarch64")) "-arm64v8" else "") + ":${project.version}"
-	builder.set(nativeBuilder)
-	imageName.set(nativeImageName)
-	environment.set(mapOf("BP_NATIVE_IMAGE" to "true", "BP_JVM_VERSION" to "17", "BP_NATIVE_IMAGE_BUILD_ARGUMENTS" to "-J-Xmx4500m"))
-	doLast {
-		exec { commandLine("docker", "run", "--rm", nativeImageName, "-check-integrity") }
-		exec { commandLine("docker", "push", nativeImageName) }
-	}
-}
-*/
-
-val graalvmBuilderImage = "ghcr.io/graalvm/native-image-community:17.0.8"
+val graalvmBuilderImage = "ghcr.io/graalvm/native-image-community:20.0.2" //"ghcr.io/graalvm/native-image-community:17.0.8"
 buildscript { dependencies { classpath("com.google.cloud.tools:jib-native-image-extension-gradle:0.1.0") }}
 tasks.register("dockerImageNativeNoTest") {group = "build"; dependsOn("bootJar")
 	doFirst {exec { commandLine(
