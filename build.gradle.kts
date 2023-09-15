@@ -2,7 +2,7 @@ import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 group = "org.goafabric"
 version = "3.2.0-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_17
+java.sourceCompatibility = JavaVersion.VERSION_20
 
 val dockerRegistry = "goafabric"
 val graalvmBuilderImage = "ghcr.io/graalvm/native-image-community:20.0.2" //"ghcr.io/graalvm/native-image-community:17.0.8"
