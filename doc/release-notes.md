@@ -1,8 +1,10 @@
 # 3.1.3
 - java 20 compatibility + jvm baseimage updated to java 20
-- one to many relation added
-- declarative webclient replaced again bei resttemplate fo future declarative restclient 
 - upgrade to Spring Boot 3.1.3
+- various dependency upgrades
+
+- one to many relation added
+- declarative webclient replaced again by resttemplate fo future declarative restclient
 
 # 3.1.1
 - upgrade to Spring Boot 3.1.1

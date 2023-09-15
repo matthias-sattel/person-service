@@ -43,7 +43,6 @@ dependencies {
 	implementation("io.micrometer:micrometer-registry-prometheus")
 	implementation("io.micrometer:micrometer-tracing-bridge-otel")
 	implementation("io.opentelemetry:opentelemetry-exporter-otlp")
-
 	implementation("net.ttddyy.observation:datasource-micrometer-spring-boot")
 
 	//openapi
@@ -51,10 +50,10 @@ dependencies {
 
 	//crosscuting
 	implementation("org.springframework.boot:spring-boot-starter-security")
-	implementation("org.springframework.boot:spring-boot-starter-aop")
 
 	//adapter
 	implementation("io.github.resilience4j:resilience4j-spring-boot3")
+	implementation("org.springframework.boot:spring-boot-starter-aop")
 
 	//code generation
 	implementation("org.mapstruct:mapstruct")
