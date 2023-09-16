@@ -60,7 +60,6 @@ dependencies {
 	annotationProcessor("org.mapstruct:mapstruct-processor")
 
 	//persistence
-	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa") {exclude("org.glassfish.jaxb", "jaxb-runtime")}
 	implementation("com.h2database:h2")
 	implementation("org.postgresql:postgresql")
