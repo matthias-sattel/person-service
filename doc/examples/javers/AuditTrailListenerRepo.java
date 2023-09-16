@@ -114,7 +114,8 @@ public class AuditTrailListenerRepo implements ApplicationContextAware {
     */
     @Component
     static class AuditJpaUpdater {
-        //todo: needs lazy loading disabled@Transactional(propagation = Propagation.REQUIRES_NEW) //new transaction helps us to retrieve the old value still inside the db
+        //todo: needs lazy loading disabled
+        @Transactional(propagation = Propagation.REQUIRES_NEW)
         public <T> T findOldObject(Class<T> clazz, String id) {
             var repo = (CrudRepository) new Repositories(context).getRepositoryFor(clazz).get();
             return (T) repo.findById(id).get();
