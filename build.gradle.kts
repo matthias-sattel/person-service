@@ -7,7 +7,7 @@ java.sourceCompatibility = JavaVersion.VERSION_20
 val dockerRegistry = "goafabric"
 val graalvmBuilderImage = "ghcr.io/graalvm/native-image-community:20.0.2" //"ghcr.io/graalvm/native-image-community:17.0.8"
 val baseImage = "ibm-semeru-runtimes:open-20.0.1_9-jre-focal@sha256:f1a10da50d02f51e79e3c9604ed078a39c19cd2711789cab7aa5d11071482a7e"
-jacoco.toolVersion = "0.8.9"
+jacoco.toolVersion = "0.8.10"
 
 plugins {
 	java
@@ -60,11 +60,13 @@ dependencies {
 	annotationProcessor("org.mapstruct:mapstruct-processor")
 
 	//persistence
-	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa") {exclude("org.glassfish.jaxb", "jaxb-runtime")}
 	implementation("com.h2database:h2")
 	implementation("org.postgresql:postgresql")
 	implementation("org.flywaydb:flyway-core")
+
+	//mongo
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 
 	//test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -91,11 +93,12 @@ jib {
 
 buildscript { dependencies { classpath("com.google.cloud.tools:jib-native-image-extension-gradle:0.1.0") }}
 tasks.register("dockerImageNativeNoTest") {group = "build"; dependsOn("bootJar")
-	doFirst {exec { commandLine(
-		"docker", "run", "--rm", "--mount", "type=bind,source=${projectDir}/build,target=/build", "--entrypoint", "/bin/bash", graalvmBuilderImage, "-c", """ mkdir -p /build/native/nativeCompile && cp /build/libs/*.jar /build/native/nativeCompile && cd /build/native/nativeCompile && jar -xvf *.jar &&
-		native-image -J-Xmx5000m -march=compatibility -H:Name=application $([[ -f META-INF/native-image/argfile ]] && echo @META-INF/native-image/argfile) -cp .:BOOT-INF/classes:$(ls -d -1 "/build/native/nativeCompile/BOOT-INF/lib/"*.* | tr "\n" ":") && /build/native/nativeCompile/application -check-integrity """
-	)}}
-	doLast {
+	jib.to.image = ""
+	doFirst {
+		exec { commandLine(
+			"docker", "run", "--rm", "--mount", "type=bind,source=${projectDir}/build,target=/build", "--entrypoint", "/bin/bash", graalvmBuilderImage, "-c", """ mkdir -p /build/native/nativeCompile && cp /build/libs/*-SNAPSHOT.jar /build/native/nativeCompile && cd /build/native/nativeCompile && jar -xvf *.jar &&
+			native-image -J-Xmx5000m -march=compatibility -H:Name=application $([[ -f META-INF/native-image/argfile ]] && echo @META-INF/native-image/argfile) -cp .:BOOT-INF/classes:$(ls -d -1 "/build/native/nativeCompile/BOOT-INF/lib/"*.* | tr "\n" ":") && /build/native/nativeCompile/application -check-integrity """
+		)}
 		jib.from.image = "ubuntu:22.04"
 		jib.to.image = "${dockerRegistry}/${project.name}-native" + (if (System.getProperty("os.arch").equals("aarch64")) "-arm64v8" else "") + ":${project.version}"
 		jib.pluginExtensions { pluginExtension {properties = mapOf("imageName" to "application"); implementation = "com.google.cloud.tools.jib.gradle.extension.nativeimage.JibNativeImageExtension" }}
