@@ -39,7 +39,7 @@ public class Application {
         return isAuthenticationEnabled
                 ? http.authorizeHttpRequests(auth -> auth.requestMatchers(new MvcRequestMatcher(introspector, "/actuator/**")).permitAll().anyRequest().authenticated())
                 .httpBasic(httpBasic -> {}).csrf(AbstractHttpConfigurer::disable).build()
-                : http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll()).build();
+                : http.authorizeHttpRequests(auth -> auth.anyRequest().permitAll()).httpBasic(httpBasic -> {}).csrf(AbstractHttpConfigurer::disable).build();
     }
 
     @Bean
