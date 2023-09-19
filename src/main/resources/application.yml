@@ -21,11 +21,10 @@ logging.level.io.opentelemetry.exporter: "OFF"
 management.otlp.tracing.endpoint: "http://localhost:4318/v1/traces"
 
 #security
-security.authentication.enabled: false
+security.authentication.enabled: true
 
 spring.security.user.name: "admin"
 spring.security.user.password: "admin"
-spring.security.enable-csrf: "false"
 
 #persistence
 spring.datasource.url: jdbc:h2:mem:person;DATABASE_TO_UPPER=FALSE
