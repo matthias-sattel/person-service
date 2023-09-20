@@ -2,7 +2,7 @@ import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 group = "org.goafabric"
 version = "3.2.0-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_20
+java.sourceCompatibility = JavaVersion.VERSION_21
 
 val dockerRegistry = "goafabric"
 val graalvmBuilderImage = "ghcr.io/graalvm/native-image-community:21.0.0" //"ghcr.io/graalvm/native-image-community:17.0.8"
@@ -96,7 +96,8 @@ tasks.register("dockerImageNativeNoTest") {group = "build"; dependsOn("bootJar")
 	jib.to.image = ""
 	doFirst {
 		exec { commandLine(
-			"docker", "run", "--rm", "--mount", "type=bind,source=${projectDir}/build,target=/build", "--entrypoint", "/bin/bash", graalvmBuilderImage, "-c", """ mkdir -p /build/native/nativeCompile && cp /build/libs/*-SNAPSHOT.jar /build/native/nativeCompile && cd /build/native/nativeCompile && jar -xvf *.jar &&
+			(if (System.getProperty("os.name").contains("Mac OS")) "/usr/local/bin/docker" else "docker"), //java21 gradle 8.3 mac docker hack
+			"run", "--rm", "--mount", "type=bind,source=${projectDir}/build,target=/build", "--entrypoint", "/bin/bash", graalvmBuilderImage, "-c", """ mkdir -p /build/native/nativeCompile && cp /build/libs/*-SNAPSHOT.jar /build/native/nativeCompile && cd /build/native/nativeCompile && jar -xvf *.jar &&
 			native-image -J-Xmx5000m -march=compatibility -H:Name=application $([[ -f META-INF/native-image/argfile ]] && echo @META-INF/native-image/argfile) -cp .:BOOT-INF/classes:$(ls -d -1 "/build/native/nativeCompile/BOOT-INF/lib/"*.* | tr "\n" ":") && /build/native/nativeCompile/application -check-integrity """
 		)}
 		jib.from.image = "ubuntu:22.04"
