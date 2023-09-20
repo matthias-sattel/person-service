@@ -2,10 +2,10 @@ import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 group = "org.goafabric"
 version = "3.2.0-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_21
+java.sourceCompatibility = JavaVersion.VERSION_20
 
 val dockerRegistry = "goafabric"
-val graalvmBuilderImage = "ghcr.io/graalvm/native-image-community:21.0.0" //"ghcr.io/graalvm/native-image-community:17.0.8"
+val graalvmBuilderImage = "ghcr.io/graalvm/native-image-community:21.0.0"
 val baseImage = "azul/zulu-openjdk:21.0.0-jre" //"ibm-semeru-runtimes:open-20.0.1_9-jre-focal@sha256:f1a10da50d02f51e79e3c9604ed078a39c19cd2711789cab7aa5d11071482a7e"
 jacoco.toolVersion = "0.8.10"
 
