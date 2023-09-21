@@ -50,8 +50,6 @@ services:
       multi-tenancy.schema-prefix: "core_"
       database.provisioning.goals: "-migrate -import-demo-data"
 
-      spring.data.mongodb.uri: "mongodb://mongodb:mongodb@mongodb:27017/person?authSource=admin"
-
       #adapter
       adapter.calleeservice.url: "http://host.docker.internal:50900"
       adapter.calleeservice.timeout: "10000"
@@ -69,9 +67,6 @@ services:
       logging.level.org.springframework: "INFO"
       logging.level.org.flywaydb.core: "INFO"
       logging.level.org.hibernate.SQL: "INFO"
-
-      #profile
-      spring.profiles.active: ${_Values_profile}
 
     depends_on:
       postgres:
@@ -102,24 +97,6 @@ services:
       - pgdata:/var/lib/postgresql/data
     networks:
       - ${_Values_root_name}-net
-
-  mongodb:
-    profiles:
-      - mongodb
-    image: mongo:7.0.1
-    container_name: ${_Values_root_name}-mongodb
-    restart: 'no'
-    ports:
-      - 27017:27017
-    volumes:
-      - mongoconfig:/data/configdb
-      - mongodata:/data/db
-    networks:
-      - ${_Values_root_name}-net
-    environment:
-      TZ: "Europe/Berlin"
-      MONGO_INITDB_ROOT_USERNAME: "mongodb"
-      MONGO_INITDB_ROOT_PASSWORD: "mongodb"
 
   nginx:
     container_name: ${_Values_root_name}-nginx

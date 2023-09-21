@@ -8,5 +8,3 @@ _Values_resources_entrypoint="java -Xms256M -Xmx256M -cp /app/resources:/app/cla
 _Values_resources_entrypoint_native="/app/application -Xmx64m"
 
 _Values_health_check_disabled=false
-
-_Values_profile=jpa #mongodb
