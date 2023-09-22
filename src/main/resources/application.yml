@@ -2,6 +2,7 @@
 server:
   port: 50800
   tomcat.threads.max: 20
+  forward-headers-strategy: FRAMEWORK
 
 #monitoring
 management:
@@ -13,17 +14,10 @@ management:
       exposure:
         include: "health,prometheus,heapdump"
 
-spring.cloud.consul.config.enabled: "false"
-
-# openapi
-springdoc.swagger-ui.path: /swagger-ui/index.html
-springdoc.enable-native-support: "true"
-
-
-#jaeger / zipkin
+#tracing
 spring.application.name: person-service
 management.tracing.sampling.probability: "1.0"
-logging.level.io.opentelemetry.exporter: "ERROR"
+logging.level.io.opentelemetry.exporter: "OFF"
 management.otlp.tracing.endpoint: "http://localhost:4318/v1/traces"
 
 #security
@@ -44,9 +38,11 @@ spring.datasource.hikari.connection-timeout: "10000"
 
 multi-tenancy.tenants: "0,5"
 multi-tenancy.schema-prefix: "core_"
-multi-tenancy.migration.enabled: "true"
+database.provisioning.goals: "-migrate -import-demo-data"
 
-database.provisioning.goals: "-import-demo-data"
+#mongo
+spring.data.mongodb.uri: "mongodb://mongodb:mongodb@localhost:27017/person?authSource=admin"
+#spring.profiles.active: "mongodb"
 
 #adapter
 adapter:

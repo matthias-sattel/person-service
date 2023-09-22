@@ -1,16 +1,14 @@
 package org.goafabric.personservice.logic;
 
 import org.goafabric.personservice.adapter.CalleeServiceAdapter;
-import org.goafabric.personservice.controller.dto.Person;
-import org.goafabric.personservice.crossfunctional.DurationLog;
-import org.goafabric.personservice.persistence.PersonRepository;
+import org.goafabric.personservice.controller.vo.Person;
+import org.goafabric.personservice.repository.PersonRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Component
-@DurationLog
 @Transactional
 public class PersonLogic {
     private final PersonMapper personMapper;
@@ -45,13 +43,18 @@ public class PersonLogic {
                 personRepository.findByLastName(lastName));
     }
 
+    public List<Person> findByStreet(String street) {
+        return personMapper.map(
+                personRepository.findByAddress_StreetContainsIgnoreCase(street));
+    }
+
     public Person save(Person person) {
         return personMapper.map(personRepository.save(
                 personMapper.map(person)));
     }
 
     public Person sayMyName(String name) {
-        return new Person(null,
+        return new Person(null, null,
                 calleeServiceAdapter.sayMyName(name).message(), "", null);
     }
 }

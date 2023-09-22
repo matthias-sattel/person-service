@@ -1,3 +1,14 @@
+# 3.1.3
+- java 21 build upgrade
+- upgrade to Spring Boot 3.1.3
+- various dependency upgrades
+
+- one to many relation added
+- declarative webclient replaced again by resttemplate fo future declarative restclient
+- validation framework removed
+- postgres update to 16.0
+- mongodb profile added
+
 # 3.1.1
 - upgrade to Spring Boot 3.1.1
 - support for Opentelemetry

@@ -1,4 +1,4 @@
-create table audit
+create table audit_trail
 (
 	id varchar(36) not null
 		constraint pk_audit
@@ -17,4 +17,4 @@ create table audit
     newvalue TEXT
 );
 
-create index idx_audit_orgunit_id on audit(orgunit_id);
+create index idx_audit_orgunit_id on audit_trail(orgunit_id);

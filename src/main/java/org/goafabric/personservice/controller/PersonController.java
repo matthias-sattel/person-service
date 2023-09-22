@@ -1,7 +1,6 @@
 package org.goafabric.personservice.controller;
 
-import jakarta.validation.Valid;
-import org.goafabric.personservice.controller.dto.Person;
+import org.goafabric.personservice.controller.vo.Person;
 import org.goafabric.personservice.logic.PersonLogic;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -37,8 +36,13 @@ public class PersonController {
         return personLogic.findByLastName(lastName);
     }
 
+    @GetMapping("findByStreet")
+    public List<Person> findByStreet(String street) {
+        return personLogic.findByStreet(street);
+    }
+
     @PostMapping(value = "save", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Person save(@RequestBody @Valid Person person) {
+    public Person save(@RequestBody Person person) {
         return personLogic.save(person);
     }
 
