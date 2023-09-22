@@ -40,10 +40,6 @@ multi-tenancy.tenants: "0,5"
 multi-tenancy.schema-prefix: "core_"
 database.provisioning.goals: "-migrate -import-demo-data"
 
-#mongo
-spring.data.mongodb.uri: "mongodb://mongodb:mongodb@localhost:27017/person?authSource=admin"
-#spring.profiles.active: "mongodb"
-
 #adapter
 adapter:
   timeout: 10000
