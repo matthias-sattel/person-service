@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -100,7 +99,6 @@ public class AuditTrailListener implements ApplicationContextAware {
     }
 
     @Component
-    @ConditionalOnProperty(value = "spring.profiles.active", havingValue = "jpa", matchIfMissing = true)
     static class AuditJpaUpdater {
         @PersistenceContext private EntityManager entityManager;
 
@@ -111,7 +109,6 @@ public class AuditTrailListener implements ApplicationContextAware {
     }
 
     @Component
-    @ConditionalOnProperty(value = "spring.profiles.active", havingValue = "jpa", matchIfMissing = true)
     @RegisterReflectionForBinding(AuditTrail.class)
     static class AuditJpaInserter {
         private final DataSource dataSource;
