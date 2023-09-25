@@ -1,3 +1,4 @@
+/*
 package org.goafabric.personservice.repository.extensions.config;
 
 import org.goafabric.personservice.extensions.HttpInterceptor;
@@ -24,3 +25,5 @@ public class MongoConfiguration {
     @Bean
     public TenantIdBean tenantIdBean(@Value("${multi-tenancy.schema-prefix:_}") String schemaPrefix) { return new TenantIdBean(schemaPrefix); }
 }
+
+ */
