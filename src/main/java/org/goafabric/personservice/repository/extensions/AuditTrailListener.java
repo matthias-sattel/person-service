@@ -100,8 +100,7 @@ public class AuditTrailListener implements ApplicationContextAware {
     }
 
     @Component
-    //@ConditionalOnProperty(value = "spring.profiles.active", havingValue = "jpa", matchIfMissing = true)
-    @ConditionalOnExpression("#{!('${spring.autoconfigure.exclude}'.contains('DataSourceAutoConfiguration'))}")
+    @ConditionalOnExpression("#{!('${spring.autoconfigure.exclude:}'.contains('DataSourceAutoConfiguration'))}")
     static class AuditJpaUpdater {
         @PersistenceContext private EntityManager entityManager;
 
@@ -112,8 +111,7 @@ public class AuditTrailListener implements ApplicationContextAware {
     }
 
     @Component
-    //@ConditionalOnProperty(value = "spring.profiles.active", havingValue = "jpa", matchIfMissing = true)
-    @ConditionalOnExpression("#{!('${spring.autoconfigure.exclude}'.contains('DataSourceAutoConfiguration'))}")
+    @ConditionalOnExpression("#{!('${spring.autoconfigure.exclude:}'.contains('DataSourceAutoConfiguration'))}")
     @RegisterReflectionForBinding(AuditTrail.class)
     static class AuditJpaInserter {
         private final DataSource dataSource;
