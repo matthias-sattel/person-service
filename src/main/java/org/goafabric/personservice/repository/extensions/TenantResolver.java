@@ -5,8 +5,6 @@ import org.goafabric.personservice.extensions.HttpInterceptor;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationRunner;
@@ -32,12 +30,8 @@ import java.util.Map;
 public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTenantConnectionProvider, HibernatePropertiesCustomizer {
 
     private final DataSource dataSource;
-
     private final String schemaPrefix;
-
     private final String defaultSchema;
-
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public TenantResolver(DataSource dataSource,
                           @Value("${multi-tenancy.default-schema:PUBLIC}") String defaultSchema,
