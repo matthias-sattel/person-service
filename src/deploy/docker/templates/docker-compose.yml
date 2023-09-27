@@ -119,8 +119,6 @@ volumes:
     tmp:
     applogs:
     pgdata:
-    mongoconfig:
-    mongodata:
 
 networks:
   person-service-net:
