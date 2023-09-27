@@ -50,8 +50,6 @@ services:
       multi-tenancy.schema-prefix: "core_"
       database.provisioning.goals: "-migrate -import-demo-data"
 
-      spring.data.mongodb.uri: "mongodb://mongodb:mongodb@mongodb:27017/person?authSource=admin"
-
       #adapter
       adapter.calleeservice.url: "http://host.docker.internal:50900"
       adapter.calleeservice.timeout: "10000"
