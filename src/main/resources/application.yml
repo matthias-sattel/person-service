@@ -1,7 +1,7 @@
 #application
 server:
   port: 50800
-  tomcat.threads.max: 20
+  tomcat.threads.max: 100
   forward-headers-strategy: FRAMEWORK
 
 #monitoring
@@ -75,4 +75,5 @@ logging.level.org.goafabric: "INFO"
 logging.level.org.flywaydb.core: "INFO"
 logging.level.org.hibernate.SQL: "INFO"
 
-spring.threads.virtual.enabled: "true"
+#vthreads
+spring.threads.virtual.enabled: "false"
