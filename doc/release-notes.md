@@ -1,3 +1,7 @@
+# 3.1.4
+- upgrade to Spring Boot 3.1.4
+- mongodb added
+
 # 3.1.3
 - java 21 build upgrade
 - upgrade to Spring Boot 3.1.3
