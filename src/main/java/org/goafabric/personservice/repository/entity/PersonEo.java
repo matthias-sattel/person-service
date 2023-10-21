@@ -15,9 +15,6 @@ public class PersonEo {
     @GeneratedValue(strategy = GenerationType.UUID)
     public String id;
 
-    //@TenantId
-    public String orgunitId;
-
     public String firstName;
 
     public String lastName;

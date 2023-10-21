@@ -9,13 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -25,7 +26,7 @@ import java.util.Map;
 
 // Source: https://spring.io/blog/2022/07/31/how-to-integrate-hibernates-multitenant-feature-with-spring-data-jpa-in-a-spring-boot-application
 
-//@Component
+@Component
 @ConditionalOnProperty(value = "spring.profiles.active", havingValue = "jpa", matchIfMissing = true)
 @RegisterReflectionForBinding({org.hibernate.binder.internal.TenantIdBinder.class, org.hibernate.generator.internal.TenantIdGeneration.class})
 public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTenantConnectionProvider, HibernatePropertiesCustomizer {
@@ -117,7 +118,7 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
     }
 
     @Bean
-    public ApplicationRunner schemaCreator(Flyway flyway,
+    public CommandLineRunner schemaCreator(Flyway flyway,
                                            @Value("${database.provisioning.goals}") String goals,
                                            @Value("${multi-tenancy.tenants}") String tenants,
                                            @Value("${multi-tenancy.schema-prefix:_}") String schemaPrefix,
@@ -132,7 +133,9 @@ public class TenantResolver implements CurrentTenantIdentifierResolver, MultiTen
                         }
                 );
             }
+
             if (goals.contains("-terminate") && !goals.contains("-import")) { SpringApplication.exit(context, () -> 0); }
+            if ((args.length == 0) || (!"-check-integrity".equals(args[0]))) { context.getBean(DemoDataImporter.class).run(); }
         };
     }
 

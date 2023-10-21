@@ -2,6 +2,7 @@ package org.goafabric.personservice.repository.entity;
 
 import jakarta.persistence.*;
 import org.goafabric.personservice.repository.extensions.AuditTrailListener;
+import org.hibernate.annotations.TenantId;
 
 
 @Entity
@@ -12,7 +13,7 @@ public class AddressEo {
     @GeneratedValue(strategy = GenerationType.UUID)
     public String id;
 
-    //@TenantId
+    @TenantId
     public String orgunitId;
 
     public String street;
