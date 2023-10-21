@@ -1,16 +1,24 @@
-package org.goafabric.personservice.repository.extensions;
+package org.goafabric.personservice;
 
+import org.javers.spring.jpa.JpaHibernateConnectionProvider;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportRuntimeHints;
+import org.springframework.context.annotation.Primary;
 
 import java.util.Arrays;
 
 @Configuration
 @ImportRuntimeHints(JaversNativeConfiguration.ApplicationRuntimeHints.class)
 public class JaversNativeConfiguration {
+    @Bean(name = "JpaHibernateConnectionProvider")
+    @Primary
+    public JpaHibernateConnectionProvider jpaConnectionProvider() {
+        return new JpaHibernateConnectionProvider();
+    }
 
     static class ApplicationRuntimeHints implements RuntimeHintsRegistrar {
         @Override

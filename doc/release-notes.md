@@ -1,5 +1,11 @@
+# 3.1.5
+
+# 3.1.4
+- upgrade to Spring Boot 3.1.4
+- mongodb added
+
 # 3.1.3
-- java 20 compatibility + jvm baseimage updated to java 20
+- java 21 build upgrade
 - upgrade to Spring Boot 3.1.3
 - various dependency upgrades
 
@@ -7,6 +13,7 @@
 - declarative webclient replaced again by resttemplate fo future declarative restclient
 - validation framework removed
 - postgres update to 16.0
+- mongodb profile added
 
 # 3.1.1
 - upgrade to Spring Boot 3.1.1

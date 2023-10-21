@@ -68,6 +68,7 @@ services:
       logging.level.org.flywaydb.core: "INFO"
       logging.level.org.hibernate.SQL: "INFO"
 
+
     depends_on:
       postgres:
         condition: service_healthy
