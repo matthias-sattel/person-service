@@ -7,6 +7,7 @@ import org.goafabric.personservice.logic.PersonLogic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Component
-public class DemoDataImporter implements Runnable {
+public class DemoDataImporter implements CommandLineRunner {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final String goals;
@@ -33,8 +34,9 @@ public class DemoDataImporter implements Runnable {
     }
 
     @Override
-    public void run() {
-        //if ((args.length > 0) && ("-check-integrity".equals(args[0]))) { return; }
+    public void run(String... args) {
+        if ((args.length > 0) && ("-check-integrity".equals(args[0]))) { return; }
+
         if (goals.contains("-import-demo-data")) {
             log.info("Importing demo data ...");
             importDemoData();
