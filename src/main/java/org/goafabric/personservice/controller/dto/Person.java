@@ -1,4 +1,4 @@
-package org.goafabric.personservice.controller.vo;
+package org.goafabric.personservice.controller.dto;
 
 import java.util.List;
 import java.util.Objects;
