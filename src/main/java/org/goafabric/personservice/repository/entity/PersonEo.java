@@ -2,6 +2,7 @@ package org.goafabric.personservice.repository.entity;
 
 import jakarta.persistence.*;
 import org.goafabric.personservice.repository.extensions.AuditTrailListener;
+import org.hibernate.annotations.TenantId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -14,6 +15,9 @@ public class PersonEo {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     public String id;
+
+    @TenantId
+    public String orgunitId;
 
     public String firstName;
 
