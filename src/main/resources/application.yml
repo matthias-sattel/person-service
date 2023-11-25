@@ -80,4 +80,4 @@ logging.level.org.flywaydb.core: "INFO"
 logging.level.org.hibernate.SQL: "INFO"
 
 #vthreads
-spring.threads.virtual.enabled: "false"
+spring.threads.virtual.enabled: "true"
