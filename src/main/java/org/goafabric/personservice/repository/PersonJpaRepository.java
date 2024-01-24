@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface PersonRepository extends CrudRepository<PersonEo, String> {
+public interface PersonJpaRepository extends CrudRepository<PersonEo, String> {
     List<PersonEo> findByFirstName(String firstName);
 
     List<PersonEo> findByLastName(String lastName);

@@ -1,4 +1,4 @@
-package org.goafabric.personservice.logic;
+package org.goafabric.personservice.repository;
 
 import org.goafabric.personservice.repository.entity.PersonEo;
 import org.goafabric.personservice.controller.dto.Person;

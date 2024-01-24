@@ -2,7 +2,7 @@ package org.goafabric.personservice.controller;
 
 import org.goafabric.personservice.controller.dto.Address;
 import org.goafabric.personservice.controller.dto.Person;
-import org.goafabric.personservice.repository.PersonRepository;
+import org.goafabric.personservice.repository.PersonJpaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +19,7 @@ class PersonControllerIT {
     private PersonController personController;
 
     @Autowired
-    private PersonRepository personRepository;
+    private PersonJpaRepository personRepository;
 
     @Test
     public void findById() {
