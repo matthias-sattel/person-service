@@ -1,6 +1,8 @@
 package org.goafabric.personservice.logic;
 
 import org.goafabric.personservice.controller.dto.Person;
+import org.goafabric.personservice.logic.port.CalleeService;
+import org.goafabric.personservice.logic.port.PersonRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

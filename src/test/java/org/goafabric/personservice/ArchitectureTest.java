@@ -15,13 +15,13 @@ public class ArchitectureTest {
         layeredArchitecture().consideringOnlyDependenciesInLayers()
                 .layer("Controller").definedBy("org.goafabric.personservice.controller")
                 .layer("Logic").definedBy("org.goafabric.personservice.logic")
-                .layer("Persistence").definedBy("org.goafabric.personservice.repository.*")
+                .layer("Persistence").definedBy("org.goafabric.personservice.repository")
                 .layer("Adapter").definedBy("org.goafabric.personservice.adapter")
 
                 .whereLayer("Controller").mayNotBeAccessedByAnyLayer()
                 .whereLayer("Logic").mayNotAccessAnyLayer()
-                //.whereLayer("Persistence").mayOnlyBeAccessedByLayers("Persistence")
-                //.whereLayer("Adapter").mayNotAccessAnyLayer()
+                .whereLayer("Persistence").mayNotAccessAnyLayer()
+                .whereLayer("Adapter").mayNotAccessAnyLayer()
                 .check(classes);
     }
 

@@ -1,7 +1,7 @@
 package org.goafabric.personservice.repository;
 
 import org.goafabric.personservice.controller.dto.Person;
-import org.goafabric.personservice.logic.PersonRepository;
+import org.goafabric.personservice.logic.port.PersonRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

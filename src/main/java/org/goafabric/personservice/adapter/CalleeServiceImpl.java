@@ -1,6 +1,6 @@
 package org.goafabric.personservice.adapter;
 
-import org.goafabric.personservice.logic.CalleeService;
+import org.goafabric.personservice.logic.port.CalleeService;
 import org.springframework.stereotype.Component;
 
 @Component
