@@ -2,12 +2,15 @@
 
 The PersonService serves as a small example on how to build a JPA Services with Spring Boot.
 It includes the following concerns, which are separated in layers.
-It also follows a pragmatic "hexagonal architecture", by decoupling most of the layers by interfaces.
-
 - Controller: REST API via MVC RestController
+- Logic: Contains the domain logic
 - Persistence: Spring Data JPA to access the Database
   - Mapstruct to map the database Entities to REST DTOs
 - Adapter: Connect to other Services via Declarative REST Clients
+
+In order to transform it into a Ports & Adapters Architecture, the layers need further decoupling. 
+This is being evaluated. It would make the architecture more flexible and improve maintainability in the long term.
+But in short term it slows down development and adds boilerplate code to decouple the layers.
                 
 ## Basic Layers
 ### Controller 
