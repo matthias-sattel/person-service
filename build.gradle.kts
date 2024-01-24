@@ -70,6 +70,7 @@ dependencies {
 
 	//test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("com.tngtech.archunit:archunit:1.2.1")
 
 	//devtools
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
